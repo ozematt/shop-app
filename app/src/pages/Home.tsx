@@ -1,5 +1,9 @@
-import Box from "@mui/material/Box";
+//react
+import React from "react";
+import { useState } from "react";
 
+//mui
+import Box from "@mui/material/Box";
 import { useColorScheme } from "@mui/material/styles";
 import {
   AppBar,
@@ -15,16 +19,17 @@ import {
   Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import React from "react";
+
+//components
 import { CustomizedSwitches } from "../components/SwitchButton";
 
+///////
 export const Home = () => {
+  //theme switch
   const { mode, setMode } = useColorScheme();
-
+  //user menu handler
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -34,14 +39,18 @@ export const Home = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  //category handler
   const [age, setAge] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
+  //mode checker
   if (!mode) {
     return <h1> error</h1>;
   }
+  ////UI
   return (
     <>
       <Box
