@@ -1,6 +1,7 @@
 //react
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+// import axios from "axios";
 
 //mui
 import { styled, alpha } from "@mui/material/styles";
@@ -43,16 +44,6 @@ export const Home = () => {
     setAnchorEl(null);
   };
 
-  //category handler
-  const [age, setAge] = useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
-  };
-  //mode checker
-  if (!mode) {
-    return <h1> error</h1>;
-  }
   //styled search field
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -95,6 +86,35 @@ export const Home = () => {
     },
   }));
 
+  //category select and fetch
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string>("");
+
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCategories(event.target.value as string);
+  };
+
+  useEffect(() => {
+    const fetchCategories = async (): Promise<string[]> => {
+      try {
+        const response = await fetch(
+          "https://fakestoreapi.com/products/categories"
+        );
+        const data: string[] = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Mamy problem", error);
+        return [];
+      }
+    };
+    const loadCategories = async () => {
+      const data: string[] = await fetchCategories();
+      setCategories(data);
+    };
+
+    loadCategories();
+  }, []);
+
   ////UI
   return (
     <>
@@ -127,11 +147,21 @@ export const Home = () => {
               {/* CATEGORY */}
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                 <InputLabel>Kategorie</InputLabel>
-                <Select value={age} label="Category" onChange={handleChange}>
-                  {/* category from Fake shop, use map */}
-                  <MenuItem value="age">
+                <Select
+                  labelId="select-category-label"
+                  id="select-category"
+                  value={selectedCategories}
+                  label="Category"
+                  onChange={handleChange}
+                >
+                  <MenuItem value="none">
                     <em>None</em>
                   </MenuItem>
+                  {categories?.map((category: string) => (
+                    <MenuItem key={category} value={category}>
+                      {category}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               {/* BUTTON SEARCH */}
