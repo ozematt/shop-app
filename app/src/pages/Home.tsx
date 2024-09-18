@@ -15,11 +15,12 @@ import {
   Typography,
 } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { CustomizedSwitches } from "../components/SwitchButton";
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import React from "react";
+import { CustomizedSwitches } from "../components/SwitchButton";
 
 export const Home = () => {
   const { mode, setMode } = useColorScheme();
