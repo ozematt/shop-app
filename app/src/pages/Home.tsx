@@ -53,7 +53,7 @@ export const Home = () => {
   if (!mode) {
     return <h1> error</h1>;
   }
-
+  //styled search field
   const Search = styled("div")(({ theme }) => ({
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -101,16 +101,9 @@ export const Home = () => {
       {/* In This Box them is changing */}
       <Box
         sx={{
-          display: "flex",
           width: "100vw",
           height: "100vh",
-          alignItems: "center",
-          justifyContent: "center",
           bgcolor: "background.default",
-          color: "text.primary",
-          borderRadius: 1,
-          p: 3,
-          minHeight: "56px",
         }}
       >
         {/* Box with nav elements */}
@@ -133,16 +126,10 @@ export const Home = () => {
               </Search>
               {/* CATEGORY */}
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                <InputLabel id="demo-select-small-label">Kategorie</InputLabel>
-                <Select
-                  labelId="demo-select-small-label"
-                  id="demo-select-small"
-                  value={age}
-                  label="Age"
-                  onChange={handleChange}
-                >
+                <InputLabel>Kategorie</InputLabel>
+                <Select value={age} label="Category" onChange={handleChange}>
                   {/* category from Fake shop, use map */}
-                  <MenuItem value="">
+                  <MenuItem value="age">
                     <em>None</em>
                   </MenuItem>
                 </Select>
