@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 
 //mui
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
 import { useColorScheme } from "@mui/material/styles";
 import {
@@ -24,6 +26,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 //components
 import { CustomizedSwitches } from "../components/SwitchButton";
+import SearchIcon from "@mui/icons-material/Search";
 
 ///////
 export const Home = () => {
@@ -50,9 +53,52 @@ export const Home = () => {
   if (!mode) {
     return <h1> error</h1>;
   }
+
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  }));
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    width: "100%",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      [theme.breakpoints.up("sm")]: {
+        width: "12ch",
+        "&:focus": {
+          width: "20ch",
+        },
+      },
+    },
+  }));
+
   ////UI
   return (
     <>
+      {/* In This Box them is changing */}
       <Box
         sx={{
           display: "flex",
@@ -67,12 +113,25 @@ export const Home = () => {
           minHeight: "56px",
         }}
       >
+        {/* Box with nav elements */}
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
+              {/* Shop Name */}
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Sklep
               </Typography>
+              {/* SEARCH */}
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+              {/* CATEGORY */}
               <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                 <InputLabel id="demo-select-small-label">Kategorie</InputLabel>
                 <Select
@@ -82,20 +141,22 @@ export const Home = () => {
                   label="Age"
                   onChange={handleChange}
                 >
-                  {/* Category from Fake shop, use map */}
+                  {/* category from Fake shop, use map */}
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
                 </Select>
               </FormControl>
-              <Button variant="contained" sx={{ marginRight: "10px" }}>
+              {/* BUTTON SEARCH */}
+              {/* <Button variant="contained" sx={{ marginRight: "10px" }}>
                 Szukaj
-              </Button>
+              </Button> */}
               <Divider
                 orientation="vertical"
                 flexItem
-                sx={{ marginRight: "10px" }}
+                sx={{ marginRight: "10px", marginLeft: "10px" }}
               />
+              {/* USER */}
               {auth && (
                 <div>
                   <IconButton
@@ -148,6 +209,7 @@ export const Home = () => {
                 flexItem
                 sx={{ marginRight: "15px" }}
               />
+              {/* THEME SWITCHER */}
               <CustomizedSwitches
                 checked={mode === "dark"}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
