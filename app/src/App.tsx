@@ -1,20 +1,31 @@
+//mui
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { Home } from "./pages/Home";
 import theme from "./components/mui/theme";
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { NotFound } from "./pages/NotFound";
 
-export const App = () => {
+//router
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+//pages
+import { NotFound } from "./pages/NotFound";
+import { Home } from "./pages/Home";
+
+//tanstack-query
+import { QueryClientProvider } from "@tanstack/react-query";
+import queryClient from "./context/queryClient";
+import React from "react";
+
+export const App: React.FC = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };

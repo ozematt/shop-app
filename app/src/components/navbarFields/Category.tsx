@@ -5,7 +5,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Category = () => {
   const [categories, setCategories] = useState<string[]>([]);
@@ -39,7 +39,7 @@ export const Category = () => {
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel>Kategorie</InputLabel>
+        <InputLabel>category</InputLabel>
         <Select
           labelId="select-category-label"
           id="select-category"
