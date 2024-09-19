@@ -1,5 +1,4 @@
 import { AppBar, Box, Divider, Toolbar } from "@mui/material";
-import React from "react";
 import { Logo } from "./navbarFields/Logo";
 import { SearchField } from "./navbarFields/SearchField";
 import { Category } from "./navbarFields/Category";
