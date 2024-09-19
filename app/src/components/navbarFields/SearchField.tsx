@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import fetchProducts, { Product } from "../../api/queries/products";
 import { Autocomplete } from "@mui/material";
 
-//STYLES
+// MUI STYLES
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -58,6 +58,10 @@ export const SearchField = () => {
     queryFn: fetchProducts,
   });
 
+  const handleInputFocusOut = () => {
+    setSearchValue("");
+  };
+
   const productsTitle: string[] =
     products?.map((product) => product.title) || [];
   //UI
@@ -82,6 +86,7 @@ export const SearchField = () => {
               placeholder="Search…"
               inputProps={{ ...params.inputProps, "aria-label": "search" }}
               value={searchValue}
+              onBlur={handleInputFocusOut}
               sx={{
                 // break points
                 width: {
