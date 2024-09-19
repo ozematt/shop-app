@@ -10,18 +10,19 @@ import { useState } from "react";
 import fetchCategories from "../../api/queries/categories";
 
 export const Category: React.FC = () => {
+  //DATA
   const [selectedCategories, setSelectedCategories] = useState<string>("");
-
-  const handleChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCategories(event.target.value as string);
-  };
-
   const { data: categories } = useQuery<string[]>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
-  console.log(categories);
 
+  //LOGIC
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedCategories(event.target.value as string);
+  };
+
+  //UI
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
