@@ -5,41 +5,29 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import fetchCategories from "../../api/queries/categories";
 
-export const Category = () => {
-  const [categories, setCategories] = useState<string[]>([]);
+export const Category: React.FC = () => {
+  //DATA
   const [selectedCategories, setSelectedCategories] = useState<string>("");
 
+  const { data: categories } = useQuery<string[]>({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+
+  //LOGIC
   const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedCategories(event.target.value as string);
   };
 
-  useEffect(() => {
-    const fetchCategories = async (): Promise<string[]> => {
-      try {
-        const response = await fetch(
-          "https://fakestoreapi.com/products/categories"
-        );
-        const data: string[] = await response.json();
-        return data;
-      } catch (error) {
-        console.error("Mamy problem", error);
-        return [];
-      }
-    };
-    const loadCategories = async () => {
-      const data: string[] = await fetchCategories();
-      setCategories(data);
-    };
-
-    loadCategories();
-  }, []);
-
+  //UI
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel>Kategorie</InputLabel>
+        <InputLabel>categories</InputLabel>
         <Select
           labelId="select-category-label"
           id="select-category"
