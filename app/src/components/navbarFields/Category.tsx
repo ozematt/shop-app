@@ -12,6 +12,7 @@ import fetchCategories from "../../api/queries/categories";
 export const Category: React.FC = () => {
   //DATA
   const [selectedCategories, setSelectedCategories] = useState<string>("");
+
   const { data: categories } = useQuery<string[]>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
@@ -26,7 +27,7 @@ export const Category: React.FC = () => {
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel>category</InputLabel>
+        <InputLabel>categories</InputLabel>
         <Select
           labelId="select-category-label"
           id="select-category"
