@@ -6,21 +6,28 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import fetchCategories from "../../api/queries/categories";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { setCategory } from "../../features/categories/categorySlice";
 
 export const Category: React.FC = () => {
   //DATA
-  const [selectedCategories, setSelectedCategories] = useState<string>("");
-
+  //redux
+  const dispatch = useDispatch<AppDispatch>();
+  const selectedCategory = useSelector(
+    (state: RootState) => state.category.selectedCategory
+  );
+  // tanstack-query
   const { data: categories } = useQuery<string[]>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
 
   //LOGIC
-  const handleChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCategories(event.target.value as string);
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    dispatch(setCategory(event.target.value as string));
   };
 
   //UI
@@ -31,9 +38,9 @@ export const Category: React.FC = () => {
         <Select
           labelId="select-category-label"
           id="select-category"
-          value={selectedCategories}
+          value={selectedCategory}
           label="Category"
-          onChange={handleChange}
+          onChange={handleCategoryChange}
         >
           <MenuItem value="none">
             <em>None</em>
