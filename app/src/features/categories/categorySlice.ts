@@ -1,22 +1,22 @@
-// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// interface CategoryState {
-//   categories: string[];
-// }
+interface CategoryState {
+  selectedCategory: string;
+}
 
-// const initialState: CategoryState = {
-//   categories: [],
-// };
+const initialState: CategoryState = {
+  selectedCategory: "",
+};
 
-// const categorySlice = createSlice({
-//   name: "categories",
-//   initialState,
-//   reducers: {
-//     setCategories(state, action: PayloadAction<string[]>) {
-//       state.categories = action.payload;
-//     },
-//   },
-// });
+const categorySlice = createSlice({
+  name: "category",
+  initialState,
+  reducers: {
+    setCategory(state, action: PayloadAction<string>) {
+      state.selectedCategory = action.payload;
+    },
+  },
+});
 
-// export const { setCategories } = categorySlice.actions;
-// export default categorySlice.reducer;
+export const { setCategory } = categorySlice.actions;
+export default categorySlice.reducer;
