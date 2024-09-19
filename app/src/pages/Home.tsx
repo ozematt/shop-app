@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Navbar } from "../components/Navbar";
 
-export const Home = () => {
+export const Home: React.FC = () => {
   return (
     <>
       <Box
