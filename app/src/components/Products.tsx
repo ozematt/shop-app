@@ -1,16 +1,15 @@
-// import { Box, Typography, useTheme } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useQuery } from "@tanstack/react-query";
 import fetchProducts, { Product } from "../api/queries/products";
 import {
   Box,
   Button,
+  CardMedia,
   Divider,
   Rating,
   Typography,
   useTheme,
 } from "@mui/material";
-// import { grey } from "@mui/material/colors";
 
 export const Products = () => {
   const theme = useTheme();
@@ -28,11 +27,10 @@ export const Products = () => {
     height: "300px",
     width: "720px",
     display: "flex",
-    gap: "20px",
+    gap: "10px",
     margin: "50px 20px 0 0",
-    padding: "20px",
+    // padding: "20px",
     border: "none",
-
     borderRight: "0.5px solid #424242",
     borderBottom: "0.5px solid #424242",
   };
@@ -53,12 +51,21 @@ export const Products = () => {
             // MAIN BOX
             <Box key={product.id} sx={productStyle}>
               {/* IMAGE */}
-              <img
-                src={product.image}
-                style={{ height: "100%", width: "200px" }}
+
+              <div
+                style={{
+                  backgroundImage: `url(${product.image})`,
+                  backgroundSize: "contain",
+                  backgroundColor: "white",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  width: "400px",
+                  height: "100%",
+                }}
               />
+
               {/* TITLE BOX */}
-              <div style={{}}>
+              <div style={{ width: "500px" }}>
                 {" "}
                 <Typography variant="h6">{product.title}</Typography>
                 <div
@@ -84,16 +91,24 @@ export const Products = () => {
                 </div>
               </div>
               <Divider orientation="vertical" flexItem />
-              <Box sx={{}}>
+              {/* PRICE BOX */}
+              <Box sx={{ width: "300px" }}>
                 {" "}
                 <div>
                   {" "}
                   <span>Price:</span>
-                  <Typography variant="h4"> {product.price} $</Typography>
+                  <Typography variant="h4">
+                    {" "}
+                    {product.price}
+                    <span style={{ fontSize: "19px" }}> $</span>
+                  </Typography>
                 </div>
                 <Button
                   variant="contained"
-                  sx={{ backgroundColor: "#DE7F1F", marginRight: "15px" }}
+                  sx={{
+                    backgroundColor: "#DE7F1F",
+                    padding: "20px",
+                  }}
                 >
                   Add to Cart
                 </Button>
