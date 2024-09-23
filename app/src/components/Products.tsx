@@ -29,10 +29,14 @@ export const Products = () => {
     display: "flex",
     gap: "10px",
     margin: "50px 20px 0 0",
-    // padding: "20px",
     border: "none",
     borderRight: "0.5px solid #424242",
     borderBottom: "0.5px solid #424242",
+    borderRadius: "8px",
+    "&:hover": {
+      backgroundColor: "rgba(255,255,255, 0.05)",
+      boxShadow: 3,
+    },
   };
 
   return (
@@ -92,14 +96,18 @@ export const Products = () => {
               </div>
               <Divider orientation="vertical" flexItem />
               {/* PRICE BOX */}
-              <Box sx={{ width: "300px" }}>
+              <Box
+                sx={{
+                  width: "300px",
+                }}
+              >
                 {" "}
-                <div>
+                <div style={{ flexGrow: "1" }}>
                   {" "}
                   <span>Price:</span>
                   <Typography variant="h4">
-                    {" "}
-                    {product.price}
+                    <b>{product.price}</b>
+
                     <span style={{ fontSize: "19px" }}> $</span>
                   </Typography>
                 </div>
@@ -108,6 +116,8 @@ export const Products = () => {
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
+                    marginTop: "155px",
+                    width: "94%",
                   }}
                 >
                   Add to Cart
