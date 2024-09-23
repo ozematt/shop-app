@@ -23,13 +23,13 @@ export const Filter = () => {
     (state: RootState) => state.filterProducts.filterOption
   );
 
-  console.log(filterProducts);
-
   // fetch categories
   const { data: categories } = useQuery<string[]>({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
+
+  console.log(categories);
 
   //LOGIC
   const handleFilterChange = (event: SelectChangeEvent<string>) => {
@@ -52,25 +52,38 @@ export const Filter = () => {
             <em>None</em>
           </MenuItem>
           <Divider component="li" />
-          <MenuItem>CATEGORIES</MenuItem>
+          <MenuItem disabled>CATEGORIES</MenuItem>
 
           {categories?.map((category: string) => (
             <MenuItem key={category} value={category}>
               {category}
             </MenuItem>
           ))}
-          <Divider component="li" />
-          <MenuItem>PRICE</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+        <InputLabel>Sort</InputLabel>
+        <Select
+          labelId="select-filter-label"
+          id="select-filter"
+          // value={sortProducts}
+          label="Filter"
+          // onChange={handleSortChange}
+        >
+          <MenuItem>
+            <em>None</em>
+          </MenuItem>
+          <MenuItem disabled>PRICE</MenuItem>
 
-          <MenuItem value="price: highest first">price: highest first</MenuItem>
-          <MenuItem value="price: lowest first">price: lowest first</MenuItem>
+          <MenuItem value="desc">price: highest first</MenuItem>
+          <MenuItem value="asc">price: lowest first</MenuItem>
           <Divider component="li" />
-          <MenuItem>RATE</MenuItem>
+          <MenuItem disabled>RATE</MenuItem>
 
           <MenuItem value="rate: highest first">rate: highest first</MenuItem>
           <MenuItem value="rate: lowest first">rate: lowest first</MenuItem>
           <Divider component="li" />
-          <MenuItem>POPULARITY</MenuItem>
+          <MenuItem disabled>POPULARITY</MenuItem>
 
           <MenuItem value="popularity: highest first">
             popularity: highest first

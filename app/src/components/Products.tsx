@@ -9,6 +9,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { useState } from "react";
 
 export const Products = () => {
   //theme
@@ -40,6 +43,35 @@ export const Products = () => {
     },
   };
 
+  const filterOption = useSelector(
+    (state: RootState) => state.filterProducts.filterOption
+  );
+  console.log(filterOption);
+
+  const filteredProducts = products?.filter((product) => {
+    if (filterOption === "none") {
+      return true;
+    }
+    //category - filter
+    if (filterOption === "electronics") {
+      return product.category === "electronics";
+    }
+    if (filterOption === "jewelery") {
+      return product.category === "jewelery";
+    }
+    if (filterOption === "men's clothing") {
+      return product.category === "men's clothing";
+    }
+    if (filterOption === "women's clothing") {
+      return product.category === "women's clothing";
+    }
+    //price - filter
+    // if (filterOption === "desc") {
+    //   const sortedProducts = [...products].sort((a, b) => {
+    //     return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    // }
+  });
+
   //UI
   return (
     <>
@@ -53,7 +85,7 @@ export const Products = () => {
           }}
         >
           {/* PRODUCTS PRINT */}
-          {products?.map((product) => (
+          {filteredProducts?.map((product) => (
             // MAIN BOX
             <Box key={product.id} sx={productStyle}>
               {/* IMAGE */}
