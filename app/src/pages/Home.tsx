@@ -1,19 +1,15 @@
 import React from "react";
-import Box from "@mui/material/Box";
+
 import { Navbar } from "../components/Navbar";
+
+import { Products } from "../components/Products";
+// import { CssBaseline } from "@mui/material";
 
 export const Home: React.FC = () => {
   return (
     <>
-      <Box
-        sx={{
-          width: "100vw",
-          height: "100vh",
-          bgcolor: "background.default",
-        }}
-      >
-        <Navbar />
-      </Box>
+      <Navbar />
+      <Products />
     </>
   );
 };

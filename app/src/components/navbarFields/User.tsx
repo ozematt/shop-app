@@ -1,4 +1,11 @@
-import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -25,6 +32,10 @@ export const User = () => {
             // onClick={handleMenu}
             color="inherit"
           >
+            <Typography variant="h6" sx={{ margin: "0 10px 0 10px" }}>
+              Cart
+            </Typography>
+
             <Tooltip title="View Cart">
               <ShoppingCartOutlinedIcon fontSize="large" />
             </Tooltip>
@@ -38,6 +49,9 @@ export const User = () => {
             onClick={handleMenu}
             color="inherit"
           >
+            <Typography variant="h6" sx={{ margin: "0 10px 0 0" }}>
+              User
+            </Typography>
             <Tooltip title="User history">
               <AccountCircleIcon fontSize="large" />
             </Tooltip>
