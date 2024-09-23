@@ -4,7 +4,6 @@ import fetchProducts, { Product } from "../api/queries/products";
 import {
   Box,
   Button,
-  CardMedia,
   Divider,
   Rating,
   Typography,
@@ -12,14 +11,16 @@ import {
 } from "@mui/material";
 
 export const Products = () => {
+  //theme
   const theme = useTheme();
 
+  //fetch products
   const { data: products } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
-  console.log(products);
 
+  //product item style
   const productStyle = {
     backgroundColor: theme.palette.background.default,
     boxShadow: theme.shadows[1],
@@ -39,6 +40,7 @@ export const Products = () => {
     },
   };
 
+  //UI
   return (
     <>
       <Container maxWidth="xl">
