@@ -4,22 +4,26 @@ import fetchProducts, { Product } from "../api/queries/products";
 import {
   Box,
   Button,
-  CardMedia,
   Divider,
   Rating,
   Typography,
   useTheme,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { useState } from "react";
 
 export const Products = () => {
+  //theme
   const theme = useTheme();
 
+  //fetch products
   const { data: products } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
-  console.log(products);
 
+  //product item style
   const productStyle = {
     backgroundColor: theme.palette.background.default,
     boxShadow: theme.shadows[1],
@@ -39,6 +43,36 @@ export const Products = () => {
     },
   };
 
+  const filterOption = useSelector(
+    (state: RootState) => state.filterProducts.filterOption
+  );
+  console.log(filterOption);
+
+  const filteredProducts = products?.filter((product) => {
+    if (filterOption === "none") {
+      return true;
+    }
+    //category - filter
+    if (filterOption === "electronics") {
+      return product.category === "electronics";
+    }
+    if (filterOption === "jewelery") {
+      return product.category === "jewelery";
+    }
+    if (filterOption === "men's clothing") {
+      return product.category === "men's clothing";
+    }
+    if (filterOption === "women's clothing") {
+      return product.category === "women's clothing";
+    }
+    //price - filter
+    // if (filterOption === "desc") {
+    //   const sortedProducts = [...products].sort((a, b) => {
+    //     return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
+    // }
+  });
+
+  //UI
   return (
     <>
       <Container maxWidth="xl">
@@ -51,7 +85,7 @@ export const Products = () => {
           }}
         >
           {/* PRODUCTS PRINT */}
-          {products?.map((product) => (
+          {filteredProducts?.map((product) => (
             // MAIN BOX
             <Box key={product.id} sx={productStyle}>
               {/* IMAGE */}

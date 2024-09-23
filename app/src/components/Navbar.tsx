@@ -1,7 +1,7 @@
-import { AppBar, Box, Button, Divider, Toolbar } from "@mui/material";
+import { AppBar, Box, Divider, Toolbar } from "@mui/material";
 import { Logo } from "./navbarFields/Logo";
 import { SearchField } from "./navbarFields/SearchField";
-import { Category } from "./navbarFields/Category";
+import { Filter } from "./navbarFields/Filter";
 import { User } from "./navbarFields/User";
 import { ThemeSwitch } from "./navbarFields/ThemeSwitch";
 import Container from "@mui/material/Container";
@@ -17,7 +17,7 @@ export const Navbar = () => {
               <Divider orientation="vertical" flexItem />
               <Logo />
               <SearchField />
-              <Category />
+              <Filter />
               <SearchButton />
               <Divider orientation="vertical" flexItem />
               <User />
