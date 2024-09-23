@@ -11,6 +11,7 @@ import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { setCategory } from "../../features/categories/categorySlice";
+import Divider from "@mui/material/Divider";
 
 export const Category: React.FC = () => {
   //DATA
@@ -34,7 +35,7 @@ export const Category: React.FC = () => {
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel>categories</InputLabel>
+        <InputLabel>Filter</InputLabel>
         <Select
           labelId="select-category-label"
           id="select-category"
@@ -45,11 +46,24 @@ export const Category: React.FC = () => {
           <MenuItem value="none">
             <em>None</em>
           </MenuItem>
+          <Divider component="li" />
+          <MenuItem>CATEGORIES</MenuItem>
+
           {categories?.map((category: string) => (
             <MenuItem key={category} value={category}>
               {category}
             </MenuItem>
           ))}
+          <Divider component="li" />
+          <MenuItem>PRICE</MenuItem>
+
+          <MenuItem>price: highest first</MenuItem>
+          <MenuItem>price: lowest first</MenuItem>
+          <Divider component="li" />
+          <MenuItem>RATE</MenuItem>
+
+          <MenuItem>rate: highest first</MenuItem>
+          <MenuItem>rate: lowest first</MenuItem>
         </Select>
       </FormControl>
     </>

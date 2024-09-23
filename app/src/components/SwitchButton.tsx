@@ -74,7 +74,7 @@ export const CustomizedSwitches = ({
         control={
           <Tooltip title="Switch theme">
             <MaterialUISwitch
-              sx={{ m: 1 }}
+              sx={{ m: 1, margin: "0 -10px 0 15px" }}
               checked={checked}
               onChange={onChange}
             />
