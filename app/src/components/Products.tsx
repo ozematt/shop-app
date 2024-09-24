@@ -1,6 +1,4 @@
 import Container from "@mui/material/Container";
-import { useQuery } from "@tanstack/react-query";
-import fetchProducts, { Product } from "../api/queries/products";
 import {
   Box,
   Button,
@@ -9,21 +7,15 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import fetchProducts, { Product } from "../api/queries/products";
+import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { useState } from "react";
 
 export const Products = () => {
-  //theme
   const theme = useTheme();
 
-  //fetch products
-  const { data: products } = useQuery<Product[]>({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
-
-  //product item style
+  //product box style
   const productStyle = {
     backgroundColor: theme.palette.background.default,
     boxShadow: theme.shadows[1],
@@ -37,22 +29,34 @@ export const Products = () => {
     borderRight: "0.5px solid #424242",
     borderBottom: "0.5px solid #424242",
     borderRadius: "8px",
+    position: "relative",
     "&:hover": {
       backgroundColor: "rgba(255,255,255, 0.05)",
       boxShadow: 3,
     },
   };
 
-  const filterOption = useSelector(
-    (state: RootState) => state.filterProducts.filterOption
-  );
-  console.log(filterOption);
+  //fetch all products
+  const { data: products } = useQuery<Product[]>({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
 
+  //selected category as filter
+  const filterOption = useSelector(
+    (state: RootState) => state.filterProducts.category
+  );
+
+  //selected sorting method
+  const sortingMethod = useSelector(
+    (state: RootState) => state.filterProducts.sortingMethod
+  );
+
+  //filter products by category
   const filteredProducts = products?.filter((product) => {
     if (filterOption === "none") {
       return true;
     }
-    //category - filter
     if (filterOption === "electronics") {
       return product.category === "electronics";
     }
@@ -65,11 +69,32 @@ export const Products = () => {
     if (filterOption === "women's clothing") {
       return product.category === "women's clothing";
     }
-    //price - filter
-    // if (filterOption === "desc") {
-    //   const sortedProducts = [...products].sort((a, b) => {
-    //     return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
-    // }
+  });
+
+  //filtered products by category or all products
+  const productsToSort = filteredProducts?.length ? filteredProducts : products;
+
+  //sorting products by sorting method
+  const sortedProducts = productsToSort?.sort((a: Product, b: Product) => {
+    if (sortingMethod === "desc") {
+      return b.price - a.price;
+    }
+    if (sortingMethod === "asc") {
+      return a.price - b.price;
+    }
+    if (sortingMethod === "rate: highest first") {
+      return b.rating.rate - a.rating.rate;
+    }
+    if (sortingMethod === "rate: lowest first") {
+      return a.rating.rate - b.rating.rate;
+    }
+    if (sortingMethod === "popularity: highest first") {
+      return b.rating.count - a.rating.count;
+    }
+    if (sortingMethod === "popularity: lowest first") {
+      return a.rating.count - b.rating.count;
+    }
+    return 0;
   });
 
   //UI
@@ -85,7 +110,7 @@ export const Products = () => {
           }}
         >
           {/* PRODUCTS PRINT */}
-          {filteredProducts?.map((product) => (
+          {sortedProducts?.map((product) => (
             // MAIN BOX
             <Box key={product.id} sx={productStyle}>
               {/* IMAGE */}
@@ -106,11 +131,14 @@ export const Products = () => {
               <div style={{ width: "500px" }}>
                 {" "}
                 <Typography variant="h6">{product.title}</Typography>
+                <p>{product.description.slice(0, 70)}...</p>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
+                    position: "absolute",
+                    bottom: "30px",
                   }}
                 >
                   {" "}
@@ -150,7 +178,7 @@ export const Products = () => {
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
-                    marginTop: "155px",
+                    marginTop: "145px",
                     width: "94%",
                   }}
                 >
