@@ -12,15 +12,22 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setFilterProducts } from "../../features/products/filterProducts";
+import {
+  setProductCategory,
+  setSortingMethod,
+} from "../../features/products/filterProducts";
+// import { useState } from "react";
 
-export const Filter = () => {
+export const Category = () => {
   //DATA
 
   //redux
   const dispatch = useDispatch<AppDispatch>();
-  const filterProducts = useSelector(
-    (state: RootState) => state.filterProducts.filterOption
+  const category = useSelector(
+    (state: RootState) => state.filterProducts.category
+  );
+  const sortingMethod = useSelector(
+    (state: RootState) => state.filterProducts.sortingMethod
   );
 
   // fetch categories
@@ -29,24 +36,33 @@ export const Filter = () => {
     queryFn: fetchCategories,
   });
 
-  console.log(categories);
-
   //LOGIC
-  const handleFilterChange = (event: SelectChangeEvent<string>) => {
-    dispatch(setFilterProducts(event.target.value as string));
+  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
+    dispatch(setProductCategory(event.target.value as string));
   };
+
+  //SORTING
+
+  // const [sortingOption, setSortingOption] = useState<string>("none");
+
+  const handleSortingMethodChange = (event: SelectChangeEvent<string>) => {
+    dispatch(setSortingMethod(event.target.value));
+  };
+
+  // console.log(sortingOption);
 
   //UI
   return (
     <>
+      {/* Category - filter */}
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel>Filter</InputLabel>
+        <InputLabel>Category</InputLabel>
         <Select
-          labelId="select-filter-label"
-          id="select-filter"
-          value={filterProducts}
-          label="Filter"
-          onChange={handleFilterChange}
+          labelId="select-category-label"
+          id="select-category"
+          value={category}
+          label="Category"
+          onChange={handleCategoryChange}
         >
           <MenuItem value="none">
             <em>None</em>
@@ -61,14 +77,15 @@ export const Filter = () => {
           ))}
         </Select>
       </FormControl>
+      {/* Sorted */}
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel>Sort</InputLabel>
         <Select
           labelId="select-filter-label"
           id="select-filter"
-          // value={sortProducts}
+          value={sortingMethod}
           label="Filter"
-          // onChange={handleSortChange}
+          onChange={handleSortingMethodChange}
         >
           <MenuItem>
             <em>None</em>

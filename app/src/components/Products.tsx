@@ -11,7 +11,9 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { useState } from "react";
+import fetchDescProducts from "../api/queries/descProducts";
+// import { log } from "console";
+// import { useState } from "react";
 
 export const Products = () => {
   //theme
@@ -44,7 +46,10 @@ export const Products = () => {
   };
 
   const filterOption = useSelector(
-    (state: RootState) => state.filterProducts.filterOption
+    (state: RootState) => state.filterProducts.category
+  );
+  const sortingMethod = useSelector(
+    (state: RootState) => state.filterProducts.sortingMethod
   );
   console.log(filterOption);
 
@@ -65,12 +70,21 @@ export const Products = () => {
     if (filterOption === "women's clothing") {
       return product.category === "women's clothing";
     }
-    //price - filter
-    // if (filterOption === "desc") {
-    //   const sortedProducts = [...products].sort((a, b) => {
-    //     return sortOrder === 'asc' ? a.price - b.price : b.price - a.price;
-    // }
   });
+  //category - filter products sorting or all products
+  const productsToSort = filteredProducts?.length ? filteredProducts : products;
+  //sorting
+  const sortedProducts = productsToSort?.sort((a: Product, b: Product) => {
+    if (sortingMethod === "asc") {
+      return a.price - b.price;
+    }
+    if (sortingMethod === "desc") {
+      return b.price - a.price;
+    }
+    return 0;
+  });
+
+  console.log(sortedProducts);
 
   //UI
   return (
@@ -85,7 +99,7 @@ export const Products = () => {
           }}
         >
           {/* PRODUCTS PRINT */}
-          {filteredProducts?.map((product) => (
+          {sortedProducts?.map((product) => (
             // MAIN BOX
             <Box key={product.id} sx={productStyle}>
               {/* IMAGE */}
