@@ -43,14 +43,9 @@ export const Category = () => {
 
   //SORTING
 
-  // const [sortingOption, setSortingOption] = useState<string>("none");
-
   const handleSortingMethodChange = (event: SelectChangeEvent<string>) => {
     dispatch(setSortingMethod(event.target.value));
   };
-
-  // console.log(sortingOption);
-
   //UI
   return (
     <>
@@ -105,7 +100,7 @@ export const Category = () => {
           <MenuItem value="popularity: highest first">
             popularity: highest first
           </MenuItem>
-          <MenuItem value="popularity: highest first">
+          <MenuItem value="popularity: lowest first">
             popularity: lowest first
           </MenuItem>
         </Select>
