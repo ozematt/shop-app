@@ -43,30 +43,25 @@ export const Products = () => {
   });
 
   //selected category as filter
-  const filterOption = useSelector(
-    (state: RootState) => state.filterProducts.category
-  );
-
-  //selected sorting method
-  const sortingMethod = useSelector(
-    (state: RootState) => state.filterProducts.sortingMethod
+  const { category, sortingMethod } = useSelector(
+    (state: RootState) => state.filterProducts
   );
 
   //filter products by category
   const filteredProducts = products?.filter((product) => {
-    if (filterOption === "none") {
+    if (category === "none") {
       return true;
     }
-    if (filterOption === "electronics") {
+    if (category === "electronics") {
       return product.category === "electronics";
     }
-    if (filterOption === "jewelery") {
+    if (category === "jewelery") {
       return product.category === "jewelery";
     }
-    if (filterOption === "men's clothing") {
+    if (category === "men's clothing") {
       return product.category === "men's clothing";
     }
-    if (filterOption === "women's clothing") {
+    if (category === "women's clothing") {
       return product.category === "women's clothing";
     }
   });
