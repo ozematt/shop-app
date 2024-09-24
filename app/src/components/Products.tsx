@@ -29,6 +29,7 @@ export const Products = () => {
     borderRight: "0.5px solid #424242",
     borderBottom: "0.5px solid #424242",
     borderRadius: "8px",
+    position: "relative",
     "&:hover": {
       backgroundColor: "rgba(255,255,255, 0.05)",
       boxShadow: 3,
@@ -130,11 +131,14 @@ export const Products = () => {
               <div style={{ width: "500px" }}>
                 {" "}
                 <Typography variant="h6">{product.title}</Typography>
+                <p>{product.description.slice(0, 70)}...</p>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
+                    position: "absolute",
+                    bottom: "30px",
                   }}
                 >
                   {" "}
@@ -174,7 +178,7 @@ export const Products = () => {
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
-                    marginTop: "155px",
+                    marginTop: "145px",
                     width: "94%",
                   }}
                 >
