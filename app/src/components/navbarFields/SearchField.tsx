@@ -55,19 +55,14 @@ export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
 
-  // const dispatch: AppDispatch = useAppDispatch();
-
+  //products list from global state
   const products = useSelector((state: RootState) => state.productsList.items);
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
-  //clear input on focus out
+  //clear input when focus out
   const handleInputFocusOut = () => {
     setSearchValue("");
   };
-
+  // products list titles
   const productsTitle: string[] =
     products?.map((product) => product.title) || [];
   //UI
