@@ -22,7 +22,7 @@ export const fetchProducts = createAsyncThunk<
   void,
   { state: RootState }
 >("products/fetch", async (_, { getState }) => {
-  const { items: productLoaded } = getState().productsList;
+  const { items: productLoaded } = getState().products;
   //if products are in state, return state
   if (productLoaded.length > 0) {
     return productLoaded;
@@ -54,23 +54,15 @@ const initialState: ProductsState = {
 };
 
 // Slice
-const fetchProductSlice = createSlice({
-  name: "productsList",
+const productSlice = createSlice({
+  name: "products",
   initialState,
   reducers: {
     setSortingMethod: (state, action: PayloadAction<string>) => {
       state.sortingMethod = action.payload;
     },
     filterByCategory: (state, action: PayloadAction<string>) => {
-      const category = action.payload;
-      state.category = category;
-      if (category === "none") {
-        state.filteredItems = state.items;
-      } else {
-        state.filteredItems = state.items.filter(
-          (product) => product.category === category
-        );
-      }
+      state.category = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -92,6 +84,5 @@ const fetchProductSlice = createSlice({
       });
   },
 });
-export const { setProductCategory, setSortingMethod, filterByCategory } =
-  fetchProductSlice.actions;
-export default fetchProductSlice.reducer;
+export const { setSortingMethod, filterByCategory } = productSlice.actions;
+export default productSlice.reducer;

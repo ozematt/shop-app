@@ -3,9 +3,8 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
 
-import { useEffect, useState } from "react";
-import { fetchProducts } from "../../features/products/fetchProducts";
-import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
+import { useState } from "react";
+import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 // MUI STYLES
@@ -56,7 +55,7 @@ export const SearchField = () => {
   const [searchValue, setSearchValue] = useState("");
 
   //products list from global state
-  const products = useSelector((state: RootState) => state.productsList.items);
+  const products = useSelector((state: RootState) => state.products.items);
 
   //clear input when focus out
   const handleInputFocusOut = () => {

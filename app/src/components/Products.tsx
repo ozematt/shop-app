@@ -8,29 +8,15 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Product } from "../features/products/fetchProducts";
+import { Product } from "../features/products/productsSlice";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { fetchProducts } from "../features/products/fetchProducts";
+import { fetchProducts } from "../features/products/productsSlice";
+import { selectSortedProducts } from "../features/products/productsSelectors";
 
 export const Products = () => {
   const theme = useTheme();
-
-  const dispatch: AppDispatch = useAppDispatch();
-
-  const {
-    items: products,
-    loading,
-    error,
-    category,
-    sortingMethod,
-    filteredItems,
-  } = useSelector((state: RootState) => state.productsList);
-
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   //product box style
   const productStyle = {
@@ -53,31 +39,18 @@ export const Products = () => {
     },
   };
 
-  //filtered products by category or all products
-  const productsToSort = filteredItems?.length ? filteredItems : products;
+  const dispatch: AppDispatch = useAppDispatch();
 
-  //sorting products by sorting method
-  const sortedProducts = [...productsToSort]?.sort((a: Product, b: Product) => {
-    if (sortingMethod === "desc") {
-      return b.price - a.price;
-    }
-    if (sortingMethod === "asc") {
-      return a.price - b.price;
-    }
-    if (sortingMethod === "rate: highest first") {
-      return b.rating.rate - a.rating.rate;
-    }
-    if (sortingMethod === "rate: lowest first") {
-      return a.rating.rate - b.rating.rate;
-    }
-    if (sortingMethod === "popularity: highest first") {
-      return b.rating.count - a.rating.count;
-    }
-    if (sortingMethod === "popularity: lowest first") {
-      return a.rating.count - b.rating.count;
-    }
-    return 0;
-  });
+  //memoized selector
+  const sortedProducts = useSelector(selectSortedProducts);
+
+  //fetchProduct slice
+  const { loading, error } = useSelector((state: RootState) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   //UI
   if (loading) {
     return (
@@ -123,7 +96,10 @@ export const Products = () => {
               <div style={{ width: "500px" }}>
                 {" "}
                 <Typography variant="h6">{product.title}</Typography>
-                <p>{product.description.slice(0, 70)}...</p>
+                <p style={{ fontSize: "14px", margin: "5px 0 5px 0" }}>
+                  <b>Category:</b> <em> {product.category}</em>
+                </p>
+                <p>{product.description.slice(0, 55)}...</p>
                 <div
                   style={{
                     display: "flex",

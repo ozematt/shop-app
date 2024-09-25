@@ -11,14 +11,14 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { filterByCategory } from "../../features/products/fetchProducts";
+import { filterByCategory } from "../../features/products/productsSlice";
 
 export const CategoryField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
 
   //filter products state
-  const { category } = useSelector((state: RootState) => state.productsList);
+  const { category } = useSelector((state: RootState) => state.products);
 
   // fetch categories
   const { data: categories } = useQuery<string[]>({
