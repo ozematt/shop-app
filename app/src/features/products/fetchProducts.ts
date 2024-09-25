@@ -37,6 +37,7 @@ export const fetchProducts = createAsyncThunk<
 
 interface ProductsState {
   items: Product[];
+  filteredItems: Product[];
   loading: boolean;
   error: string | null;
   category: string;
@@ -45,6 +46,7 @@ interface ProductsState {
 
 const initialState: ProductsState = {
   items: [],
+  filteredItems: [],
   loading: false,
   error: null,
   category: "",
@@ -56,11 +58,19 @@ const fetchProductSlice = createSlice({
   name: "productsList",
   initialState,
   reducers: {
-    setProductCategory(state, action: PayloadAction<string>) {
-      state.category = action.payload;
-    },
-    setSortingMethod(state, action: PayloadAction<string>) {
+    setSortingMethod: (state, action: PayloadAction<string>) => {
       state.sortingMethod = action.payload;
+    },
+    filterByCategory: (state, action: PayloadAction<string>) => {
+      const category = action.payload;
+      state.category = category;
+      if (category === "none") {
+        state.filteredItems = state.items;
+      } else {
+        state.filteredItems = state.items.filter(
+          (product) => product.category === category
+        );
+      }
     },
   },
   extraReducers: (builder) => {
@@ -82,6 +92,6 @@ const fetchProductSlice = createSlice({
       });
   },
 });
-export const { setProductCategory, setSortingMethod } =
+export const { setProductCategory, setSortingMethod, filterByCategory } =
   fetchProductSlice.actions;
 export default fetchProductSlice.reducer;

@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setProductCategory } from "../../features/products/fetchProducts";
+import { filterByCategory } from "../../features/products/fetchProducts";
 
 export const CategoryField = () => {
   //DATA
@@ -29,7 +29,7 @@ export const CategoryField = () => {
   //LOGIC
   //select category
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    dispatch(setProductCategory(event.target.value as string));
+    dispatch(filterByCategory(event.target.value as string));
   };
 
   //UI

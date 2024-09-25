@@ -25,6 +25,7 @@ export const Products = () => {
     error,
     category,
     sortingMethod,
+    filteredItems,
   } = useSelector((state: RootState) => state.productsList);
 
   useEffect(() => {
@@ -52,32 +53,8 @@ export const Products = () => {
     },
   };
 
-  //selected category as filter
-  // const {  } = useSelector(
-  //   (state: RootState) => state.
-  // );
-
-  //filter products by category
-  const filteredProducts = products?.filter((product) => {
-    if (category === "none") {
-      return true;
-    }
-    if (category === "electronics") {
-      return product.category === "electronics";
-    }
-    if (category === "jewelery") {
-      return product.category === "jewelery";
-    }
-    if (category === "men's clothing") {
-      return product.category === "men's clothing";
-    }
-    if (category === "women's clothing") {
-      return product.category === "women's clothing";
-    }
-  });
-
   //filtered products by category or all products
-  const productsToSort = filteredProducts?.length ? filteredProducts : products;
+  const productsToSort = filteredItems?.length ? filteredItems : products;
 
   //sorting products by sorting method
   const sortedProducts = [...productsToSort]?.sort((a: Product, b: Product) => {
