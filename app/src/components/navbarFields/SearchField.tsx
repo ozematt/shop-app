@@ -1,10 +1,11 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import fetchProducts, { Product } from "../../api/queries/products";
 import { Autocomplete } from "@mui/material";
+
+import { useState } from "react";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 // MUI STYLES
 const Search = styled("div")(({ theme }) => ({
@@ -53,15 +54,14 @@ export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
 
-  const { data: products } = useQuery<Product[]>({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
+  //products list from global state
+  const products = useSelector((state: RootState) => state.products.items);
 
+  //clear input when focus out
   const handleInputFocusOut = () => {
     setSearchValue("");
   };
-
+  // products list titles
   const productsTitle: string[] =
     products?.map((product) => product.title) || [];
   //UI
