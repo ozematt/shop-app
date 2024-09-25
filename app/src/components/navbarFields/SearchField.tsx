@@ -1,10 +1,10 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useState } from "react";
-// import { useQuery } from "@tanstack/react-query";
-import { fetchProducts, Product } from "../../features/products/fetchProducts";
 import { Autocomplete } from "@mui/material";
+
+import { useEffect, useState } from "react";
+import { fetchProducts } from "../../features/products/fetchProducts";
 import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 
@@ -55,18 +55,15 @@ export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
 
-  const dispatch: AppDispatch = useAppDispatch();
+  // const dispatch: AppDispatch = useAppDispatch();
 
-  const {
-    items: products,
-    loading,
-    error,
-  } = useSelector((state: RootState) => state.productsList);
+  const products = useSelector((state: RootState) => state.productsList.items);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  //clear input on focus out
   const handleInputFocusOut = () => {
     setSearchValue("");
   };
