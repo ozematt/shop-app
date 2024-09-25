@@ -39,19 +39,30 @@ interface ProductsState {
   items: Product[];
   loading: boolean;
   error: string | null;
+  category: string;
+  sortingMethod: string;
 }
 
 const initialState: ProductsState = {
   items: [],
   loading: false,
   error: null,
+  category: "",
+  sortingMethod: "",
 };
 
 // Slice
 const fetchProductSlice = createSlice({
   name: "productsList",
   initialState,
-  reducers: {},
+  reducers: {
+    setProductCategory(state, action: PayloadAction<string>) {
+      state.category = action.payload;
+    },
+    setSortingMethod(state, action: PayloadAction<string>) {
+      state.sortingMethod = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -71,5 +82,6 @@ const fetchProductSlice = createSlice({
       });
   },
 });
-
+export const { setProductCategory, setSortingMethod } =
+  fetchProductSlice.actions;
 export default fetchProductSlice.reducer;

@@ -23,6 +23,8 @@ export const Products = () => {
     items: products,
     loading,
     error,
+    category,
+    sortingMethod,
   } = useSelector((state: RootState) => state.productsList);
 
   useEffect(() => {
@@ -51,9 +53,9 @@ export const Products = () => {
   };
 
   //selected category as filter
-  const { category, sortingMethod } = useSelector(
-    (state: RootState) => state.filterProducts
-  );
+  // const {  } = useSelector(
+  //   (state: RootState) => state.
+  // );
 
   //filter products by category
   const filteredProducts = products?.filter((product) => {

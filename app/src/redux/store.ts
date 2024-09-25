@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import filterProductsReducer from "../features/products/filterProducts";
 import productsListReducer from "../features/products/fetchProducts";
 import { useDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: {
-    filterProducts: filterProductsReducer,
     productsList: productsListReducer,
   },
 });
