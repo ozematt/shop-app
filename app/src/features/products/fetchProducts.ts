@@ -1,5 +1,4 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import { RootState } from "../../redux/store";
 
 interface Rating {
@@ -16,6 +15,7 @@ export interface Product {
   image: string;
   rating: Rating;
 }
+
 //lazy loading with createAsyncThunk
 export const fetchProducts = createAsyncThunk<
   Product[],
@@ -40,12 +40,14 @@ interface ProductsState {
   loading: boolean;
   error: string | null;
 }
+
 const initialState: ProductsState = {
   items: [],
   loading: false,
   error: null,
 };
 
+// Slice
 const fetchProductSlice = createSlice({
   name: "productsList",
   initialState,
@@ -55,7 +57,7 @@ const fetchProductSlice = createSlice({
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
       })
-
+      //products added to state
       .addCase(
         fetchProducts.fulfilled,
         (state, action: PayloadAction<Product[]>) => {
@@ -63,7 +65,6 @@ const fetchProductSlice = createSlice({
           state.items = action.payload;
         }
       )
-
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch products";

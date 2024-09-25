@@ -55,11 +55,6 @@ export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
 
-  // const { data: products } = useQuery<Product[]>({
-  //   queryKey: ["products"],
-  //   queryFn: fetchProducts,
-  // });
-
   const dispatch: AppDispatch = useAppDispatch();
 
   const {
