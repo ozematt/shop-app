@@ -16,16 +16,18 @@ export interface Product {
   image: string;
   rating: Rating;
 }
-
+//lazy loading with createAsyncThunk
 export const fetchProducts = createAsyncThunk<
   Product[],
   void,
   { state: RootState }
 >("products/fetch", async (_, { getState }) => {
   const { items: productLoaded } = getState().productsList;
+  //if products are in state, return state
   if (productLoaded.length > 0) {
     return productLoaded;
   }
+  //if not fetch products
   const response = await fetch("https://fakestoreapi.com/products");
   if (!response.ok) {
     throw new Error("Failed to fetch products");
@@ -58,7 +60,7 @@ const fetchProductSlice = createSlice({
         fetchProducts.fulfilled,
         (state, action: PayloadAction<Product[]>) => {
           state.loading = false;
-          state.items = action.payload; // Przypisanie pobranych produktów do stanu
+          state.items = action.payload;
         }
       )
 

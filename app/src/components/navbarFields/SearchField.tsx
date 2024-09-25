@@ -1,10 +1,12 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import fetchProducts, { Product } from "../../api/queries/products";
+import { useEffect, useState } from "react";
+// import { useQuery } from "@tanstack/react-query";
+import { fetchProducts, Product } from "../../features/products/fetchProducts";
 import { Autocomplete } from "@mui/material";
+import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 // MUI STYLES
 const Search = styled("div")(({ theme }) => ({
@@ -53,10 +55,22 @@ export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
 
-  const { data: products } = useQuery<Product[]>({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
+  // const { data: products } = useQuery<Product[]>({
+  //   queryKey: ["products"],
+  //   queryFn: fetchProducts,
+  // });
+
+  const dispatch: AppDispatch = useAppDispatch();
+
+  const {
+    items: products,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.productsList);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const handleInputFocusOut = () => {
     setSearchValue("");
