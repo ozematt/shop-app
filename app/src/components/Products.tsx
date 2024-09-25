@@ -108,7 +108,7 @@ export const Products = () => {
     );
   }
   if (error !== null) {
-    return <p>Error loading products: {error}</p>;
+    return <p>{error}</p>;
   }
 
   return (

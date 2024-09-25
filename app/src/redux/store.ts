@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import categoryReducer from "../features/categories/categorySlice";
 import filterProductsReducer from "../features/products/filterProducts";
 import productsListReducer from "../features/products/fetchProducts";
 import { useDispatch } from "react-redux";
 
 const store = configureStore({
   reducer: {
-    category: categoryReducer,
     filterProducts: filterProductsReducer,
     productsList: productsListReducer,
   },
