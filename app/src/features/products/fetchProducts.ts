@@ -1,36 +1,72 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// interface Rating {
-//   rate: number;
-//   count: number;
-// }
+import { RootState } from "../../redux/store";
 
-// interface Product {
-//   id: number;
-//   title: string;
-//   price: number;
-//   category: string;
-//   description: string;
-//   image: string;
-//   rating: Rating;
-// }
+interface Rating {
+  rate: number;
+  count: number;
+}
 
-// interface ProductsState {
-//   items: Product[];
-//   loading: boolean;
-//   error: string | null;
-// }
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+  rating: Rating;
+}
 
-// const initialState: ProductsState = {
-//   items: [],
-//   loading: false,
-//   error: null,
-// };
-
-const fetchProductsSlice = createSlice({
-  name: "productsList",
-  initialState: "test2",
-  reducers: {},
+export const fetchProducts = createAsyncThunk<
+  Product[],
+  void,
+  { state: RootState }
+>("products/fetch", async (_, { getState }) => {
+  const { items: productLoaded } = getState().productsList;
+  if (productLoaded.length > 0) {
+    return productLoaded;
+  }
+  const response = await fetch("https://fakestoreapi.com/products");
+  if (!response.ok) {
+    throw new Error("Failed to fetch products");
+  }
+  return await response.json();
 });
 
-export default fetchProductsSlice.reducer;
+interface ProductsState {
+  items: Product[];
+  loading: boolean;
+  error: string | null;
+}
+const initialState: ProductsState = {
+  items: [],
+  loading: false,
+  error: null,
+};
+
+const fetchProductSlice = createSlice({
+  name: "productsList",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.loading = true;
+      })
+
+      .addCase(
+        fetchProducts.fulfilled,
+        (state, action: PayloadAction<Product[]>) => {
+          state.loading = false;
+          state.items = action.payload; // Przypisanie pobranych produktów do stanu
+        }
+      )
+
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch products";
+      });
+  },
+});
+
+export default fetchProductSlice.reducer;

@@ -3,21 +3,31 @@ import {
   Box,
   Button,
   Divider,
+  LinearProgress,
   Rating,
   Typography,
   useTheme,
 } from "@mui/material";
-import fetchProducts, { Product } from "../api/queries/products";
-import { useQuery } from "@tanstack/react-query";
+import { Product } from "../features/products/fetchProducts";
 import { useSelector } from "react-redux";
-import store, { RootState } from "../redux/store";
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
+import { useEffect } from "react";
+import { fetchProducts } from "../features/products/fetchProducts";
 
 export const Products = () => {
   const theme = useTheme();
-  // const testi = useSelector((state: RootState) => state.productsList);
-  // console.log(testi);
-  const currentState = store.getState();
-  console.log(currentState);
+
+  const dispatch: AppDispatch = useAppDispatch();
+
+  const {
+    items: products,
+    loading,
+    error,
+  } = useSelector((state: RootState) => state.productsList);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   //product box style
   const productStyle = {
@@ -39,12 +49,6 @@ export const Products = () => {
       boxShadow: 3,
     },
   };
-
-  //fetch all products
-  const { data: products } = useQuery<Product[]>({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
 
   //selected category as filter
   const { category, sortingMethod } = useSelector(
@@ -74,7 +78,7 @@ export const Products = () => {
   const productsToSort = filteredProducts?.length ? filteredProducts : products;
 
   //sorting products by sorting method
-  const sortedProducts = productsToSort?.sort((a: Product, b: Product) => {
+  const sortedProducts = [...productsToSort]?.sort((a: Product, b: Product) => {
     if (sortingMethod === "desc") {
       return b.price - a.price;
     }
@@ -95,8 +99,18 @@ export const Products = () => {
     }
     return 0;
   });
-
   //UI
+  if (loading) {
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
+  }
+  if (error !== null) {
+    return <p>Error loading products: {error}</p>;
+  }
+
   return (
     <>
       <Container maxWidth="xl">
