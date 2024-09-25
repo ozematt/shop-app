@@ -8,16 +8,14 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setSortingMethod } from "../../features/products/filterProducts";
+import { setSortingMethod } from "../../features/products/productsSlice";
 
 export const SortField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
 
   //sorting method state
-  const { sortingMethod } = useSelector(
-    (state: RootState) => state.filterProducts
-  );
+  const { sortingMethod } = useSelector((state: RootState) => state.products);
 
   //LOGIC
   //select sorting method
@@ -37,7 +35,7 @@ export const SortField = () => {
           label="Filter"
           onChange={handleSortingMethodChange}
         >
-          <MenuItem>
+          <MenuItem value="none">
             <em>None</em>
           </MenuItem>
 

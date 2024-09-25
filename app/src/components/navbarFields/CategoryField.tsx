@@ -11,14 +11,14 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setProductCategory } from "../../features/products/filterProducts";
+import { filterByCategory } from "../../features/products/productsSlice";
 
 export const CategoryField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
 
   //filter products state
-  const { category } = useSelector((state: RootState) => state.filterProducts);
+  const { category } = useSelector((state: RootState) => state.products);
 
   // fetch categories
   const { data: categories } = useQuery<string[]>({
@@ -29,7 +29,7 @@ export const CategoryField = () => {
   //LOGIC
   //select category
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    dispatch(setProductCategory(event.target.value as string));
+    dispatch(filterByCategory(event.target.value as string));
   };
 
   //UI

@@ -3,14 +3,16 @@ import {
   Box,
   Button,
   Divider,
+  LinearProgress,
   Rating,
   Typography,
   useTheme,
 } from "@mui/material";
-import fetchProducts, { Product } from "../api/queries/products";
-import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
+import { useEffect } from "react";
+import { fetchProducts } from "../features/products/productsSlice";
+import { selectSortedProducts } from "../features/products/productsSelectors";
 
 export const Products = () => {
   const theme = useTheme();
@@ -36,63 +38,30 @@ export const Products = () => {
     },
   };
 
-  //fetch all products
-  const { data: products } = useQuery<Product[]>({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
+  const dispatch: AppDispatch = useAppDispatch();
 
-  //selected category as filter
-  const { category, sortingMethod } = useSelector(
-    (state: RootState) => state.filterProducts
-  );
+  //memoized selector
+  const sortedProducts = useSelector(selectSortedProducts);
 
-  //filter products by category
-  const filteredProducts = products?.filter((product) => {
-    if (category === "none") {
-      return true;
-    }
-    if (category === "electronics") {
-      return product.category === "electronics";
-    }
-    if (category === "jewelery") {
-      return product.category === "jewelery";
-    }
-    if (category === "men's clothing") {
-      return product.category === "men's clothing";
-    }
-    if (category === "women's clothing") {
-      return product.category === "women's clothing";
-    }
-  });
+  //fetchProduct slice
+  const { loading, error } = useSelector((state: RootState) => state.products);
 
-  //filtered products by category or all products
-  const productsToSort = filteredProducts?.length ? filteredProducts : products;
-
-  //sorting products by sorting method
-  const sortedProducts = productsToSort?.sort((a: Product, b: Product) => {
-    if (sortingMethod === "desc") {
-      return b.price - a.price;
-    }
-    if (sortingMethod === "asc") {
-      return a.price - b.price;
-    }
-    if (sortingMethod === "rate: highest first") {
-      return b.rating.rate - a.rating.rate;
-    }
-    if (sortingMethod === "rate: lowest first") {
-      return a.rating.rate - b.rating.rate;
-    }
-    if (sortingMethod === "popularity: highest first") {
-      return b.rating.count - a.rating.count;
-    }
-    if (sortingMethod === "popularity: lowest first") {
-      return a.rating.count - b.rating.count;
-    }
-    return 0;
-  });
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   //UI
+  if (loading) {
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
+  }
+  if (error !== null) {
+    return <p>{error}</p>;
+  }
+
   return (
     <>
       <Container maxWidth="xl">
@@ -126,7 +95,10 @@ export const Products = () => {
               <div style={{ width: "500px" }}>
                 {" "}
                 <Typography variant="h6">{product.title}</Typography>
-                <p>{product.description.slice(0, 70)}...</p>
+                <p style={{ fontSize: "14px", margin: "5px 0 5px 0" }}>
+                  <b>Category:</b> <em> {product.category}</em>
+                </p>
+                <p>{product.description.slice(0, 55)}...</p>
                 <div
                   style={{
                     display: "flex",
