@@ -10,10 +10,14 @@ import {
 import fetchProducts, { Product } from "../api/queries/products";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import store, { RootState } from "../redux/store";
 
 export const Products = () => {
   const theme = useTheme();
+  // const testi = useSelector((state: RootState) => state.productsList);
+  // console.log(testi);
+  const currentState = store.getState();
+  console.log(currentState);
 
   //product box style
   const productStyle = {
