@@ -8,7 +8,6 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Product } from "../features/products/productsSlice";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
