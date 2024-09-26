@@ -2,6 +2,7 @@ import { IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import React, { useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
 
 export const User = () => {
   const [auth, setAuth] = useState(true);
@@ -26,7 +27,9 @@ export const User = () => {
             color="inherit"
           >
             <Typography variant="h6" sx={{ margin: "0 10px 0 10px" }}>
-              Cart
+              <Link to="/cart" style={{ color: "inherit" }}>
+                Cart
+              </Link>
             </Typography>
 
             <Tooltip title="View Cart">

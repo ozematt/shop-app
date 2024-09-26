@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const Logo = () => {
   return (
@@ -11,10 +12,12 @@ export const Logo = () => {
           fontWeight: 700,
           fontSize: "26px",
           color: "#DE7F1F",
-          marginLeft: "15px",
         }}
       >
-        SKLEP
+        <Link to="/" style={{ color: "inherit" }}>
+          {" "}
+          SKLEP
+        </Link>
       </Typography>
     </>
   );
