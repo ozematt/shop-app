@@ -17,6 +17,8 @@ import React from "react";
 //redux tool kit
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { Cart } from "./pages/Cart";
+import { Dashboard } from "./components/Dashboard";
 
 export const App: React.FC = () => {
   return (
@@ -26,8 +28,11 @@ export const App: React.FC = () => {
           <CssBaseline />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Dashboard />}>
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
+                <Route path="/cart" element={<Cart />} />
+              </Route>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
