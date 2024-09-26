@@ -13,13 +13,7 @@ import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
 import { Product, fetchProducts } from "../features/products/productsSlice";
 import { selectSortedProducts } from "../features/products/productsSelectors";
-import {
-  CartProduct,
-  addToCart,
-  selectAllCart,
-  totalUpdate,
-  updateCart,
-} from "../features/cart/cartSlice";
+import { CartProduct, addToCart } from "../features/cart/cartSlice";
 
 export const Products = () => {
   const theme = useTheme();
@@ -69,8 +63,6 @@ export const Products = () => {
     dispatch(addToCart(modifiedItemData));
   };
 
-  // const cart = useSelector(selectAllCart);
-  // console.log(cart);
   const state = useSelector((state: RootState) => state.cart);
   console.log(state);
 
