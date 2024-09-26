@@ -15,7 +15,7 @@ export const SortField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
 
-  //sorting method state
+  //sorting method from global state
   const sortingMethod = useSelector(
     (state: RootState) => state.products.sortingMethod
   );
