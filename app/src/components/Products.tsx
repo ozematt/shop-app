@@ -64,8 +64,8 @@ export const Products = () => {
     dispatch(addToCart(modifiedItemData));
   };
 
-  const state = useSelector((state: RootState) => state.cart);
-  console.log(state);
+  // const state = useSelector((state: RootState) => state.cart);
+  // console.log(state);
 
   //UI
   if (loading) {

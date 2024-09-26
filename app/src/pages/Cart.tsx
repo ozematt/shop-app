@@ -34,7 +34,7 @@ export const Cart = () => {
   //when cart is empty
 
   const cart = useSelector(selectAllCart);
-  console.log(cart.length);
+  console.log(cart);
 
   return (
     <>
@@ -43,6 +43,7 @@ export const Cart = () => {
         <Box sx={{ height: "100vh" }}>
           {cart.length > 0 ? (
             <div>
+              {/*  buying stage  */}
               <div
                 style={{
                   margin: "90px 30px 0 0",
@@ -72,32 +73,47 @@ export const Cart = () => {
                   }}
                 />
               </div>
-              <Paper sx={{ marginTop: "20px" }}>
+
+              {/* cart title */}
+              <Paper
+                sx={{
+                  marginTop: "20px",
+                  width: "100%",
+                  maxWidth: "914px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Typography
                   variant="h6"
                   sx={{ marginLeft: "15px", padding: "5px" }}
                 >
                   Your Cart:
                 </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{ marginRight: "15px", padding: "5px", color: "red" }}
+                >
+                  Delete Cart
+                </Typography>
               </Paper>
-              <div style={{ display: "flex", gap: "7px" }}>
-                {/* item field */}
+              {cart.map((item) => (
                 <Paper
+                  key={item.id}
                   sx={{
-                    flexGrow: "2",
                     height: "300px",
                     width: "100%",
-                    maxWidth: "900px",
+                    maxWidth: "914px",
                     margin: "14px 7px 0 0",
                   }}
                 >
                   {/* Item section */}
-                  <Box sx={{ margin: "30px 10px 0 50px", display: "flex" }}>
+                  <Box sx={{ padding: "20px", display: "flex" }}>
                     {/* box with image and amount add */}
                     <div>
                       <div
                         style={{
-                          backgroundImage: `url()`,
+                          backgroundImage: `url(${item.image})`,
                           backgroundSize: "contain",
                           backgroundColor: "white",
                           backgroundPosition: "center",
@@ -107,6 +123,8 @@ export const Cart = () => {
                           margin: "0 0 10px 12px",
                         }}
                       />
+
+                      {/* amount + - */}
                       <Box sx={{ display: "flex", fontSize: "18px" }}>
                         <div
                           style={{
@@ -159,7 +177,9 @@ export const Cart = () => {
                         }}
                       >
                         {" "}
-                        <Typography variant="h5">Title</Typography>
+                        <Typography variant="h5" sx={{ width: "500px" }}>
+                          {item.title}
+                        </Typography>
                         <DeleteOutlineOutlinedIcon fontSize="large" />
                       </div>
                       <Typography
@@ -170,13 +190,18 @@ export const Cart = () => {
                           right: "40px",
                         }}
                       >
-                        Price: 100,00
+                        Price: {item.price}
                       </Typography>
                     </div>
                   </Box>
                 </Paper>
+              ))}
+
+              <div style={{ display: "flex", gap: "7px" }}>
+                {/* item field */}
+
                 {/* price field */}
-                <Paper
+                {/* <Paper
                   sx={{
                     flexGrow: "1",
                     minWidth: "100px",
@@ -203,7 +228,7 @@ export const Cart = () => {
                   >
                     Buy
                   </Button>
-                </Paper>
+                </Paper> */}
               </div>
             </div>
           ) : (
