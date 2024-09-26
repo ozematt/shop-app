@@ -11,8 +11,15 @@ import {
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { fetchProducts } from "../features/products/productsSlice";
+import { Product, fetchProducts } from "../features/products/productsSlice";
 import { selectSortedProducts } from "../features/products/productsSelectors";
+import {
+  CartProduct,
+  addToCart,
+  selectAllCart,
+  totalUpdate,
+  updateCart,
+} from "../features/cart/cartSlice";
 
 export const Products = () => {
   const theme = useTheme();
@@ -49,6 +56,23 @@ export const Products = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  //CART
+
+  const handleAddToCart = (item: Product) => {
+    const modifiedItemData: CartProduct = {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      amount: 1,
+    };
+    dispatch(addToCart(modifiedItemData));
+  };
+
+  // const cart = useSelector(selectAllCart);
+  // console.log(cart);
+  const state = useSelector((state: RootState) => state.cart);
+  console.log(state);
 
   //UI
   if (loading) {
@@ -142,6 +166,7 @@ export const Products = () => {
                 </div>
                 <Button
                   variant="contained"
+                  onClick={() => handleAddToCart(product)}
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
