@@ -7,8 +7,12 @@ import {
   Typography,
 } from "@mui/material";
 import emptyCart from "../assets/Empty_cart_image.png";
-import { useSelector } from "react-redux";
-import { selectAllCart } from "../features/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CartProduct,
+  removeFromCart,
+  selectAllCart,
+} from "../features/cart/cartSlice";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { RootState } from "../redux/store";
 
@@ -38,6 +42,12 @@ export const Cart = () => {
   console.log(cart);
 
   const total = useSelector((state: RootState) => state.cart.total);
+
+  const dispatch = useDispatch();
+
+  const handleDeleteFromCart = (item: CartProduct) => {
+    dispatch(removeFromCart(item.id));
+  };
 
   return (
     <>
@@ -184,7 +194,10 @@ export const Cart = () => {
                           <Typography variant="h6" sx={{ width: "500px" }}>
                             {item.title}
                           </Typography>
-                          <DeleteOutlineOutlinedIcon fontSize="large" />
+                          <DeleteOutlineOutlinedIcon
+                            onClick={() => handleDeleteFromCart(item)}
+                            fontSize="large"
+                          />
                         </div>
                         <Typography
                           variant="h5"

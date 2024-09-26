@@ -31,11 +31,18 @@ const cartSlice = createSlice({
     addToCart: (state, action: PayloadAction<CartProduct>) => {
       const item = action.payload;
       cartAdapter.addOne(state, item);
-      state.total += item.price;
+      state.total = Number((state.total + item.price).toFixed(2));
       state.quantity += 1;
     },
     updateCart: cartAdapter.updateOne,
-    removeFromCart: cartAdapter.removeOne,
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      const itemId = action.payload;
+      const itemToRemove = state.entities[itemId];
+      if (itemToRemove) {
+        state.total = Number((state.total - itemToRemove.price).toFixed(2));
+      }
+      cartAdapter.removeOne(state, itemId);
+    },
   },
 });
 
