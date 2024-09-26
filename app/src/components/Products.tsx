@@ -57,6 +57,7 @@ export const Products = () => {
     const modifiedItemData: CartProduct = {
       id: item.id,
       title: item.title,
+      image: item.image,
       price: item.price,
       amount: 1,
     };

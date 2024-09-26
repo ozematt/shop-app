@@ -10,6 +10,7 @@ import { RootState } from "../../redux/store";
 export interface CartProduct {
   id: number;
   title: string;
+  image: string;
   price: number;
   amount: number;
   total?: number;
