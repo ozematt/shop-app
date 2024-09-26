@@ -3,7 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
@@ -58,9 +58,10 @@ export const SearchField = () => {
   const products = useSelector((state: RootState) => state.products.items);
 
   //clear input when focus out
-  const handleInputFocusOut = () => {
+  const handleInputFocusOut = useCallback(() => {
     setSearchValue("");
-  };
+  }, []);
+
   // products list titles
   const productsTitle: string[] =
     products?.map((product) => product.title) || [];
