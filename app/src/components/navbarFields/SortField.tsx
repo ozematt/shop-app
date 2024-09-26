@@ -9,19 +9,25 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { setSortingMethod } from "../../features/products/productsSlice";
+import { useCallback } from "react";
 
 export const SortField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
 
   //sorting method state
-  const { sortingMethod } = useSelector((state: RootState) => state.products);
+  const sortingMethod = useSelector(
+    (state: RootState) => state.products.sortingMethod
+  );
 
   //LOGIC
   //select sorting method
-  const handleSortingMethodChange = (event: SelectChangeEvent<string>) => {
-    dispatch(setSortingMethod(event.target.value as string));
-  };
+  const handleSortingMethodChange = useCallback(
+    (event: SelectChangeEvent<string>) => {
+      dispatch(setSortingMethod(event.target.value as string));
+    },
+    [dispatch]
+  );
 
   //UI
   return (

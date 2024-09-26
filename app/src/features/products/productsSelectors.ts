@@ -2,21 +2,25 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
 import { Product } from "./productsSlice";
 
+////MEMOIZING SELECTORS
+
 // selector to filter products by category
 const productsFilterByCategory = (state: RootState) => {
   const { items, category } = state.products;
   if (category === "none" || category === "") return items; // return original items array
-  return items.filter((product) => product.category === category); // filtering is fine here
+  return items.filter((product) => product.category === category); // filtering by category
 };
 
 // selector to sort products
 export const selectSortedProducts = createSelector(
   [
-    productsFilterByCategory, // this is an input selector
+    productsFilterByCategory, //
     (state: RootState) => state.products.sortingMethod, // sorting method selector
   ],
+  //filteredProducts - result of productsFilterByCategory function,
+  //sortingMethod - sorting method form state
   (filteredProducts, sortingMethod) => {
-    // return a new sorted array to avoid mutation issues
+    //working on the copied array [...], good practice
     return [...filteredProducts].sort((a: Product, b: Product) => {
       if (sortingMethod === "desc") {
         return b.price - a.price;
