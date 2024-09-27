@@ -19,6 +19,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Cart } from "./pages/Cart";
 import { Dashboard } from "./components/Dashboard";
+import { Authorization } from "./pages/Authorization";
 
 export const App: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ export const App: React.FC = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Authorization />} />
               </Route>
             </Routes>
           </BrowserRouter>
