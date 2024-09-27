@@ -14,6 +14,16 @@ export interface Product {
   description: string;
   image: string;
   rating: Rating;
+  // amount?: number;
+}
+
+interface ProductsState {
+  items: Product[];
+  filteredItems: Product[];
+  loading: boolean;
+  error: string | null;
+  category: string;
+  sortingMethod: string;
 }
 
 //lazy loading with createAsyncThunk
@@ -34,15 +44,6 @@ export const fetchProducts = createAsyncThunk<
   }
   return await response.json();
 });
-
-interface ProductsState {
-  items: Product[];
-  filteredItems: Product[];
-  loading: boolean;
-  error: string | null;
-  category: string;
-  sortingMethod: string;
-}
 
 const initialState: ProductsState = {
   items: [],

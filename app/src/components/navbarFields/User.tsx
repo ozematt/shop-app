@@ -1,14 +1,15 @@
 import { Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import React, { useState } from "react";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import { useSelector } from "react-redux";
-import { selectAllCart } from "../../features/cart/cartSlice";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { RootState } from "../../redux/store";
 
 export const User = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,7 +29,7 @@ export const User = () => {
     },
   }));
 
-  const cart = useSelector(selectAllCart);
+  const cart = useSelector((state: RootState) => state.cart.quantity);
 
   return (
     <>
@@ -48,7 +49,8 @@ export const User = () => {
           </Typography>
 
           <Tooltip title="View Cart">
-            <StyledBadge badgeContent={cart.length} color="secondary">
+            {/* ////////////////////////////////////////////////////////////////////// */}
+            <StyledBadge badgeContent={cart} color="secondary">
               <ShoppingCartIcon fontSize="large" />
             </StyledBadge>
           </Tooltip>

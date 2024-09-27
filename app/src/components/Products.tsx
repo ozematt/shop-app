@@ -13,7 +13,7 @@ import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
 import { Product, fetchProducts } from "../features/products/productsSlice";
 import { selectSortedProducts } from "../features/products/productsSelectors";
-import { CartProduct, addToCart } from "../features/cart/cartSlice";
+import { addToCart } from "../features/cart/cartSlice";
 
 export const Products = () => {
   const theme = useTheme();
@@ -44,28 +44,22 @@ export const Products = () => {
   //memoized selector
   const sortedProducts = useSelector(selectSortedProducts);
 
-  //fetchProduct slice
+  //fetch products status
   const { loading, error } = useSelector((state: RootState) => state.products);
 
+  // fetch products after render
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
   //CART
+  // const items = useSelector((state: RootState) => state.cart);
+  // console.log(items);
 
+  //handle add item to cart
   const handleAddToCart = (item: Product) => {
-    const modifiedItemData: CartProduct = {
-      id: item.id,
-      title: item.title,
-      image: item.image,
-      price: item.price,
-      amount: 1,
-    };
-    dispatch(addToCart(modifiedItemData));
+    dispatch(addToCart(item));
   };
-
-  // const state = useSelector((state: RootState) => state.cart);
-  // console.log(state);
 
   //UI
   if (loading) {

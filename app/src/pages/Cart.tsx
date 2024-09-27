@@ -7,15 +7,18 @@ import {
   Typography,
 } from "@mui/material";
 import emptyCart from "../assets/Empty_cart_image.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   CartProduct,
+  removeAllFromCart,
   removeFromCart,
   selectAllCart,
+  updateCart,
 } from "../features/cart/cartSlice";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { RootState } from "../redux/store";
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 
+// empty cart view
 const emptyCartView = (
   <>
     <Paper sx={{ margin: "80px 30px 0 0" }}>
@@ -36,19 +39,40 @@ const emptyCartView = (
 );
 
 export const Cart = () => {
-  //when cart is empty
+  ////DATA
+  const dispatch: AppDispatch = useAppDispatch();
 
+  //cart state
   const cart = useSelector(selectAllCart);
-  console.log(cart);
-
+  //total price
   const total = useSelector((state: RootState) => state.cart.total);
 
-  const dispatch = useDispatch();
-
-  const handleDeleteFromCart = (item: CartProduct) => {
-    dispatch(removeFromCart(item.id));
+  ////LOGIC
+  //increment item quantity
+  const handleIncrementItemAmount = (item: CartProduct) => {
+    dispatch(
+      updateCart({
+        id: item.id,
+        changes: { pieces: item.pieces + 1 },
+      })
+    );
   };
 
+  //decrement item quantity
+  const handleDecrementItemAmount = (item: CartProduct) => {
+    if (item.pieces > 1) {
+      dispatch(
+        updateCart({
+          id: item.id,
+          changes: { pieces: item.pieces - 1 },
+        })
+      );
+    } else {
+      dispatch(removeFromCart(item.id));
+    }
+  };
+
+  ////UI
   return (
     <>
       <CssBaseline />
@@ -106,7 +130,13 @@ export const Cart = () => {
                   </Typography>
                   <Typography
                     variant="h6"
-                    sx={{ marginRight: "15px", padding: "5px", color: "red" }}
+                    sx={{
+                      marginRight: "15px",
+                      padding: "5px",
+                      color: "red",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => dispatch(removeAllFromCart())}
                   >
                     Delete Cart
                   </Typography>
@@ -141,12 +171,14 @@ export const Cart = () => {
                         {/* amount + - */}
                         <Box sx={{ display: "flex", fontSize: "18px" }}>
                           <div
+                            onClick={() => handleDecrementItemAmount(item)}
                             style={{
+                              cursor: "pointer",
                               width: "40px",
                               height: "40px",
                               border: " 1px solid grey",
                               textAlign: "center",
-                              lineHeight: "40px",
+                              lineHeight: "35px",
                             }}
                           >
                             -
@@ -157,18 +189,20 @@ export const Cart = () => {
                               height: "40px",
                               border: " 1px solid grey",
                               textAlign: "center",
-                              lineHeight: "40px",
+                              lineHeight: "37px",
                             }}
                           >
-                            1
+                            {item.pieces}
                           </div>
                           <div
+                            onClick={() => handleIncrementItemAmount(item)}
                             style={{
+                              cursor: "pointer",
                               width: "40px",
                               height: "40px",
                               border: " 1px solid grey",
                               textAlign: "center",
-                              lineHeight: "40px",
+                              lineHeight: "35px",
                             }}
                           >
                             +
@@ -195,7 +229,8 @@ export const Cart = () => {
                             {item.title}
                           </Typography>
                           <DeleteOutlineOutlinedIcon
-                            onClick={() => handleDeleteFromCart(item)}
+                            onClick={() => dispatch(removeFromCart(item.id))}
+                            sx={{ cursor: "pointer" }}
                             fontSize="large"
                           />
                         </div>
