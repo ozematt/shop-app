@@ -11,9 +11,9 @@ import {
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { fetchProducts } from "../features/products/productsSlice";
-import { selectSortedProducts } from "../features/products/productsSelectors";
-import { addToCart } from "../features/cart/cartSlice";
+import { fetchProducts } from "../redux/products/productsSlice";
+import { selectSortedProducts } from "../redux/products/productsSelectors";
+import { addToCart } from "../redux/cart/cartSlice";
 
 export const Products = () => {
   ////DATA

@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { filterByCategory } from "../../features/products/productsSlice";
+import { filterByCategory } from "../../redux/products/productsSlice";
 
 export const CategoryField = () => {
   //DATA

@@ -3,16 +3,9 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { RootState } from "../../redux/store";
-import { Product } from "../products/productsSlice";
-
-export interface CartProduct {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  pieces: number;
-}
+import { RootState } from "../store";
+import { CartProduct } from "../../types/cartTypes";
+import { Product } from "../../types/productTypes";
 
 const cartAdapter = createEntityAdapter({
   selectId: (product: CartProduct) => product.id, //

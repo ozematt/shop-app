@@ -9,14 +9,14 @@ import {
 import emptyCart from "../assets/Empty_cart_image.png";
 import { useSelector } from "react-redux";
 import {
-  CartProduct,
   removeAllFromCart,
   removeFromCart,
   selectAllCart,
   updateCart,
-} from "../features/cart/cartSlice";
+} from "../redux/cart/cartSlice";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
+import { CartProduct } from "../types/cartTypes";
 
 // empty cart view
 const emptyCartView = (

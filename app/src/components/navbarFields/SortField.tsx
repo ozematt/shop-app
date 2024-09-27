@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setSortingMethod } from "../../features/products/productsSlice";
+import { setSortingMethod } from "../../redux/products/productsSlice";
 import { useCallback } from "react";
 
 export const SortField = () => {
