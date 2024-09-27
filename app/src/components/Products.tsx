@@ -19,7 +19,7 @@ export const Products = () => {
   ////DATA
 
   const theme = useTheme();
-
+  console.log(theme.palette.secondary.main);
   //product box style
   const productStyle = {
     backgroundColor: theme.palette.background.default,

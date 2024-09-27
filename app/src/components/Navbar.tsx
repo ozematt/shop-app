@@ -14,7 +14,6 @@ export const Navbar = () => {
         <AppBar position="fixed">
           <Container maxWidth="xl">
             <Toolbar>
-              {/* <Divider orientation="vertical" flexItem /> */}
               <Logo />
               <SearchField />
               <FilterNavbarFields />
