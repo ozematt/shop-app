@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
 import { logout } from "../../redux/user/authSlice";
+import { removeAllFromCart } from "../../redux/cart/cartSlice";
 
 export const User = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -31,15 +32,22 @@ export const User = () => {
 
   ///___________
 
+  ////DATA
   const dispatch: AppDispatch = useAppDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
+
   //cart quantity state
   const quantity = useSelector((state: RootState) => state.cart.quantity);
+
+  ////LOGIC
+  //handle logout
   const handleLogOut = () => {
     dispatch(logout());
+    navigate("/");
+    dispatch(removeAllFromCart());
   };
-
+  ////UI
   return (
     <>
       <div>
