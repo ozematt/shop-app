@@ -1,14 +1,14 @@
 import { Menu, MenuItem, Tooltip, Typography } from "@mui/material";
-import React, { useState } from "react";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router-dom";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
-import { useSelector } from "react-redux";
-import { selectAllCart } from "../../features/cart/cartSlice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 export const User = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,31 +28,28 @@ export const User = () => {
     },
   }));
 
-  const cart = useSelector(selectAllCart);
+  //cart quantity state
+  const quantity = useSelector((state: RootState) => state.cart.quantity);
 
   return (
     <>
       <div>
-        <IconButton
-          size="large"
-          aria-label="cart of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          // onClick={handleMenu}
-          color="inherit"
-        >
-          <Typography variant="h6" sx={{ margin: "0 10px 0 10px" }}>
-            <Link to="/cart" style={{ color: "inherit" }}>
-              Cart
-            </Link>
-          </Typography>
-
-          <Tooltip title="View Cart">
-            <StyledBadge badgeContent={cart.length} color="secondary">
-              <ShoppingCartIcon fontSize="large" />
-            </StyledBadge>
-          </Tooltip>
-        </IconButton>
+        <Link to="/cart" style={{ color: "inherit" }}>
+          <IconButton
+            size="large"
+            aria-label="cart of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            // onClick={handleMenu}
+            color="inherit"
+          >
+            <Tooltip title="View Cart">
+              <StyledBadge badgeContent={quantity} color="secondary">
+                <ShoppingCartIcon fontSize="large" />
+              </StyledBadge>
+            </Tooltip>
+          </IconButton>
+        </Link>
 
         <IconButton
           size="large"
@@ -62,9 +59,6 @@ export const User = () => {
           onClick={handleMenu}
           color="inherit"
         >
-          <Typography variant="h6" sx={{ margin: "0 10px 0 0" }}>
-            User
-          </Typography>
           <Tooltip title="User history">
             <AccountCircleIcon fontSize="large" />
           </Tooltip>
