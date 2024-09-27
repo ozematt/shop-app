@@ -15,7 +15,7 @@ export interface CartProduct {
 }
 
 const cartAdapter = createEntityAdapter({
-  selectId: (product: CartProduct) => product.id,
+  selectId: (product: CartProduct) => product.id, //
 });
 
 const cartSlice = createSlice({
@@ -27,19 +27,16 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
       const item = action.payload;
-
-      const existingItem = state.entities[item.id];
+      const existingItem = state.entities[item.id]; //assign if item already exist
 
       if (existingItem) {
-        const updatedAmount = existingItem.pieces + 1;
-
-        state.total = Number((state.total + item.price).toFixed(2));
-
+        const updatedPieces = existingItem.pieces + 1;
+        state.total = Number((state.total + item.price).toFixed(2)); //update total price
         state.quantity += 1;
-
+        // if item exist update pieces
         cartAdapter.updateOne(state, {
           id: item.id,
-          changes: { pieces: updatedAmount },
+          changes: { pieces: updatedPieces },
         });
       } else {
         const modifiedItemData: CartProduct = {
@@ -49,13 +46,10 @@ const cartSlice = createSlice({
           price: item.price,
           pieces: 1,
         };
-        //add item
-        cartAdapter.addOne(state, modifiedItemData);
 
-        //update total price,
-        state.total = Number((state.total + item.price).toFixed(2));
-        //update quantity
-        state.quantity += 1;
+        cartAdapter.addOne(state, modifiedItemData); //add new item with modified data
+        state.total = Number((state.total + item.price).toFixed(2)); //update total price
+        state.quantity += 1; //update quantity
       }
     },
     updateCart: (
@@ -63,40 +57,29 @@ const cartSlice = createSlice({
       action: PayloadAction<{ id: number; changes: Partial<CartProduct> }>
     ) => {
       const { id, changes } = action.payload;
-      //check if item already exist
-      const existingItem = state.entities[id];
+      const existingItem = state.entities[id]; //check if item already exist
 
       if (existingItem) {
         //calculate the difference in quantity (in case the product quantity changes)
         const amountDifference = changes.pieces
           ? changes.pieces - existingItem.pieces
           : 0;
-
-        //update total price if item exist
         state.total = Number(
-          (state.total + existingItem.price * amountDifference).toFixed(2)
+          (state.total + existingItem.price * amountDifference).toFixed(2) //update total price
         );
-
-        //update product amount
-        existingItem.pieces = changes.pieces ?? existingItem.pieces;
-
-        //update quantity
-        state.quantity += amountDifference;
+        existingItem.pieces = changes.pieces ?? existingItem.pieces; //update product amount
+        state.quantity += amountDifference; //update quantity
       }
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
       const itemId = action.payload;
-
-      //check if item already exist
-      const itemToRemove = state.entities[itemId];
+      const itemToRemove = state.entities[itemId]; //check if item already exist
 
       if (itemToRemove) {
-        // update total price
         state.total = Number(
-          (state.total - itemToRemove.price * itemToRemove.pieces).toFixed(2)
+          (state.total - itemToRemove.price * itemToRemove.pieces).toFixed(2) // update total price
         );
-        //update quantity
-        state.quantity -= itemToRemove.pieces;
+        state.quantity -= itemToRemove.pieces; //update quantity
       }
       cartAdapter.removeOne(state, itemId);
     },
@@ -112,8 +95,6 @@ export const { addToCart, updateCart, removeFromCart, removeAllFromCart } =
   cartSlice.actions;
 export default cartSlice.reducer;
 
-export const {
-  selectAll: selectAllCart,
-  selectIds: selectAllIdsInCart,
-  selectById: selectByItemId,
-} = cartAdapter.getSelectors<RootState>((state) => state.cart);
+export const { selectAll: selectAllCart } = cartAdapter.getSelectors<RootState>(
+  (state) => state.cart
+);
