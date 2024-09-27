@@ -14,7 +14,6 @@ export interface Product {
   description: string;
   image: string;
   rating: Rating;
-  // amount?: number;
 }
 
 interface ProductsState {
@@ -37,7 +36,7 @@ export const fetchProducts = createAsyncThunk<
   if (productLoaded.length > 0) {
     return productLoaded;
   }
-  //if not fetch products
+  //if not, fetch products
   const response = await fetch("https://fakestoreapi.com/products");
   if (!response.ok) {
     throw new Error("Failed to fetch products");

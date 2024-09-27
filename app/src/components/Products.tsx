@@ -11,11 +11,13 @@ import {
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { Product, fetchProducts } from "../features/products/productsSlice";
+import { fetchProducts } from "../features/products/productsSlice";
 import { selectSortedProducts } from "../features/products/productsSelectors";
 import { addToCart } from "../features/cart/cartSlice";
 
 export const Products = () => {
+  ////DATA
+
   const theme = useTheme();
 
   //product box style
@@ -41,27 +43,21 @@ export const Products = () => {
 
   const dispatch: AppDispatch = useAppDispatch();
 
-  //memoized selector
+  //memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
 
   //fetch products status
   const { loading, error } = useSelector((state: RootState) => state.products);
+
+  ////LOGIC
 
   // fetch products after render
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  //CART
-  // const items = useSelector((state: RootState) => state.cart);
-  // console.log(items);
-
-  //handle add item to cart
-  const handleAddToCart = (item: Product) => {
-    dispatch(addToCart(item));
-  };
-
   //UI
+
   if (loading) {
     return (
       <Box sx={{ width: "100%" }}>
@@ -69,6 +65,7 @@ export const Products = () => {
       </Box>
     );
   }
+
   if (error !== null) {
     return <p>{error}</p>;
   }
@@ -153,7 +150,7 @@ export const Products = () => {
                 </div>
                 <Button
                   variant="contained"
-                  onClick={() => handleAddToCart(product)}
+                  onClick={() => dispatch(addToCart(product))}
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",

@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../../redux/store";
 import { Product } from "./productsSlice";
 
-////MEMOIZING SELECTORS
+////MEMOIZING FILTER SELECTORS
 
 // selector to filter products by category
 const productsFilterByCategory = (state: RootState) => {
