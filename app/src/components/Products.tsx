@@ -11,13 +11,15 @@ import {
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect } from "react";
-import { Product, fetchProducts } from "../features/products/productsSlice";
-import { selectSortedProducts } from "../features/products/productsSelectors";
-import { CartProduct, addToCart } from "../features/cart/cartSlice";
+import { fetchProducts } from "../redux/products/productsSlice";
+import { selectSortedProducts } from "../redux/products/productsSelectors";
+import { addToCart } from "../redux/cart/cartSlice";
 
 export const Products = () => {
-  const theme = useTheme();
+  ////DATA
 
+  const theme = useTheme();
+  console.log(theme.palette.secondary.main);
   //product box style
   const productStyle = {
     backgroundColor: theme.palette.background.default,
@@ -41,33 +43,21 @@ export const Products = () => {
 
   const dispatch: AppDispatch = useAppDispatch();
 
-  //memoized selector
+  //memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
 
-  //fetchProduct slice
+  //fetch products status
   const { loading, error } = useSelector((state: RootState) => state.products);
 
+  ////LOGIC
+
+  // fetch products after render
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  //CART
-
-  const handleAddToCart = (item: Product) => {
-    const modifiedItemData: CartProduct = {
-      id: item.id,
-      title: item.title,
-      image: item.image,
-      price: item.price,
-      amount: 1,
-    };
-    dispatch(addToCart(modifiedItemData));
-  };
-
-  // const state = useSelector((state: RootState) => state.cart);
-  // console.log(state);
-
   //UI
+
   if (loading) {
     return (
       <Box sx={{ width: "100%" }}>
@@ -75,6 +65,7 @@ export const Products = () => {
       </Box>
     );
   }
+
   if (error !== null) {
     return <p>{error}</p>;
   }
@@ -159,7 +150,7 @@ export const Products = () => {
                 </div>
                 <Button
                   variant="contained"
-                  onClick={() => handleAddToCart(product)}
+                  onClick={() => dispatch(addToCart(product))}
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
