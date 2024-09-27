@@ -16,6 +16,7 @@ import { useState } from "react";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useSelector } from "react-redux";
 import { loginUser } from "../redux/user/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Authorization = () => {
   //MUI password field logic
@@ -35,20 +36,29 @@ export const Authorization = () => {
     event.preventDefault();
   };
 
-  // user authorization
+  ////DATA
   const dispatch: AppDispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // input user data
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isLoading, error } = useSelector((state: RootState) => state.auth);
+  const {
+    isLoading,
+    error,
+    isLoggedIn: auth,
+  } = useSelector((state: RootState) => state.auth);
 
+  ////LOGIC
+  //submit login data
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(loginUser({ username, password }));
+    auth ? navigate("/") : null;
   };
 
+  ////UI
   return (
     <>
       <Container maxWidth="xl">

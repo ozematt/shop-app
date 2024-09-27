@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { fetchProducts } from "../redux/products/productsSlice";
 import { selectSortedProducts } from "../redux/products/productsSelectors";
 import { addToCart } from "../redux/cart/cartSlice";
+import { useNavigate } from "react-router-dom";
+import { Product } from "../types/productTypes";
 
 export const Products = () => {
   ////DATA
@@ -42,12 +44,14 @@ export const Products = () => {
   };
 
   const dispatch: AppDispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   //memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
 
   //fetch products status
   const { loading, error } = useSelector((state: RootState) => state.products);
+
+  const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   ////LOGIC
 
@@ -55,6 +59,11 @@ export const Products = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  // add to cart when user is logged in
+  const handleAddToCartClick = (item: Product) => {
+    auth ? dispatch(addToCart(item)) : navigate("/login");
+  };
 
   //UI
 
@@ -150,7 +159,7 @@ export const Products = () => {
                 </div>
                 <Button
                   variant="contained"
-                  onClick={() => dispatch(addToCart(product))}
+                  onClick={() => handleAddToCartClick(product)}
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
