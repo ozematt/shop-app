@@ -1,4 +1,4 @@
-import { Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import { Button, Divider, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
@@ -6,9 +6,10 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
+import { logout } from "../../redux/user/authSlice";
 
 export const User = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,8 +29,16 @@ export const User = () => {
     },
   }));
 
+  ///___________
+
+  const dispatch: AppDispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
   //cart quantity state
   const quantity = useSelector((state: RootState) => state.cart.quantity);
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
 
   return (
     <>
@@ -40,7 +49,6 @@ export const User = () => {
             aria-label="cart of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            // onClick={handleMenu}
             color="inherit"
           >
             <Tooltip title="View Cart">
@@ -50,37 +58,48 @@ export const User = () => {
             </Tooltip>
           </IconButton>
         </Link>
-
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleMenu}
-          color="inherit"
-        >
-          <Tooltip title="User history">
-            <AccountCircleIcon fontSize="large" />
-          </Tooltip>
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-        </Menu>
+        {auth ? (
+          <>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <Tooltip title="Options">
+                <AccountCircleIcon fontSize="large" />
+              </Tooltip>
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Orders</MenuItem>
+              <Divider />
+              <MenuItem onClick={handleLogOut}>LogOut</MenuItem>
+            </Menu>{" "}
+          </>
+        ) : (
+          <Button
+            onClick={() => navigate("/login")}
+            sx={{ marginRight: "10px" }}
+          >
+            Login
+          </Button>
+        )}
       </div>
     </>
   );

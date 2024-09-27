@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { log } from "console";
 
-//auth with fake shop API
+//authorization with fake shop API
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (

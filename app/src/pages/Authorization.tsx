@@ -44,18 +44,16 @@ export const Authorization = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const {
-    isLoading,
-    error,
-    isLoggedIn: auth,
-  } = useSelector((state: RootState) => state.auth);
+  const { isLoading, error } = useSelector((state: RootState) => state.auth);
 
   ////LOGIC
   //submit login data
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(loginUser({ username, password }));
-    auth ? navigate("/") : null;
+    const resultAction = await dispatch(loginUser({ username, password }));
+    if (loginUser.fulfilled.match(resultAction)) {
+      navigate("/");
+    }
   };
 
   ////UI
@@ -69,7 +67,6 @@ export const Authorization = () => {
             position: "absolute",
             display: "flex",
             flexDirection: "column",
-            // justifyContent: "center",
             alignItems: "center",
             gap: "10px",
             left: "50%",
