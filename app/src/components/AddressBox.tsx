@@ -1,24 +1,29 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-
-// import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Address } from "../pages/Finalization";
 import { useState } from "react";
 
 export const AddressBox = () => {
+  //// DATA
+  //summary address
   const [addressSummary, setAddressSummary] = useState<boolean>(false);
 
+  //use form context
   const {
     register,
     formState: { errors },
     getValues,
   } = useFormContext<Address>();
 
-  // const [paymentMethod, setPaymentMethod] = useState<string>("");
+  //// LOGIC
+  // check if object "errors" has value
   const hasErrors = Object.keys(errors).length > 0;
 
   const handleAddress = () => {
+    // get address value
     const values: Address = getValues() as Address;
+
+    // keyof provides that each field is a valid key defined in the Address type
     const requiredFields: (keyof Address)[] = [
       "name",
       "surname",
@@ -32,7 +37,7 @@ export const AddressBox = () => {
 
     const allFieldsFilled = requiredFields.every((field) => {
       const value = values[field];
-
+      // check if the value is not empty and if it is a string, remove whitespace
       return value && (typeof value === "string" ? value.trim() !== "" : true);
     });
 
@@ -42,11 +47,12 @@ export const AddressBox = () => {
     console.log(getValues());
   };
 
+  //handle edit button click in address summary
   const handleAddressEdit = () => {
     setAddressSummary(!addressSummary);
   };
-  console.log(hasErrors);
 
+  ////UI
   return (
     <>
       <Paper
@@ -63,7 +69,6 @@ export const AddressBox = () => {
       <Paper
         sx={{
           margin: "14px 7px 0 0",
-          //   height: "100vh",
         }}
       >
         {!addressSummary ? (
@@ -222,6 +227,7 @@ export const AddressBox = () => {
                 helperText={errors.city?.message?.toString()}
               />
             </Box>
+            {/* TOGGLE TO SUMMARY */}
             <Button
               variant="contained"
               sx={{ marginTop: "20px", width: "250px" }}
@@ -232,6 +238,7 @@ export const AddressBox = () => {
           </Box>
         ) : (
           <Box sx={{ padding: "20px" }}>
+            {/* ADDRESS SUMMARY */}
             <Box sx={{ marginTop: "15px" }}>
               <p> Name and surname:</p>
               <Typography variant="h5">
@@ -262,6 +269,8 @@ export const AddressBox = () => {
                 <Typography variant="h5"> {getValues().phone}</Typography>
               </Box>
             </Box>
+
+            {/* RETURN TO INPUT FIELDS */}
             <Button
               onClick={handleAddressEdit}
               variant="outlined"
