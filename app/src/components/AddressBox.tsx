@@ -18,7 +18,25 @@ export const AddressBox = () => {
   const hasErrors = Object.keys(errors).length > 0;
 
   const handleAddress = () => {
-    if (!hasErrors) {
+    const values: Address = getValues() as Address;
+    const requiredFields: (keyof Address)[] = [
+      "name",
+      "surname",
+      "email",
+      "phone",
+      "street",
+      "houseNumber",
+      "zipCode",
+      "city",
+    ];
+
+    const allFieldsFilled = requiredFields.every((field) => {
+      const value = values[field];
+
+      return value && (typeof value === "string" ? value.trim() !== "" : true);
+    });
+
+    if (!hasErrors && allFieldsFilled) {
       setAddressSummary(true);
     }
     console.log(getValues());
