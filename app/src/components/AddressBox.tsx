@@ -17,7 +17,7 @@ export const AddressBox = () => {
 
   //// LOGIC
   // check if object "errors" has value
-  const hasErrors = Object.keys(errors).length > 0;
+  // const hasErrors = Object.keys(errors).length > 0;
 
   const handleAddress = () => {
     // get address value
@@ -41,7 +41,7 @@ export const AddressBox = () => {
       return value && (typeof value === "string" ? value.trim() !== "" : true);
     });
 
-    if (!hasErrors && allFieldsFilled) {
+    if (allFieldsFilled) {
       setAddressSummary(true);
     }
     console.log(getValues());

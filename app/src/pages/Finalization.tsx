@@ -15,11 +15,10 @@ export interface Address {
   zipCode: number | null;
   city: string;
   payOnDelivery: boolean | null;
-  creditCard: {
-    number: number | null;
-    date: number | null;
-    CVV: number | null;
-  };
+  paymentCard: boolean | null;
+  cardNumber: number | null;
+  cardDate: string | null;
+  cardCVV: string | null;
 }
 
 export const Finalization = () => {
@@ -36,16 +35,23 @@ export const Finalization = () => {
       zipCode: null,
       city: "",
       payOnDelivery: false,
-      creditCard: {
-        number: null,
-        date: null,
-        CVV: null,
-      },
+      paymentCard: false,
+      cardNumber: null,
+      cardDate: null,
+      cardCVV: null,
     },
   });
 
   const onSubmit: SubmitHandler<Address> = (data) => {
-    console.log(data);
+    if (!data.payOnDelivery && !data.paymentCard) {
+      methods.setError("payOnDelivery", {
+        type: "manual",
+        message: "Please select a payment method.",
+      });
+      return;
+    }
+
+    console.log("Form data: ", data);
   };
 
   return (

@@ -1,8 +1,6 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-// import { useState } from "react";
-// import { type } from '../redux/store';
 import { useFormContext } from "react-hook-form";
 import { Address } from "../pages/Finalization";
 import { useState } from "react";
@@ -15,16 +13,22 @@ export const PaymentMethod = () => {
     register,
     formState: { errors },
     setValue,
+    watch,
+    clearErrors,
+    getValues,
+    setError,
   } = useFormContext<Address>();
 
   //set pay on delivery method
   const handlePayOnDelivery = () => {
     setValue("payOnDelivery", true);
-    setValue("creditCard.CVV", null);
-    setValue("creditCard.date", null);
-    setValue("creditCard.number", null);
+    setValue("paymentCard", false);
+    setValue("cardCVV", null);
+    setValue("cardDate", null);
+    setValue("cardNumber", null);
     setCardFields(false);
     setAddClicked(false);
+    clearErrors(["payOnDelivery"]);
   };
 
   //show card fields
@@ -36,8 +40,29 @@ export const PaymentMethod = () => {
 
   //set card
   const handleAddCardButton = () => {
-    setCardFields(false);
-    setAddClicked(true);
+    const values: Address = getValues() as Address;
+    const requiredFields: (keyof Address)[] = [
+      "cardNumber",
+      "cardDate",
+      "cardCVV",
+    ];
+    const allFieldsFilled = requiredFields.every((field) => {
+      const value = values[field];
+      // check if the value is not empty and if it is a string, remove whitespace
+      return value && (typeof value === "string" ? value.trim() !== "" : true);
+    });
+
+    if (allFieldsFilled) {
+      setValue("paymentCard", true);
+      setCardFields(false);
+      setAddClicked(true);
+      clearErrors(["paymentCard"]);
+    } else {
+      setError("paymentCard", {
+        type: "manual",
+        message: "Please fill in the fields.",
+      });
+    }
   };
 
   return (
@@ -62,7 +87,7 @@ export const PaymentMethod = () => {
           }}
         >
           <Button
-            variant="outlined"
+            variant={watch().payOnDelivery ? "contained" : "outlined"}
             value="payOnDelivery"
             startIcon={<AttachMoneyIcon />}
             sx={{ width: "250px", padding: "15px", marginRight: "10px" }}
@@ -72,7 +97,7 @@ export const PaymentMethod = () => {
           </Button>
 
           <Button
-            variant="outlined"
+            variant={watch().paymentCard ? "contained" : "outlined"}
             value="paymentCard"
             sx={{ width: "250px", padding: "15px" }}
             startIcon={<CreditCardIcon />}
@@ -80,6 +105,12 @@ export const PaymentMethod = () => {
           >
             payment card
           </Button>
+          {errors.payOnDelivery && (
+            <Typography color="error" sx={{ marginTop: "10px" }}>
+              {errors.payOnDelivery.message}
+            </Typography>
+          )}
+
           {addClicked ? (
             <Box
               sx={{
@@ -114,15 +145,15 @@ export const PaymentMethod = () => {
                 label="Credit card number"
                 variant="outlined"
                 margin="dense"
-                {...register("creditCard.number", {
+                {...register("cardNumber", {
                   minLength: {
                     value: 14,
                     message: "Credit card number required 14 characters",
                   },
                   required: "Credit card number is required",
                 })}
-                error={!!errors.creditCard?.number}
-                helperText={errors.creditCard?.number?.message?.toString()}
+                error={!!errors.cardNumber}
+                helperText={errors.cardNumber?.message?.toString()}
               />
               <Box>
                 <TextField
@@ -130,32 +161,45 @@ export const PaymentMethod = () => {
                   label="Valid Thru"
                   variant="outlined"
                   margin="dense"
-                  {...register("creditCard.date", {
+                  {...register("cardDate", {
                     pattern: {
                       value: /(0[1-9]|1[0-2])\/[0-9]{2}/,
                       message: "Invalid date. Use MM/YY format.",
                     },
                     required: "Valid Thru is required",
                   })}
-                  error={!!errors.creditCard?.date}
-                  helperText={errors.creditCard?.date?.message?.toString()}
+                  error={!!errors.cardDate}
+                  helperText={errors.cardDate?.message?.toString()}
                 />
                 <TextField
                   type="password"
                   label="CVV"
                   variant="outlined"
                   margin="dense"
-                  {...register("creditCard.CVV", {
+                  {...register("cardCVV", {
+                    minLength: {
+                      value: 3,
+                      message: "CVV must have 3 characters",
+                    },
                     maxLength: {
                       value: 3,
                       message: "CVV must have 3 characters",
                     },
                     required: "CVV is required",
+                    pattern: {
+                      value: /^[0-9]+$/,
+                      message: "CVV must be numeric",
+                    },
                   })}
-                  error={!!errors.creditCard?.CVV}
-                  helperText={errors.creditCard?.CVV?.message?.toString()}
+                  error={!!errors.cardCVV}
+                  helperText={errors.cardCVV?.message?.toString()}
                 />
               </Box>
+              {errors.paymentCard && (
+                <Typography color="error" sx={{ marginTop: "10px" }}>
+                  {errors.paymentCard.message}
+                </Typography>
+              )}
               <Button
                 variant="contained"
                 sx={{ marginTop: "20px", width: "250px" }}
