@@ -17,6 +17,7 @@ import {
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { CartProduct } from "../types/cartTypes";
+import { useNavigate } from "react-router-dom";
 
 // empty cart view
 const emptyCartView = (
@@ -41,6 +42,7 @@ const emptyCartView = (
 export const Cart = () => {
   ////DATA
   const dispatch: AppDispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   //cart state
   const cart = useSelector(selectAllCart);
@@ -70,6 +72,11 @@ export const Cart = () => {
     } else {
       dispatch(removeFromCart(item.id));
     }
+  };
+
+  //handle finalization view
+  const handleBuyButton = () => {
+    navigate("/finalization");
   };
 
   ////UI
@@ -148,7 +155,6 @@ export const Cart = () => {
                       height: "300px",
                       width: "100%",
                       maxWidth: "914px",
-                      margin: "14px 7px 0 0",
                     }}
                   >
                     {/* Item section */}
@@ -267,6 +273,7 @@ export const Cart = () => {
                 </Typography>
                 <Button
                   variant="contained"
+                  onClick={handleBuyButton}
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
