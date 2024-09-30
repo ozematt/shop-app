@@ -68,11 +68,9 @@ export const Finalization = () => {
                 alignItems: "flex-start",
               }}
             >
+              {/* NAME */}
               <TextField
                 sx={{ width: "400px" }}
-                //   id="outlined-basic"
-                // onChange={}
-                //   value={name}
                 label="Name"
                 variant="outlined"
                 margin="dense"
@@ -84,9 +82,10 @@ export const Finalization = () => {
                   required: "Name is required",
                 })}
                 error={!!errors.name}
-                helperText={errors?.name && String(errors.name.message)}
+                helperText={errors.name?.message?.toString()}
               />
 
+              {/* SURNAME */}
               <TextField
                 sx={{ width: "400px" }}
                 label="Surname"
@@ -100,8 +99,9 @@ export const Finalization = () => {
                   required: "Surname is required",
                 })}
                 error={!!errors.surname}
-                helperText={errors?.surname && String(errors.surname.message)}
+                helperText={errors.surname?.message?.toString()}
               />
+              {/* EMAIL */}
               <TextField
                 sx={{ width: "400px" }}
                 type="email"
@@ -117,66 +117,88 @@ export const Finalization = () => {
                   required: "Email is required",
                 })}
                 error={!!errors.email}
-                helperText={errors?.email && String(errors.email.message)}
+                helperText={errors.email?.message?.toString()}
               />
+              {/* PHONE */}
               <TextField
                 type="tel"
                 sx={{ width: "400px" }}
-                label="Phone"
+                label="Phone number"
                 variant="outlined"
                 margin="dense"
-                {...register("phone", { minLength: 9 })}
+                {...register("phone", {
+                  minLength: {
+                    value: 9,
+                    message: "Phone number must have at last 9 characters",
+                  },
+                  required: "Phone is required",
+                })}
                 error={!!errors.phone}
-                helperText={errors?.phone && String(errors.phone.message)}
+                helperText={errors.phone?.message?.toString()}
               />
+              {/* STREET */}
               <TextField
                 sx={{ width: "400px", marginTop: "30px" }}
                 label="Street"
                 variant="outlined"
                 margin="dense"
-                {...register("street", { minLength: 2 })}
+                {...register("street", {
+                  minLength: {
+                    value: 2,
+                    message: " Street must by at last 2 characters long ",
+                  },
+                  required: "Street is required",
+                })}
                 error={!!errors.street}
-                helperText={errors?.street && String(errors.street.message)}
+                helperText={errors.street?.message?.toString()}
               />
+
               <Box>
                 {" "}
+                {/* HOUSE NUMBER */}
                 <TextField
                   type="number"
                   sx={{ width: "190px" }}
                   label="House number"
                   variant="outlined"
                   margin="dense"
-                  {...register("houseNumber")}
+                  {...register("houseNumber", {
+                    required: "House number is required",
+                  })}
                   error={!!errors.houseNumber}
-                  helperText={
-                    errors?.houseNumber && String(errors.houseNumber.message)
-                  }
+                  helperText={errors.houseNumber?.message?.toString()}
                 />
+                {/* APARTMENT NUMBER */}
                 <TextField
                   type="number"
                   sx={{ width: "190px", marginLeft: "20px" }}
                   label="Apartment number"
                   variant="outlined"
                   margin="dense"
-                  {...register("apartmentNumber", { minLength: 2 })}
+                  {...register("apartmentNumber")}
                   error={!!errors.apartmentNumber}
-                  helperText={
-                    errors?.apartmentNumber &&
-                    String(errors.apartmentNumber.message)
-                  }
+                  helperText={errors.apartmentNumber?.message?.toString()}
                 />
               </Box>
               <Box>
+                {/* ZIP CODE */}
                 <TextField
-                  type="number"
                   sx={{ width: "190px" }}
                   label="Zip-Code"
                   variant="outlined"
                   margin="dense"
-                  {...register("zipCode", { minLength: 2 })}
+                  {...register("zipCode", {
+                    pattern: {
+                      value: /^([0-9]{2})(-[0-9]{3})?$/i,
+                      message: "Invalid zip code",
+                    },
+                    required: "Zip code is required",
+                  })}
                   error={!!errors.zipCode}
-                  helperText={errors?.zipCode && String(errors.zipCode.message)}
+                  helperText={errors.zipCode?.message?.toString()}
                 />
+
+                {/* CITY */}
                 <TextField
                   sx={{ width: "190px", marginLeft: "20px" }}
                   label="City"
@@ -187,10 +209,10 @@ export const Finalization = () => {
                       value: 2,
                       message: "Name must by at last 2 characters long",
                     },
-                    required: "Name is required",
+                    required: "City is required",
                   })}
                   error={!!errors.city}
-                  helperText={errors?.city && String(errors.city.message)}
+                  helperText={errors.city?.message?.toString()}
                 />
               </Box>
 
