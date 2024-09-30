@@ -7,8 +7,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useForm } from "react-hook-form";
 
 export const Finalization = () => {
+  const { register } = useForm();
+
   return (
     <>
       <CssBaseline />
@@ -18,9 +21,6 @@ export const Finalization = () => {
             sx={{
               marginTop: "20px",
               width: "100%",
-              //   maxWidth: "914px",
-              //   display: "flex",
-              //   justifyContent: "space-between",
             }}
           >
             <Typography
@@ -34,7 +34,7 @@ export const Finalization = () => {
           <Paper
             sx={{
               margin: "14px 7px 0 0",
-              height: "100vh",
+              //   height: "100vh",
             }}
           >
             <Box
