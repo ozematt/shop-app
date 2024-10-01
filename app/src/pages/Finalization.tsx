@@ -10,8 +10,13 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethod";
 import { Address } from "../types/addressTypes";
+import { PaymentSummary } from "../components/PaymentSummary";
+import { useState } from "react";
 
 export const Finalization = () => {
+  const [summaryView, setSummaryView] = useState(false);
+  console.log(summaryView);
+
   ////DATA
   //useForm with default values
   const methods = useForm<Address>({
@@ -37,16 +42,31 @@ export const Finalization = () => {
   ////LOGIC
   //handle data submit
   const onSubmit: SubmitHandler<Address> = (data) => {
+    console.log("Form data: ", data);
+  };
+
+  const handleConfirmButton = () => {
+    //check errors object
+    const errors = Object.keys(methods.formState.errors).length > 0;
     //set error when is no payment method selected
-    if (!data.payOnDelivery && !data.paymentCard) {
+    if (
+      !methods.getValues().payOnDelivery &&
+      !methods.getValues().paymentCard
+    ) {
       methods.setError("payOnDelivery", {
         type: "manual",
         message: "Please select a payment method.",
       });
       return;
+    } else if (errors) {
+      return;
+    } else {
+      setSummaryView(true);
     }
+  };
 
-    console.log("Form data: ", data);
+  const handleSummaryView: () => void = () => {
+    setSummaryView(!summaryView);
   };
   ////UI
   return (
@@ -55,33 +75,40 @@ export const Finalization = () => {
         <CssBaseline />
         <Container maxWidth="xl">
           <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
-            <AddressBox />
-            <PaymentMethod />
-            <Paper
-              sx={{
-                margin: "14px 7px 0 0",
-                paddingBottom: "20px",
-              }}
-            >
-              <Typography
-                variant="h5"
-                sx={{ padding: "20px", marginBottom: "20px" }}
-              >
-                3. Confirm your information{" "}
-              </Typography>
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{
-                  maxWidth: "400px",
-                  width: "100%",
-                  height: "50px",
-                  marginLeft: "20px",
-                }}
-              >
-                Confirm
-              </Button>
-            </Paper>
+            {!summaryView ? (
+              <>
+                <AddressBox />
+                <PaymentMethod />
+                <Paper
+                  sx={{
+                    margin: "14px 7px 0 0",
+                    paddingBottom: "20px",
+                  }}
+                >
+                  <Typography
+                    variant="h5"
+                    sx={{ padding: "20px", marginBottom: "20px" }}
+                  >
+                    3. Confirm your information{" "}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    // type="submit"
+                    onClick={handleConfirmButton}
+                    sx={{
+                      maxWidth: "400px",
+                      width: "100%",
+                      height: "50px",
+                      marginLeft: "20px",
+                    }}
+                  >
+                    Confirm
+                  </Button>
+                </Paper>{" "}
+              </>
+            ) : (
+              <PaymentSummary handleSummaryView={handleSummaryView} />
+            )}
           </Box>
         </Container>
       </FormProvider>

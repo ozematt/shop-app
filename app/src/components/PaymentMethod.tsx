@@ -68,7 +68,7 @@ export const PaymentMethod = () => {
       setValue("paymentCard", true); //select payment method on "payment card"
       setAddClicked(true); // state of "Add Card" button
       setCardFields(false); // hide card fields
-      clearErrors(["paymentCard"]); //clear payment card error
+      clearErrors(["paymentCard", "payOnDelivery"]); //clear errors
     } else {
       //set error message
       setError("paymentCard", {
