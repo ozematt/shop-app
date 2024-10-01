@@ -6,9 +6,13 @@ import { Address } from "../pages/Finalization";
 import { useState } from "react";
 
 export const PaymentMethod = () => {
+  ////DATA
+  // state of "Add Card" button clicked
   const [addClicked, setAddClicked] = useState(false);
+  //show card fields
   const [cardFields, setCardFields] = useState(false);
 
+  //form context
   const {
     register,
     formState: { errors },
@@ -19,16 +23,19 @@ export const PaymentMethod = () => {
     setError,
   } = useFormContext<Address>();
 
+  ////LOGIC
   //set pay on delivery method
   const handlePayOnDelivery = () => {
     setValue("payOnDelivery", true);
+    clearErrors(["payOnDelivery"]);
+
+    // clear fields
     setValue("paymentCard", false);
     setValue("cardCVV", null);
     setValue("cardDate", null);
     setValue("cardNumber", null);
     setCardFields(false);
     setAddClicked(false);
-    clearErrors(["payOnDelivery"]);
   };
 
   //show card fields
@@ -38,14 +45,19 @@ export const PaymentMethod = () => {
     setAddClicked(false);
   };
 
-  //set card
+  //add card
   const handleAddCardButton = () => {
+    // get address value
     const values: Address = getValues() as Address;
+
+    // keyof provides that each field is a valid key defined in the Address type
     const requiredFields: (keyof Address)[] = [
       "cardNumber",
       "cardDate",
       "cardCVV",
     ];
+
+    //checks each field to see if it is empty
     const allFieldsFilled = requiredFields.every((field) => {
       const value = values[field];
       // check if the value is not empty and if it is a string, remove whitespace
@@ -53,11 +65,12 @@ export const PaymentMethod = () => {
     });
 
     if (allFieldsFilled) {
-      setValue("paymentCard", true);
-      setCardFields(false);
-      setAddClicked(true);
-      clearErrors(["paymentCard"]);
+      setValue("paymentCard", true); //select payment method on "payment card"
+      setAddClicked(true); // state of "Add Card" button
+      setCardFields(false); // hide card fields
+      clearErrors(["paymentCard"]); //clear payment card error
     } else {
+      //set error message
       setError("paymentCard", {
         type: "manual",
         message: "Please fill in the fields.",
@@ -65,6 +78,7 @@ export const PaymentMethod = () => {
     }
   };
 
+  ////UI
   return (
     <>
       <Paper
@@ -86,6 +100,7 @@ export const PaymentMethod = () => {
             padding: "20px",
           }}
         >
+          {/* PAY PO DELIVERY BUTTON */}
           <Button
             variant={watch().payOnDelivery ? "contained" : "outlined"}
             value="payOnDelivery"
@@ -96,6 +111,7 @@ export const PaymentMethod = () => {
             pay on delivery
           </Button>
 
+          {/* PAYMENT CARD BUTTON */}
           <Button
             variant={watch().paymentCard ? "contained" : "outlined"}
             value="paymentCard"
@@ -105,12 +121,15 @@ export const PaymentMethod = () => {
           >
             payment card
           </Button>
+
+          {/* ERROR MESSAGE */}
           {errors.payOnDelivery && (
             <Typography color="error" sx={{ marginTop: "10px" }}>
               {errors.payOnDelivery.message}
             </Typography>
           )}
 
+          {/* PAYMENT CARD ADDED SUCCESSFULLY  */}
           {addClicked ? (
             <Box
               sx={{
@@ -131,14 +150,14 @@ export const PaymentMethod = () => {
             </Box>
           ) : null}
 
-          {/* CREDIT CARD NUMBER */}
+          {/* CARD FIELDS */}
           {cardFields ? (
             <Box sx={{}}>
               <Typography variant="h6" sx={{ margin: "30px 0 15px 0" }}>
                 Enter your Card:
               </Typography>
 
-              {/* CARD FIELDS */}
+              {/* CARD NUMBER */}
               <TextField
                 sx={{ width: "400px" }}
                 type="number"
@@ -156,6 +175,7 @@ export const PaymentMethod = () => {
                 helperText={errors.cardNumber?.message?.toString()}
               />
               <Box>
+                {/* CARD DATE */}
                 <TextField
                   sx={{ marginRight: "10px" }}
                   label="Valid Thru"
@@ -171,6 +191,7 @@ export const PaymentMethod = () => {
                   error={!!errors.cardDate}
                   helperText={errors.cardDate?.message?.toString()}
                 />
+                {/* CARD CVV */}
                 <TextField
                   type="password"
                   label="CVV"
@@ -195,11 +216,13 @@ export const PaymentMethod = () => {
                   helperText={errors.cardCVV?.message?.toString()}
                 />
               </Box>
+              {/* ERROR MESSAGE */}
               {errors.paymentCard && (
                 <Typography color="error" sx={{ marginTop: "10px" }}>
                   {errors.paymentCard.message}
                 </Typography>
               )}
+              {/* ADD CARD BUTTON */}
               <Button
                 variant="contained"
                 sx={{ marginTop: "20px", width: "250px" }}
