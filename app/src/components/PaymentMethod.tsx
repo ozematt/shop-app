@@ -73,7 +73,7 @@ export const PaymentMethod = () => {
         }}
       >
         <Typography variant="h5" sx={{ marginLeft: "15px", padding: "5px" }}>
-          Choose payment method:
+          2. Choose payment method:
         </Typography>
       </Paper>
       <Paper

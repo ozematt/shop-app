@@ -1,4 +1,4 @@
-import { Box, Button, Container, CssBaseline } from "@mui/material";
+import { Box, Button, Container, CssBaseline, Paper } from "@mui/material";
 
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
@@ -62,13 +62,20 @@ export const Finalization = () => {
           <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
             <AddressBox />
             <PaymentMethod />
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{ marginTop: "30px", width: "400px" }}
+            <Paper
+              sx={{
+                margin: "14px 7px 0 0",
+                padding: "20px",
+              }}
             >
-              Confirm
-            </Button>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ width: "400px", height: "50px" }}
+              >
+                Confirm
+              </Button>
+            </Paper>
           </Box>
         </Container>
       </FormProvider>

@@ -7,6 +7,7 @@ export const AddressBox = () => {
   //// DATA
   //summary address
   const [addressSummary, setAddressSummary] = useState<boolean>(false);
+  const [addressError, setAddressError] = useState<string | null>(null);
 
   //use form context
   const {
@@ -16,10 +17,8 @@ export const AddressBox = () => {
   } = useFormContext<Address>();
 
   //// LOGIC
-  // check if object "errors" has value
-  // const hasErrors = Object.keys(errors).length > 0;
-
-  const handleAddress = () => {
+  //handle save address action
+  const handleSaveAddress = () => {
     // get address value
     const values: Address = getValues() as Address;
 
@@ -42,12 +41,15 @@ export const AddressBox = () => {
     });
 
     if (allFieldsFilled) {
-      setAddressSummary(true);
+      setAddressSummary(true); // show address summary
+      setAddressError(null); //clear error message
+    } else {
+      // set error message
+      setAddressError("Please fill in the fields.");
     }
-    console.log(getValues());
   };
 
-  //handle edit button click in address summary
+  //handle the address edit button summary
   const handleAddressEdit = () => {
     setAddressSummary(!addressSummary);
   };
@@ -63,7 +65,7 @@ export const AddressBox = () => {
         }}
       >
         <Typography variant="h5" sx={{ marginLeft: "15px", padding: "5px" }}>
-          Enter your shipping address:
+          1. Enter your shipping address:
         </Typography>
       </Paper>
       <Paper
@@ -229,11 +231,18 @@ export const AddressBox = () => {
                   helperText={errors.city?.message?.toString()}
                 />
               </Box>
+
+              {/* ERROR MESSAGE */}
+              {addressError && (
+                <Typography color="error" sx={{ marginTop: "10px" }}>
+                  {addressError}
+                </Typography>
+              )}
               {/* TOGGLE TO SUMMARY */}
               <Button
                 variant="contained"
                 sx={{ marginTop: "20px", width: "250px" }}
-                onClick={handleAddress}
+                onClick={handleSaveAddress}
               >
                 Save Address
               </Button>
@@ -249,7 +258,6 @@ export const AddressBox = () => {
                 {getValues().name} {getValues().surname}
               </Typography>
             </Box>
-
             <Box sx={{ marginTop: "15px" }}>
               <p>Delivery address:</p>{" "}
               <Typography variant="h5">
