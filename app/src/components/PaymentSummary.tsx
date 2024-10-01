@@ -52,7 +52,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
     <>
       <Paper
         sx={{
-          margin: "14px 7px 0 0",
+          margin: "80px 7px 0 0",
         }}
       >
         {" "}
@@ -152,6 +152,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
         </Typography>
         {cart.map((item) => (
           <CartItem
+            key={item.id}
             item={item}
             handleDecrementItemAmount={handleDecrementItemAmount}
             handleIncrementItemAmount={handleIncrementItemAmount}

@@ -151,6 +151,7 @@ export const Cart = () => {
                 </Paper>
                 {cart.map((item) => (
                   <CartItem
+                    key={item.id}
                     item={item}
                     handleDecrementItemAmount={handleDecrementItemAmount}
                     handleIncrementItemAmount={handleIncrementItemAmount}

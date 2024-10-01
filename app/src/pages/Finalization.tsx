@@ -15,6 +15,8 @@ import { useState } from "react";
 
 export const Finalization = () => {
   const [summaryView, setSummaryView] = useState(false);
+  console.log(summaryView);
+
   ////DATA
   //useForm with default values
   const methods = useForm<Address>({
@@ -40,17 +42,29 @@ export const Finalization = () => {
   ////LOGIC
   //handle data submit
   const onSubmit: SubmitHandler<Address> = (data) => {
+    console.log("Form data: ", data);
+  };
+
+  const handleConfirmButton = () => {
+    //check errors object
+    const errors = Object.keys(methods.formState.errors).length > 0;
     //set error when is no payment method selected
-    if (!data.payOnDelivery && !data.paymentCard) {
+    if (
+      !methods.getValues().payOnDelivery &&
+      !methods.getValues().paymentCard
+    ) {
       methods.setError("payOnDelivery", {
         type: "manual",
         message: "Please select a payment method.",
       });
       return;
+    } else if (errors) {
+      return;
+    } else {
+      setSummaryView(true);
     }
-    setSummaryView(true);
-    console.log("Form data: ", data);
   };
+
   const handleSummaryView: () => void = () => {
     setSummaryView(!summaryView);
   };
@@ -79,7 +93,8 @@ export const Finalization = () => {
                   </Typography>
                   <Button
                     variant="contained"
-                    type="submit"
+                    // type="submit"
+                    onClick={handleConfirmButton}
                     sx={{
                       maxWidth: "400px",
                       width: "100%",
