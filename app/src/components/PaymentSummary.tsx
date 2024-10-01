@@ -11,7 +11,13 @@ import {
 } from "../redux/cart/cartSlice";
 import { CartProduct } from "../types/cartTypes";
 
-export const PaymentSummary = () => {
+interface PaymentSummaryProps {
+  handleSummaryView: () => void;
+}
+
+export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
+  handleSummaryView,
+}) => {
   const { getValues } = useFormContext<Address>();
   console.log(getValues());
   const cart = useSelector(selectAllCart);
@@ -63,9 +69,18 @@ export const PaymentSummary = () => {
       >
         <Box>
           {" "}
-          <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>
-            1. Shipping details:
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>
+              1. Shipping details:
+            </Typography>{" "}
+            <Button
+              onClick={handleSummaryView}
+              variant="outlined"
+              sx={{ margin: "20px 0 0 20px" }}
+            >
+              Edit
+            </Button>
+          </Box>
           <Box sx={{ padding: "10px 0 0 49px" }}>
             {/* ADDRESS SUMMARY */}
             <Box sx={{ marginTop: "15px" }}>
@@ -97,15 +112,6 @@ export const PaymentSummary = () => {
                 <Typography variant="h5"> {getValues().phone}</Typography>
               </Box>
             </Box>
-
-            {/* RETURN TO INPUT FIELDS */}
-            {/* <Button
-              onClick={handleAddressEdit}
-              variant="outlined"
-              sx={{ marginTop: "30px" }}
-            >
-              Edit
-            </Button> */}
           </Box>
         </Box>
       </Paper>
@@ -115,8 +121,22 @@ export const PaymentSummary = () => {
           paddingBottom: "20px",
         }}
       >
-        <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>
-          2. Payment method:{"    "}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>
+            2. Payment method:
+          </Typography>
+          <Button
+            onClick={handleSummaryView}
+            variant="outlined"
+            sx={{ margin: "20px 0 0 20px" }}
+          >
+            Edit
+          </Button>
+        </Box>
+        <Typography
+          variant="h6"
+          sx={{ padding: "20px 0 0 20px", marginLeft: "29px" }}
+        >
           {getValues().payOnDelivery && "Payable on delivery."}{" "}
           {getValues().paymentCard && "Payable by card."}
         </Typography>
