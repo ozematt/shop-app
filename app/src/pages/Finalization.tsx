@@ -42,12 +42,16 @@ export const Finalization = () => {
     },
   });
 
+  //date-fns
   const formatDate = () => {
     const today = new Date();
     return format(today, "dd.MM.yyyy");
   };
+
+  //unique id
   const orderId = useId();
 
+  //cart state
   const { total, quantity } = useSelector((state: RootState) => state.cart);
   const cart = useSelector(selectAllCart);
 
