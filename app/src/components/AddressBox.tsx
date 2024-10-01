@@ -62,19 +62,12 @@ export const AddressBox = () => {
       {/* ADDRESS */}
       <Paper
         sx={{
-          margin: "90px 0 14px 0",
-          width: "100%",
+          margin: "90px 7px 0 0",
         }}
       >
-        <Typography variant="h5" sx={{ marginLeft: "15px", padding: "5px" }}>
+        <Typography variant="h5" sx={{ padding: "20px" }}>
           1. Enter your shipping address:
         </Typography>
-      </Paper>
-      <Paper
-        sx={{
-          margin: "14px 7px 0 0",
-        }}
-      >
         {!addressSummary ? (
           <>
             <Box

@@ -85,16 +85,15 @@ export const PaymentMethod = () => {
         sx={{
           margin: "14px 7px 0 0",
         }}
-      >
-        <Typography variant="h5" sx={{ marginLeft: "15px", padding: "5px" }}>
-          2. Choose payment method:
-        </Typography>
-      </Paper>
+      ></Paper>
       <Paper
         sx={{
           margin: "14px 7px 0 0",
         }}
       >
+        <Typography variant="h5" sx={{ padding: "20px" }}>
+          2. Choose payment method:
+        </Typography>
         <Box
           sx={{
             padding: "20px",

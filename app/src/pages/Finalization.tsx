@@ -1,4 +1,11 @@
-import { Box, Button, Container, CssBaseline, Paper } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethod";
@@ -53,13 +60,24 @@ export const Finalization = () => {
             <Paper
               sx={{
                 margin: "14px 7px 0 0",
-                padding: "20px",
+                paddingBottom: "20px",
               }}
             >
+              <Typography
+                variant="h5"
+                sx={{ padding: "20px", marginBottom: "20px" }}
+              >
+                3. Confirm your information{" "}
+              </Typography>
               <Button
                 variant="contained"
                 type="submit"
-                sx={{ width: "400px", height: "50px" }}
+                sx={{
+                  maxWidth: "400px",
+                  width: "100%",
+                  height: "50px",
+                  marginLeft: "20px",
+                }}
               >
                 Confirm
               </Button>
