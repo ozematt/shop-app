@@ -2,8 +2,8 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../pages/Finalization";
 import { useState } from "react";
+import { Address } from "../types/addressTypes";
 
 export const PaymentMethod = () => {
   ////DATA

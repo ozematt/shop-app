@@ -1,27 +1,12 @@
 import { Box, Button, Container, CssBaseline, Paper } from "@mui/material";
-
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethod";
-
-export interface Address {
-  name: string;
-  surname: string;
-  email: string;
-  phone: number | null;
-  street: string;
-  houseNumber: number | null;
-  apartmentNumber: number | null;
-  zipCode: number | null;
-  city: string;
-  payOnDelivery: boolean | null;
-  paymentCard: boolean | null;
-  cardNumber: number | null;
-  cardDate: string | null;
-  cardCVV: string | null;
-}
+import { Address } from "../types/addressTypes";
 
 export const Finalization = () => {
+  ////DATA
+  //useForm with default values
   const methods = useForm<Address>({
     mode: "onBlur",
     defaultValues: {
@@ -42,7 +27,10 @@ export const Finalization = () => {
     },
   });
 
+  ////LOGIC
+  //handle data submit
   const onSubmit: SubmitHandler<Address> = (data) => {
+    //set error when is no payment method selected
     if (!data.payOnDelivery && !data.paymentCard) {
       methods.setError("payOnDelivery", {
         type: "manual",
@@ -53,7 +41,7 @@ export const Finalization = () => {
 
     console.log("Form data: ", data);
   };
-
+  ////UI
   return (
     <>
       <FormProvider {...methods}>

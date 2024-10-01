@@ -1,7 +1,7 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../pages/Finalization";
 import { useState } from "react";
+import { Address } from "../types/addressTypes";
 
 export const AddressBox = () => {
   //// DATA
