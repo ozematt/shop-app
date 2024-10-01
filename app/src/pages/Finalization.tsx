@@ -10,6 +10,7 @@ import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethod";
 import { Address } from "../types/addressTypes";
+import { PaymentSummary } from "../components/PaymentSummary";
 
 export const Finalization = () => {
   ////DATA
@@ -83,6 +84,8 @@ export const Finalization = () => {
               </Button>
             </Paper>
           </Box>
+
+          <PaymentSummary />
         </Container>
       </FormProvider>
     </>
