@@ -11,6 +11,7 @@ import {
 } from "../redux/cart/cartSlice";
 import { CartProduct } from "../types/cartTypes";
 
+//props type
 interface PaymentSummaryProps {
   handleSummaryView: () => void;
 }
@@ -19,10 +20,10 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
   handleSummaryView,
 }) => {
   const { getValues } = useFormContext<Address>();
-  console.log(getValues());
+
+  const total = useSelector((state: RootState) => state.cart.total);
   const cart = useSelector(selectAllCart);
   const dispatch: AppDispatch = useAppDispatch();
-  const total = useSelector((state: RootState) => state.cart.total);
 
   ////LOGIC
   //increment item quantity
@@ -48,6 +49,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
       dispatch(removeFromCart(item.id));
     }
   };
+
   return (
     <>
       <Paper
@@ -170,6 +172,8 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
         </Typography>
         <Button
           variant="contained"
+          type="submit"
+          // onClick={handlePaymentComplete}
           sx={{
             marginTop: "20px",
             maxWidth: "400px",
