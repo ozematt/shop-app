@@ -1,14 +1,16 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../pages/Finalization";
 import { useState } from "react";
+import { Address } from "../types/addressTypes";
 
 export const AddressBox = () => {
   //// DATA
-  //summary address
+  //show address summary
   const [addressSummary, setAddressSummary] = useState<boolean>(false);
+  //error message when save address button is clicked, and fields are empty
+  const [addressError, setAddressError] = useState<string | null>(null);
 
-  //use form context
+  //form context
   const {
     register,
     formState: { errors },
@@ -16,10 +18,8 @@ export const AddressBox = () => {
   } = useFormContext<Address>();
 
   //// LOGIC
-  // check if object "errors" has value
-  // const hasErrors = Object.keys(errors).length > 0;
-
-  const handleAddress = () => {
+  //handle save address action
+  const handleSaveAddress = () => {
     // get address value
     const values: Address = getValues() as Address;
 
@@ -35,6 +35,7 @@ export const AddressBox = () => {
       "city",
     ];
 
+    //checks each field to see if it is empty
     const allFieldsFilled = requiredFields.every((field) => {
       const value = values[field];
       // check if the value is not empty and if it is a string, remove whitespace
@@ -42,12 +43,15 @@ export const AddressBox = () => {
     });
 
     if (allFieldsFilled) {
-      setAddressSummary(true);
+      setAddressSummary(true); // show address summary
+      setAddressError(null); //clear error message
+    } else {
+      // set error message
+      setAddressError("Please fill in the fields.");
     }
-    console.log(getValues());
   };
 
-  //handle edit button click in address summary
+  //handle the address edit button summary
   const handleAddressEdit = () => {
     setAddressSummary(!addressSummary);
   };
@@ -58,19 +62,12 @@ export const AddressBox = () => {
       {/* ADDRESS */}
       <Paper
         sx={{
-          margin: "90px 0 14px 0",
-          width: "100%",
+          margin: "90px 7px 0 0",
         }}
       >
-        <Typography variant="h5" sx={{ marginLeft: "15px", padding: "5px" }}>
-          Enter your shipping address:
+        <Typography variant="h5" sx={{ padding: "20px" }}>
+          1. Enter your shipping address:
         </Typography>
-      </Paper>
-      <Paper
-        sx={{
-          margin: "14px 7px 0 0",
-        }}
-      >
         {!addressSummary ? (
           <>
             <Box
@@ -229,11 +226,18 @@ export const AddressBox = () => {
                   helperText={errors.city?.message?.toString()}
                 />
               </Box>
+
+              {/* ERROR MESSAGE */}
+              {addressError && (
+                <Typography color="error" sx={{ marginTop: "10px" }}>
+                  {addressError}
+                </Typography>
+              )}
               {/* TOGGLE TO SUMMARY */}
               <Button
                 variant="contained"
                 sx={{ marginTop: "20px", width: "250px" }}
-                onClick={handleAddress}
+                onClick={handleSaveAddress}
               >
                 Save Address
               </Button>
@@ -249,7 +253,6 @@ export const AddressBox = () => {
                 {getValues().name} {getValues().surname}
               </Typography>
             </Box>
-
             <Box sx={{ marginTop: "15px" }}>
               <p>Delivery address:</p>{" "}
               <Typography variant="h5">
