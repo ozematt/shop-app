@@ -5,11 +5,12 @@ import { useState } from "react";
 
 export const AddressBox = () => {
   //// DATA
-  //summary address
+  //show address summary
   const [addressSummary, setAddressSummary] = useState<boolean>(false);
+  //error message when save address button is clicked, and fields are empty
   const [addressError, setAddressError] = useState<string | null>(null);
 
-  //use form context
+  //form context
   const {
     register,
     formState: { errors },
@@ -34,6 +35,7 @@ export const AddressBox = () => {
       "city",
     ];
 
+    //checks each field to see if it is empty
     const allFieldsFilled = requiredFields.every((field) => {
       const value = values[field];
       // check if the value is not empty and if it is a string, remove whitespace
