@@ -14,8 +14,9 @@ import { PaymentSummary } from "../components/PaymentSummary";
 import { useId, useState } from "react";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { selectAllCart } from "../redux/cart/cartSlice";
+import { addOrder } from "../redux/user/ordersSlice";
 
 export const Finalization = () => {
   const [summaryView, setSummaryView] = useState(false);
@@ -54,6 +55,7 @@ export const Finalization = () => {
   //cart state
   const { total, quantity } = useSelector((state: RootState) => state.cart);
   const cart = useSelector(selectAllCart);
+  const dispatch: AppDispatch = useAppDispatch();
 
   ////LOGIC
   //handle data submit
@@ -83,7 +85,10 @@ export const Finalization = () => {
         pieces: item.pieces,
       })),
     };
+    dispatch(addOrder(modifiedData));
   };
+  const order = useSelector((state: RootState) => state.orders);
+  console.log(order);
 
   const handleConfirmButton = () => {
     //check errors object

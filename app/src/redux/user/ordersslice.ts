@@ -21,49 +21,22 @@ interface OrdersItem {
 }
 
 interface Orders {
-  id: number | null;
-  date: number | null;
+  id: string | null;
+  date: string | null;
   totalPrice: number | null;
   quantity: number | null;
   address: OrdersAddress;
   items: OrdersItem[];
 }
 
-const initialState: Orders[] = [
-  {
-    id: null,
-    date: null,
-    totalPrice: null,
-    quantity: null,
-    address: {
-      name: "",
-      surname: "",
-      street: "",
-      houseNumber: null,
-      apartmentNumber: null,
-      zipCode: null,
-      city: "",
-      payOnDelivery: null,
-      paymentCard: null,
-    },
-    items: [
-      {
-        id: null,
-        title: "",
-        image: "",
-        price: 0,
-        pieces: 0,
-      },
-    ],
-  },
-];
+const initialState: Orders[] = [];
 
 const ordersSlice = createSlice({
   name: "orders",
   initialState,
   reducers: {
     addOrder: (state: Orders[], action: PayloadAction<Orders>) => {
-      [...state, action.payload];
+      state.push(action.payload);
     },
   },
 });
