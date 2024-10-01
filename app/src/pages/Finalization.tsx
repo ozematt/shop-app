@@ -11,11 +11,14 @@ import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethod";
 import { Address } from "../types/addressTypes";
 import { PaymentSummary } from "../components/PaymentSummary";
-import { useState } from "react";
+import { useId, useState } from "react";
+import { format } from "date-fns";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { selectAllCart } from "../redux/cart/cartSlice";
 
 export const Finalization = () => {
   const [summaryView, setSummaryView] = useState(false);
-  console.log(summaryView);
 
   ////DATA
   //useForm with default values
@@ -39,9 +42,47 @@ export const Finalization = () => {
     },
   });
 
+  const formatDate = () => {
+    const today = new Date();
+    return format(today, "dd.MM.yyyy");
+  };
+  const orderId = useId();
+
+  const { total, quantity } = useSelector((state: RootState) => state.cart);
+  const cart = useSelector(selectAllCart);
+
   ////LOGIC
   //handle data submit
   const onSubmit: SubmitHandler<Address> = (data) => {
+    const modifiedData = {
+      orders: [
+        {
+          id: orderId,
+          date: formatDate(),
+          totalPrice: total,
+          quantity: quantity,
+          address: {
+            name: data.name,
+            surname: data.surname,
+            street: data.street,
+            houseNumber: data.houseNumber,
+            apartmentNumber: data.apartmentNumber,
+            zipCode: data.zipCode,
+            city: data.city,
+            payOnDelivery: data.payOnDelivery,
+            paymentCard: data.paymentCard,
+          },
+
+          items: cart.map((item) => ({
+            id: item.id,
+            title: item.title,
+            image: item.image,
+            price: item.price,
+            pieces: item.pieces,
+          })),
+        },
+      ],
+    };
     console.log("Form data: ", data);
   };
 

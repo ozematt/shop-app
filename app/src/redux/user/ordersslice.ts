@@ -6,6 +6,7 @@ interface Orders {
       id: number | null;
       date: number | null;
       totalPrice: number | null;
+      quantity: number | null;
       address: {
         name: string;
         surname: string;
@@ -36,6 +37,7 @@ const initialState: Orders = {
       id: null,
       date: null,
       totalPrice: null,
+      quantity: null,
       address: {
         name: "",
         surname: "",
