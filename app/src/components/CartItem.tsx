@@ -16,6 +16,8 @@ export const CartItem = ({
   handleIncrementItemAmount,
 }: CartItem) => {
   const dispatch: AppDispatch = useAppDispatch();
+
+  ////UI
   return (
     <>
       <Paper
