@@ -19,7 +19,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
   handleSummaryView,
 }) => {
   const { getValues } = useFormContext<Address>();
-  console.log(getValues());
+
   const cart = useSelector(selectAllCart);
   const dispatch: AppDispatch = useAppDispatch();
   const total = useSelector((state: RootState) => state.cart.total);
@@ -170,6 +170,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
         </Typography>
         <Button
           variant="contained"
+          type="submit"
           sx={{
             marginTop: "20px",
             maxWidth: "400px",

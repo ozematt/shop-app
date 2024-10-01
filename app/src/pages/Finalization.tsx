@@ -59,35 +59,30 @@ export const Finalization = () => {
   //handle data submit
   const onSubmit: SubmitHandler<Address> = (data) => {
     const modifiedData = {
-      orders: [
-        {
-          id: orderId,
-          date: formatDate(),
-          totalPrice: total,
-          quantity: quantity,
-          address: {
-            name: data.name,
-            surname: data.surname,
-            street: data.street,
-            houseNumber: data.houseNumber,
-            apartmentNumber: data.apartmentNumber,
-            zipCode: data.zipCode,
-            city: data.city,
-            payOnDelivery: data.payOnDelivery,
-            paymentCard: data.paymentCard,
-          },
+      id: orderId,
+      date: formatDate(),
+      totalPrice: total,
+      quantity: quantity,
+      address: {
+        name: data.name,
+        surname: data.surname,
+        street: data.street,
+        houseNumber: data.houseNumber,
+        apartmentNumber: data.apartmentNumber,
+        zipCode: data.zipCode,
+        city: data.city,
+        payOnDelivery: data.payOnDelivery,
+        paymentCard: data.paymentCard,
+      },
 
-          items: cart.map((item) => ({
-            id: item.id,
-            title: item.title,
-            image: item.image,
-            price: item.price,
-            pieces: item.pieces,
-          })),
-        },
-      ],
+      items: cart.map((item) => ({
+        id: item.id,
+        title: item.title,
+        image: item.image,
+        price: item.price,
+        pieces: item.pieces,
+      })),
     };
-    console.log("Form data: ", data);
   };
 
   const handleConfirmButton = () => {
