@@ -46,6 +46,11 @@ export const User = () => {
     navigate("/");
     dispatch(removeAllFromCart());
   };
+
+  const handleOrdersHistory = () => {
+    navigate("/orders");
+    setAnchorEl(null);
+  };
   ////UI
   return (
     <>
@@ -94,7 +99,7 @@ export const User = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Orders</MenuItem>
+              <MenuItem onClick={handleOrdersHistory}>Orders</MenuItem>
               <Divider />
               <MenuItem onClick={handleLogOut}>LogOut</MenuItem>
             </Menu>{" "}

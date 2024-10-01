@@ -15,8 +15,9 @@ import { useId, useState } from "react";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { selectAllCart } from "../redux/cart/cartSlice";
+import { removeAllFromCart, selectAllCart } from "../redux/cart/cartSlice";
 import { addOrder } from "../redux/user/ordersSlice";
+import { useNavigate } from "react-router-dom";
 
 export const Finalization = () => {
   const [summaryView, setSummaryView] = useState(false);
@@ -48,7 +49,7 @@ export const Finalization = () => {
     const today = new Date();
     return format(today, "dd.MM.yyyy");
   };
-
+  const navigate = useNavigate();
   //unique id
   const orderId = useId();
 
@@ -86,6 +87,8 @@ export const Finalization = () => {
       })),
     };
     dispatch(addOrder(modifiedData));
+    dispatch(removeAllFromCart());
+    navigate("/success");
   };
   const order = useSelector((state: RootState) => state.orders);
   console.log(order);

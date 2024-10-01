@@ -20,7 +20,7 @@ interface OrdersItem {
   pieces: number;
 }
 
-interface Orders {
+export interface Orders {
   id: string | null;
   date: string | null;
   totalPrice: number | null;

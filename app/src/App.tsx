@@ -23,6 +23,7 @@ import { Authorization } from "./pages/Authorization";
 import { Finalization } from "./pages/Finalization";
 
 import { OrdersHistory } from "./pages/OrdersHistory";
+import { Success } from "./pages/Success";
 
 export const App: React.FC = () => {
   return (
@@ -39,6 +40,7 @@ export const App: React.FC = () => {
                 <Route path="/login" element={<Authorization />} />
                 <Route path="/finalization" element={<Finalization />} />
                 <Route path="/orders" element={<OrdersHistory />} />
+                <Route path="/success" element={<Success />} />
               </Route>
             </Routes>
           </BrowserRouter>
