@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Product, ProductsState } from "../../types/productTypes";
+import { Product, ProductsState } from "../../lib/types/productTypes";
 
 //lazy loading with createAsyncThunk
 export const fetchProducts = createAsyncThunk<

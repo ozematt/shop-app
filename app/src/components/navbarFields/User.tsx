@@ -107,7 +107,7 @@ export const User = () => {
         ) : (
           <Button
             onClick={() => navigate("/login")}
-            sx={{ marginRight: "10px" }}
+            sx={{ marginRight: "10px", color: "white" }}
           >
             Login
           </Button>
