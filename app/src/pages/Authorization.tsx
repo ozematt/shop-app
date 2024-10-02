@@ -69,8 +69,8 @@ export const Authorization = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "500px",
-            padding: "20px",
             marginTop: "90px",
+            width: "100%",
           }}
         >
           <Box
@@ -80,7 +80,7 @@ export const Authorization = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              gap: "20px",
+              gap: "10px",
             }}
           >
             <Typography variant="h4">Login:</Typography>
@@ -123,14 +123,19 @@ export const Authorization = () => {
               <Button
                 variant="contained"
                 type="submit"
-                sx={{ padding: "10px 40px 10px 40px" }}
+                sx={{
+                  padding: "10px",
+                  marginRight: "20px",
+                  width: "280px",
+                  // width: "100%",
+                }}
               >
                 Login
               </Button>
               <Button
-                variant="outlined"
+                variant="text"
                 onClick={() => navigate("/")}
-                sx={{ padding: "10px 40px 10px 40px", marginLeft: "110px" }}
+                sx={{ padding: "10px" }}
               >
                 main page
               </Button>
