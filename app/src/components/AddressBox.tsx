@@ -2,7 +2,11 @@ import { Box, Paper, TextField, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import { Address } from "../lib/types/addressTypes";
 
-export const AddressBox = () => {
+export const AddressBox = ({
+  errorEmptyAddressFields,
+}: {
+  errorEmptyAddressFields: string | null;
+}) => {
   //// DATA
   const {
     register,
@@ -178,6 +182,9 @@ export const AddressBox = () => {
                 helperText={errors.city?.message?.toString()}
               />
             </Box>
+            <Typography sx={{ color: "red" }}>
+              {errorEmptyAddressFields}
+            </Typography>
           </Box>
         </Paper>
       </Box>

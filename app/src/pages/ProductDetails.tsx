@@ -39,8 +39,8 @@ export const ProductDetails = () => {
       <Container maxWidth="xl">
         <Paper
           sx={{
-            margin: "14px 7px 0 0",
-            padding: "20px",
+            margin: "90px 7px 0 0",
+            padding: "40px",
           }}
         >
           <Box
@@ -70,7 +70,7 @@ export const ProductDetails = () => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 width: "800px",
-                height: "800px",
+                height: "750px",
               }}
             />
             {/* Box with price and rating */}

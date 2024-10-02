@@ -12,6 +12,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
@@ -45,6 +46,7 @@ export const Authorization = () => {
   // input user data
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorAuth, setErrorAuth] = useState<string | null>(null);
 
   const { isLoading, error } = useSelector((state: RootState) => state.auth);
 
@@ -55,6 +57,9 @@ export const Authorization = () => {
     const resultAction = await dispatch(loginUser({ username, password }));
     if (loginUser.fulfilled.match(resultAction)) {
       navigate("/");
+      setErrorAuth(null);
+    } else {
+      setErrorAuth("User does not exist");
     }
   };
 
@@ -86,7 +91,7 @@ export const Authorization = () => {
             <Typography variant="h4">Login:</Typography>
             {/* Login field */}
             <TextField
-              sx={{ width: "400px" }}
+              sx={{ width: "400px", marginTop: "20px" }}
               id="outlined-basic"
               onChange={(e) => setUsername(e.target.value)}
               value={username}
@@ -119,7 +124,8 @@ export const Authorization = () => {
                 label="Password"
               />
             </FormControl>
-            <Box>
+            <Typography sx={{ color: "red" }}>{errorAuth}</Typography>
+            <Box sx={{ marginTop: "20px" }}>
               <Button
                 variant="contained"
                 type="submit"
@@ -142,8 +148,8 @@ export const Authorization = () => {
             </Box>
           </Box>
         </Paper>
-        {isLoading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
+        {isLoading && <CircularProgress />}
+        {error && <Typography variant="h3">Error: {error}</Typography>}
       </Container>
     </>
   );

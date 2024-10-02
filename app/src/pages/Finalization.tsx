@@ -90,28 +90,36 @@ export const Finalization = () => {
     dispatch(removeAllFromCart());
     navigate("/success");
   };
-  const order = useSelector((state: RootState) => state.orders);
-  console.log(order);
+
+  //checking if address have empty fields
+  const [errorEmptyAddressFields, setErrorEmptyAddressFields] = useState<
+    string | null
+  >(null);
 
   const handleConfirmButton = () => {
     //check errors object
-    const errors = Object.keys(methods.formState.errors).length > 0;
+    const errorsExist = Object.keys(methods.formState.errors).length > 0;
+    const addressValues = methods.getValues();
+
+    const hasEmptyFields = Object.values(addressValues).some(
+      (value) => value === "" || value === null
+    );
     //set error when is no payment method selected
-    if (
-      !methods.getValues().payOnDelivery &&
-      !methods.getValues().paymentCard
-    ) {
+    if (!addressValues.payOnDelivery && !addressValues.paymentCard) {
       methods.setError("payOnDelivery", {
         type: "manual",
         message: "Please select a payment method.",
       });
       return;
-    } else if (errors) {
-      return;
-    } else {
-      setSummaryView(true);
     }
+    if (errorsExist || hasEmptyFields) {
+      setErrorEmptyAddressFields("Address is required");
+      return;
+    }
+    setSummaryView(true);
   };
+
+  console.log(errorEmptyAddressFields);
 
   const handleSummaryView: () => void = () => {
     setSummaryView(!summaryView);
@@ -125,7 +133,7 @@ export const Finalization = () => {
           <Box component="form" onSubmit={methods.handleSubmit(onSubmit)}>
             {!summaryView ? (
               <>
-                <AddressBox />
+                <AddressBox errorEmptyAddressFields={errorEmptyAddressFields} />
                 <PaymentMethod />
                 <Paper
                   sx={{
