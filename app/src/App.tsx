@@ -21,9 +21,9 @@ import { Cart } from "./pages/Cart";
 import { Dashboard } from "./components/Dashboard";
 import { Authorization } from "./pages/Authorization";
 import { Finalization } from "./pages/Finalization";
-
 import { OrdersHistory } from "./pages/OrdersHistory";
 import { Success } from "./pages/Success";
+import { ProductDetails } from "./pages/ProductDetails";
 
 export const App: React.FC = () => {
   return (
@@ -41,6 +41,7 @@ export const App: React.FC = () => {
                 <Route path="/finalization" element={<Finalization />} />
                 <Route path="/orders" element={<OrdersHistory />} />
                 <Route path="/success" element={<Success />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
               </Route>
             </Routes>
           </BrowserRouter>

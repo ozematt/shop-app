@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchProducts } from "../redux/products/productsSlice";
 import { selectSortedProducts } from "../redux/products/productsSelectors";
 import { addToCart } from "../redux/cart/cartSlice";
@@ -21,7 +21,7 @@ export const Products = () => {
   ////DATA
 
   const theme = useTheme();
-  console.log(theme.palette.secondary.main);
+  // console.log(theme.palette.secondary.main);
   //product box style
   const productStyle = {
     backgroundColor: theme.palette.background.default,
@@ -47,12 +47,15 @@ export const Products = () => {
   const navigate = useNavigate();
   //memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
+  const products = useSelector((state: RootState) => state.products.items);
+  console.log(products);
 
   //fetch products status
   const { loading, error } = useSelector((state: RootState) => state.products);
 
   const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
 
+  const [visibleCount, setVisibleCount] = useState(10);
   ////LOGIC
 
   // fetch products after render
@@ -61,12 +64,34 @@ export const Products = () => {
   }, [dispatch]);
 
   // add to cart when user is logged in
-  const handleAddToCartClick = (item: Product) => {
+  const handleAddToCartClick = (event: React.MouseEvent, item: Product) => {
+    event.stopPropagation();
     auth ? dispatch(addToCart(item)) : navigate("/login");
   };
 
-  //UI
+  //dynamic product loading
 
+  const loadMoreProducts = () => {
+    setVisibleCount((prevCount) => prevCount + 4); // Increase the number of visible products by 4
+  };
+
+  // A function that listens for page scrolling
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 100 >=
+      document.documentElement.scrollHeight
+    ) {
+      loadMoreProducts(); // Load more products if user is near the end of the page
+    }
+  };
+
+  // event listener for scroll
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll); // Cleanup event listener
+  }, []);
+
+  //UI
   if (loading) {
     return (
       <Box sx={{ width: "100%" }}>
@@ -91,9 +116,13 @@ export const Products = () => {
           }}
         >
           {/* PRODUCTS PRINT */}
-          {sortedProducts?.map((product) => (
+          {sortedProducts?.slice(0, visibleCount).map((product) => (
             // MAIN BOX
-            <Box key={product.id} sx={productStyle}>
+            <Box
+              key={product.id}
+              sx={productStyle}
+              onClick={() => navigate(`/product/${product.id}`)}
+            >
               {/* IMAGE */}
 
               <div
@@ -159,7 +188,7 @@ export const Products = () => {
                 </div>
                 <Button
                   variant="contained"
-                  onClick={() => handleAddToCartClick(product)}
+                  onClick={(event) => handleAddToCartClick(event, product)}
                   sx={{
                     backgroundColor: "#DE7F1F",
                     padding: "20px",
