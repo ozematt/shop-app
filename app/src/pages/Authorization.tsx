@@ -2,11 +2,13 @@ import {
   Box,
   Button,
   Container,
+  CssBaseline,
   FormControl,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -59,62 +61,82 @@ export const Authorization = () => {
   ////UI
   return (
     <>
+      <CssBaseline />
       <Container maxWidth="xl">
-        <Box
-          component="form"
-          onSubmit={handleLogin}
+        <Paper
           sx={{
-            position: "absolute",
             display: "flex",
-            flexDirection: "column",
+            justifyContent: "center",
             alignItems: "center",
-            gap: "10px",
-            left: "50%",
-            top: "400px",
-            transform: "translate(-50%, -50%)",
+            height: "500px",
+            padding: "20px",
+            marginTop: "90px",
           }}
         >
-          <Typography variant="h5">Login:</Typography>
-          {/* Login field */}
-          <TextField
-            sx={{ width: "400px" }}
-            id="outlined-basic"
-            onChange={(e) => setUsername(e.target.value)}
-            value={username}
-            label="Login"
-            variant="outlined"
-          />
-          {/* Password field */}
-          <FormControl sx={{ m: 1, width: "400px" }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
-            <OutlinedInput
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    onMouseUp={handleMouseUpPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-              label="Password"
+          <Box
+            component="form"
+            onSubmit={handleLogin}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "20px",
+            }}
+          >
+            <Typography variant="h4">Login:</Typography>
+            {/* Login field */}
+            <TextField
+              sx={{ width: "400px" }}
+              id="outlined-basic"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+              label="Login"
+              variant="outlined"
             />
-          </FormControl>
-
-          <Button variant="contained" type="submit">
-            Login
-          </Button>
-        </Box>
+            {/* Password field */}
+            <FormControl sx={{ width: "400px" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      onMouseUp={handleMouseUpPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
+            <Box>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ padding: "10px 40px 10px 40px" }}
+              >
+                Login
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => navigate("/")}
+                sx={{ padding: "10px 40px 10px 40px", marginLeft: "110px" }}
+              >
+                main page
+              </Button>
+            </Box>
+          </Box>
+        </Paper>
         {isLoading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
       </Container>
