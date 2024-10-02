@@ -9,7 +9,7 @@ import {
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethod";
-import { Address } from "../types/addressTypes";
+import { Address } from "../lib/types/addressTypes";
 import { PaymentSummary } from "../components/PaymentSummary";
 import { useId, useState } from "react";
 import { format } from "date-fns";

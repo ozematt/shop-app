@@ -16,7 +16,7 @@ import {
 } from "../redux/cart/cartSlice";
 
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { CartProduct } from "../types/cartTypes";
+import { CartProduct } from "../lib/types/cartTypes";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../components/CartItem";
 
@@ -90,40 +90,11 @@ export const Cart = () => {
             <div style={{ display: "flex" }}>
               {/*  buying stage  */}
               <div>
-                <div
-                  style={{
-                    margin: "90px 30px 0 0",
-                    display: "flex",
-                    gap: "7px",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: "300px",
-                      height: "5px",
-                      backgroundColor: "#DE7F1F",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: "300px",
-                      height: "5px",
-                      backgroundColor: "#DE7F1F",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      width: "300px",
-                      height: "5px",
-                      backgroundColor: "#DE7F1F",
-                    }}
-                  />
-                </div>
-
                 {/* cart title */}
                 <Paper
+                  elevation={3}
                   sx={{
-                    marginTop: "20px",
+                    margin: "90px 0 10px 0",
                     width: "100%",
                     maxWidth: "914px",
                     display: "flex",
@@ -160,30 +131,42 @@ export const Cart = () => {
               </div>
               {/* price field */}
               <Paper
+                elevation={3}
                 sx={{
                   flexGrow: "1",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  height: "357px",
-                  marginTop: "114px",
+                  height: "353px",
+                  margin: "90px 0 0px 10px",
+
                   position: "relative",
                 }}
               >
-                <Typography variant="h4" sx={{ marginBottom: "30px" }}>
-                  Total Price: {total}
+                <Typography variant="h6">Total price:</Typography>
+                <Typography
+                  variant="h3"
+                  sx={{ padding: "10px 0 0 20px", marginBottom: "20px" }}
+                >
+                  <b>{total}$</b>
                 </Typography>
                 <Button
                   variant="contained"
                   onClick={handleBuyButton}
                   sx={{
-                    backgroundColor: "#DE7F1F",
                     padding: "20px",
                     width: "300px",
                   }}
                 >
                   Buy
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => navigate("/")}
+                  sx={{ width: 300, marginTop: "10px" }}
+                >
+                  back to shopping
                 </Button>
               </Paper>
             </div>

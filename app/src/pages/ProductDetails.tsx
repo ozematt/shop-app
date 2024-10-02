@@ -11,7 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { Product } from "../types/productTypes";
+import { Product } from "../lib/types/productTypes";
 import { addToCart } from "../redux/cart/cartSlice";
 
 export const ProductDetails = () => {
@@ -135,7 +135,7 @@ export const ProductDetails = () => {
                   variant="contained"
                   onClick={() => handleAddToCartClick(product)}
                   sx={{
-                    backgroundColor: "#DE7F1F",
+                    // backgroundColor: "#DE7F1F",
                     padding: "20px",
                     width: "420px",
                   }}

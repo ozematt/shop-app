@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   LinearProgress,
+  Paper,
   Rating,
   Typography,
   useTheme,
@@ -15,7 +16,7 @@ import { fetchProducts } from "../redux/products/productsSlice";
 import { selectSortedProducts } from "../redux/products/productsSelectors";
 import { addToCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { Product } from "../types/productTypes";
+import { Product } from "../lib/types/productTypes";
 
 export const Products = () => {
   ////DATA
@@ -118,13 +119,12 @@ export const Products = () => {
           {/* PRODUCTS PRINT */}
           {sortedProducts?.slice(0, visibleCount).map((product) => (
             // MAIN BOX
-            <Box
+            <Paper
               key={product.id}
               sx={productStyle}
               onClick={() => navigate(`/product/${product.id}`)}
             >
               {/* IMAGE */}
-
               <div
                 style={{
                   backgroundImage: `url(${product.image})`,
@@ -190,7 +190,6 @@ export const Products = () => {
                   variant="contained"
                   onClick={(event) => handleAddToCartClick(event, product)}
                   sx={{
-                    backgroundColor: "#DE7F1F",
                     padding: "20px",
                     marginTop: "145px",
                     width: "94%",
@@ -199,7 +198,7 @@ export const Products = () => {
                   Add to Cart
                 </Button>
               </Box>
-            </Box>
+            </Paper>
           ))}
         </Box>
       </Container>
