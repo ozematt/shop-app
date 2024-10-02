@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   LinearProgress,
+  Paper,
   Rating,
   Typography,
   useTheme,
@@ -15,18 +16,16 @@ import { fetchProducts } from "../redux/products/productsSlice";
 import { selectSortedProducts } from "../redux/products/productsSelectors";
 import { addToCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { Product } from "../types/productTypes";
+import { Product } from "../lib/types/productTypes";
 
 export const Products = () => {
   ////DATA
 
   const theme = useTheme();
-  // console.log(theme.palette.secondary.main);
+
   //product box style
   const productStyle = {
-    backgroundColor: theme.palette.background.default,
-    boxShadow: theme.shadows[1],
-    color: theme.palette.text.primary,
+    padding: "10px",
     height: "300px",
     width: "720px",
     display: "flex",
@@ -38,8 +37,9 @@ export const Products = () => {
     borderRadius: "8px",
     position: "relative",
     "&:hover": {
-      backgroundColor: "rgba(255,255,255, 0.05)",
-      boxShadow: 3,
+      backgroundColor:
+        theme.palette.mode === "dark" ? "rgba(255,255,255, 0.05)" : "none",
+      boxShadow: 10,
     },
   };
 
@@ -118,13 +118,12 @@ export const Products = () => {
           {/* PRODUCTS PRINT */}
           {sortedProducts?.slice(0, visibleCount).map((product) => (
             // MAIN BOX
-            <Box
+            <Paper
               key={product.id}
               sx={productStyle}
               onClick={() => navigate(`/product/${product.id}`)}
             >
               {/* IMAGE */}
-
               <div
                 style={{
                   backgroundImage: `url(${product.image})`,
@@ -174,6 +173,7 @@ export const Products = () => {
               <Box
                 sx={{
                   width: "300px",
+                  position: "relative",
                 }}
               >
                 {" "}
@@ -190,16 +190,15 @@ export const Products = () => {
                   variant="contained"
                   onClick={(event) => handleAddToCartClick(event, product)}
                   sx={{
-                    backgroundColor: "#DE7F1F",
                     padding: "20px",
-                    marginTop: "145px",
-                    width: "94%",
+                    position: "absolute",
+                    bottom: "20px",
                   }}
                 >
                   Add to Cart
                 </Button>
               </Box>
-            </Box>
+            </Paper>
           ))}
         </Box>
       </Container>

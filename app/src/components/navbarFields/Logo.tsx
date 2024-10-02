@@ -5,18 +5,16 @@ export const Logo = () => {
   return (
     <>
       <Typography
-        variant="h6"
+        variant="h4"
         component="div"
+        color="text.secondary"
         sx={{
           flexGrow: 1,
-          fontWeight: 700,
-          fontSize: "26px",
-          color: "#DE7F1F",
         }}
       >
         <Link to="/" style={{ color: "inherit" }}>
           {" "}
-          SKLEP
+          <b>SKLEP.COM</b>
         </Link>
       </Typography>
     </>

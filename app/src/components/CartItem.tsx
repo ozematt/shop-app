@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { AppDispatch, useAppDispatch } from "../redux/store";
 import { removeFromCart } from "../redux/cart/cartSlice";
-import { CartProduct } from "../types/cartTypes";
+import { CartProduct } from "../lib/types/cartTypes";
 
 interface CartItem {
   item: CartProduct;
@@ -20,10 +20,12 @@ export const CartItem = ({
   ////UI
   return (
     <Paper
+      // elevation={5}
       sx={{
         height: "300px",
         width: "100%",
         maxWidth: "914px",
+        marginBottom: "10px",
       }}
     >
       {/* Item section */}
@@ -105,7 +107,7 @@ export const CartItem = ({
             </Typography>
             <DeleteOutlineOutlinedIcon
               onClick={() => dispatch(removeFromCart(item.id))}
-              sx={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer", color: " red" }}
               fontSize="large"
             />
           </div>
