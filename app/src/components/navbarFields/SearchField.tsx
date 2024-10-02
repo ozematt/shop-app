@@ -3,9 +3,11 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
 
-import { useCallback, useState } from "react";
+import { SyntheticEvent, useCallback, useState } from "react";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
+import { selectSortedProducts } from "../../redux/products/productsSelectors";
+import { useNavigate } from "react-router-dom";
 
 // MUI STYLES
 const Search = styled("div")(({ theme }) => ({
@@ -53,9 +55,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   //products list from global state
-  const products = useSelector((state: RootState) => state.products.items);
+  const products = useSelector(selectSortedProducts);
 
   //clear input when focus out
   const handleInputFocusOut = useCallback(() => {
@@ -65,6 +68,24 @@ export const SearchField = () => {
   // products list titles
   const productsTitle: string[] =
     products?.map((product) => product.title) || [];
+
+  const handleProductSelect = (
+    event: SyntheticEvent<Element, Event>,
+    newValue: string | null
+  ) => {
+    if (!newValue) return;
+
+    // Find the product that matches the selected title
+    const selectedProduct = products.find(
+      (product) => product.title === newValue
+    );
+
+    // If a product is found, navigate to its detail page
+    if (selectedProduct) {
+      navigate(`/product/${selectedProduct.id}`);
+    }
+  };
+
   //UI
   return (
     <>
@@ -75,8 +96,10 @@ export const SearchField = () => {
         {/* Autocomplete wrapper*/}
         <Autocomplete
           freeSolo
+          // onClick={}
           options={productsTitle}
           inputValue={searchValue}
+          onChange={handleProductSelect}
           onInputChange={(_, newInputValue) => {
             setSearchValue(newInputValue);
           }}
