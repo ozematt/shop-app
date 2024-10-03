@@ -1,51 +1,16 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Divider from "@mui/material/Divider";
-
-import { useQuery } from "@tanstack/react-query";
-import fetchCategories from "../../api/queries/categories";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import {
-  filterByCategory,
-  resetCategory,
-} from "../../redux/products/productsSlice";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useCategoryField } from "../../lib/hooks/navbar/useCategoryField";
 
 export const CategoryField = () => {
-  //DATA
-  const dispatch = useDispatch<AppDispatch>();
-  const location = useLocation();
+  //
+  ////DATA
+  const { category, categories, handleCategoryChange } = useCategoryField();
 
-  //filter products state
-  const { category } = useSelector((state: RootState) => state.products);
-
-  // fetch categories
-  const { data: categories } = useQuery<string[]>({
-    queryKey: ["categories"],
-    queryFn: fetchCategories,
-  });
-
-  //LOGIC
-  //select category
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    dispatch(filterByCategory(event.target.value as string));
-  };
-
-  useEffect(() => {
-    dispatch(resetCategory()); // Akcja do resetu kategorii
-  }, [location, dispatch]);
-
-  //UI
+  //
+  ////UI
   return (
     <>
-      {/* Category - filter */}
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel>Category</InputLabel>
         <Select

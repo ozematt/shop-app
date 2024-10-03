@@ -1,11 +1,11 @@
 import { AppBar, Box, Divider, Toolbar } from "@mui/material";
 import { Logo } from "./navbarFields/Logo";
 import { SearchField } from "./navbarFields/SearchField";
-import { User } from "./navbarFields/User";
-import { ThemeSwitch } from "./navbarFields/ThemeSwitch";
 import Container from "@mui/material/Container";
-
-import { FilterNavbarFields } from "./navbarFields/FilterNavbarFields";
+import { UserPanelFields } from "./navbarFields/UserPanelFields";
+import { ThemeSwitchField } from "./navbarFields/ThemeSwitchField";
+import { CategoryField } from "./navbarFields/CategoryField";
+import { SortField } from "./navbarFields/SortField";
 
 export const Navbar = () => {
   return (
@@ -16,12 +16,12 @@ export const Navbar = () => {
             <Toolbar>
               <Logo />
               <SearchField />
-              <FilterNavbarFields />
-
+              <CategoryField />
+              <SortField />
               <Divider orientation="vertical" flexItem />
-              <User />
+              <UserPanelFields />
               <Divider orientation="vertical" flexItem />
-              <ThemeSwitch />
+              <ThemeSwitchField />
             </Toolbar>
           </Container>
         </AppBar>

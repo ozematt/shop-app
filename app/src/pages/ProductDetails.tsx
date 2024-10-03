@@ -23,7 +23,6 @@ export const ProductDetails = () => {
   const product = useSelector((state: RootState) =>
     state.products.items.find((item) => item.id === Number(id))
   );
-  console.log(product);
 
   const handleAddToCartClick = (item: Product) => {
     auth ? dispatch(addToCart(item)) : navigate("/login");
