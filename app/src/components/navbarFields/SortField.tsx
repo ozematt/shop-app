@@ -8,12 +8,17 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { setSortingMethod } from "../../redux/products/productsSlice";
-import { useCallback } from "react";
+import {
+  resetSortingMethod,
+  setSortingMethod,
+} from "../../redux/products/productsSlice";
+import { useCallback, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export const SortField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
 
   //sorting method from global state
   const sortingMethod = useSelector(
@@ -28,6 +33,10 @@ export const SortField = () => {
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    dispatch(resetSortingMethod()); // Akcja do resetu kategorii
+  }, [location, dispatch]);
 
   //UI
   return (
