@@ -4,32 +4,15 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { setSortingMethod } from "../../redux/products/productsSlice";
-import { useCallback } from "react";
+import { useSortField } from "../../lib/hooks/navbar/useSortField";
 
 export const SortField = () => {
-  //DATA
-  const dispatch = useDispatch<AppDispatch>();
+  //
+  ////DATA
+  const { sortingMethod, handleSortingMethodChange } = useSortField();
 
-  //sorting method from global state
-  const sortingMethod = useSelector(
-    (state: RootState) => state.products.sortingMethod
-  );
-
-  //LOGIC
-  //select sorting method
-  const handleSortingMethodChange = useCallback(
-    (event: SelectChangeEvent<string>) => {
-      dispatch(setSortingMethod(event.target.value as string));
-    },
-    [dispatch]
-  );
-
-  //UI
+  ////UI
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">

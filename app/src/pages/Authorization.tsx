@@ -133,11 +133,6 @@ export const Authorization = () => {
                   label="Password"
                 />
               </FormControl>
-              {mutation.isError && (
-                <Typography variant="h3">
-                  Error: {mutation.error.message}
-                </Typography>
-              )}
               <Typography sx={{ color: "red" }}>{errorAuth}</Typography>
               <Box sx={{ marginTop: "20px" }}>
                 <Button

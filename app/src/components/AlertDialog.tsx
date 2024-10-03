@@ -9,7 +9,7 @@ export const AlertDialog = ({
   handleCloseDialogAlert,
 }: {
   open: boolean;
-  handleCloseDialogAlert: () => void;
+  handleCloseDialogAlert: (confirmed: boolean) => void;
 }) => {
   return (
     <>
@@ -22,7 +22,7 @@ export const AlertDialog = ({
           {"You have been successfully logged out!"}
         </DialogTitle>
         <DialogActions>
-          <Button variant="text" onClick={handleCloseDialogAlert}>
+          <Button variant="text" onClick={() => handleCloseDialogAlert(true)}>
             Close
           </Button>
         </DialogActions>
