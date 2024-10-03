@@ -16,10 +16,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
-import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { useSelector } from "react-redux";
-import { loginUser } from "../redux/user/authSlice";
+import { AppDispatch, useAppDispatch } from "../redux/store";
+
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import userCheck from "../api/queries/authorization";
+import { logUser } from "../redux/user/userSlice";
 
 export const Authorization = () => {
   //MUI password field logic
@@ -48,19 +50,23 @@ export const Authorization = () => {
   const [password, setPassword] = useState("");
   const [errorAuth, setErrorAuth] = useState<string | null>(null);
 
-  const { isLoading, error } = useSelector((state: RootState) => state.auth);
+  const mutation = useMutation({
+    mutationFn: userCheck,
+    onSuccess: () => {
+      dispatch(logUser());
+      navigate("/");
+      setErrorAuth(null);
+    },
+    onError: () => {
+      setErrorAuth("User does not exist");
+    },
+  });
 
   ////LOGIC
   //submit login data
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const resultAction = await dispatch(loginUser({ username, password }));
-    if (loginUser.fulfilled.match(resultAction)) {
-      navigate("/");
-      setErrorAuth(null);
-    } else {
-      setErrorAuth("User does not exist");
-    }
+    mutation.mutate({ username, password });
   };
 
   ////UI
@@ -148,8 +154,10 @@ export const Authorization = () => {
             </Box>
           </Box>
         </Paper>
-        {isLoading && <CircularProgress />}
-        {error && <Typography variant="h3">Error: {error}</Typography>}
+        {mutation.isPending && <CircularProgress />}
+        {mutation.isError && (
+          <Typography variant="h3">Error: {mutation.error.message}</Typography>
+        )}
       </Container>
     </>
   );

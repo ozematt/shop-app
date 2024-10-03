@@ -41,6 +41,12 @@ const productSlice = createSlice({
     filterByCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload;
     },
+    resetCategory: (state) => {
+      state.category = "";
+    },
+    resetSortingMethod: (state) => {
+      state.sortingMethod = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -61,5 +67,10 @@ const productSlice = createSlice({
       });
   },
 });
-export const { setSortingMethod, filterByCategory } = productSlice.actions;
+export const {
+  setSortingMethod,
+  filterByCategory,
+  resetCategory,
+  resetSortingMethod,
+} = productSlice.actions;
 export default productSlice.reducer;

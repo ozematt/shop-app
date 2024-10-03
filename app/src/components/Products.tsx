@@ -12,11 +12,16 @@ import {
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../redux/products/productsSlice";
+import {
+  fetchProducts,
+  filterByCategory,
+  setSortingMethod,
+} from "../redux/products/productsSlice";
 import { selectSortedProducts } from "../redux/products/productsSelectors";
 import { addToCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../lib/types/productTypes";
+import { useIntersection } from "@mantine/hooks";
 
 export const Products = () => {
   ////DATA
@@ -53,9 +58,8 @@ export const Products = () => {
   //fetch products status
   const { loading, error } = useSelector((state: RootState) => state.products);
 
-  const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
 
-  const [visibleCount, setVisibleCount] = useState(10);
   ////LOGIC
 
   // fetch products after render
@@ -70,26 +74,25 @@ export const Products = () => {
   };
 
   //dynamic product loading
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const loadMoreProducts = () => {
     setVisibleCount((prevCount) => prevCount + 4); // Increase the number of visible products by 4
   };
 
   // A function that listens for page scrolling
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop + 100 >=
-      document.documentElement.scrollHeight
-    ) {
-      loadMoreProducts(); // Load more products if user is near the end of the page
-    }
-  };
+  const { ref, entry } = useIntersection({
+    root: null, // watch in the context of the entire viewport
+    rootMargin: "0px",
+    threshold: 1.0, // activate when sentinel is fully visible
+  });
 
   // event listener for scroll
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll); // Cleanup event listener
-  }, []);
+    if (entry?.isIntersecting) {
+      loadMoreProducts(); // load more products when sentinel is visible
+    }
+  }, [entry]);
 
   //UI
   if (loading) {
@@ -150,7 +153,7 @@ export const Products = () => {
                     justifyContent: "flex-start",
                     alignItems: "center",
                     position: "absolute",
-                    bottom: "30px",
+                    bottom: "1px",
                   }}
                 >
                   {" "}
@@ -200,6 +203,8 @@ export const Products = () => {
               </Box>
             </Paper>
           ))}
+          {/* Element sentinel */}
+          <div ref={ref} style={{ height: "20px" }} />
         </Box>
       </Container>
     </>

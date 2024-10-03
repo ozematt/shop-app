@@ -58,13 +58,19 @@ export const PaymentMethod = () => {
     ];
 
     //checks each field to see if it is empty
-    const allFieldsFilled = requiredFields.every((field) => {
+    const allFieldsCheck = requiredFields.every((field) => {
       const value = values[field];
-      // check if the value is not empty and if it is a string, remove whitespace
-      return value && (typeof value === "string" ? value.trim() !== "" : true);
+      const hasErrors = errors[field];
+      // check if the value is not empty (if it is a string, remove whitespace) and checking if the value has no errors
+      return (
+        value &&
+        (typeof value === "string" ? value.trim() !== "" : true) &&
+        !hasErrors
+      );
     });
 
-    if (allFieldsFilled) {
+    // const errorsFree = requiredFields.map((field) => errors[field] )
+    if (allFieldsCheck) {
       setValue("paymentCard", true); //select payment method on "payment card"
       setAddClicked(true); // state of "Add Card" button
       setCardFields(false); // hide card fields
