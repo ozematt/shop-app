@@ -16,8 +16,6 @@ export interface Product {
 export interface ProductsState {
   items: Product[];
   filteredItems: Product[];
-  loading: boolean;
-  error: string | null;
   category: string;
   sortingMethod: string;
 }

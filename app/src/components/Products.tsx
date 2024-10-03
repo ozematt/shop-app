@@ -12,16 +12,14 @@ import {
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { useEffect, useState } from "react";
-import {
-  fetchProducts,
-  filterByCategory,
-  setSortingMethod,
-} from "../redux/products/productsSlice";
+import fetchProducts from "../api/queries/products";
 import { selectSortedProducts } from "../redux/products/productsSelectors";
 import { addToCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../lib/types/productTypes";
 import { useIntersection } from "@mantine/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { addProducts } from "../redux/products/productsSlice";
 
 export const Products = () => {
   ////DATA
@@ -52,20 +50,27 @@ export const Products = () => {
   const navigate = useNavigate();
   //memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
-  const products = useSelector((state: RootState) => state.products.items);
-  console.log(products);
 
   //fetch products status
-  const { loading, error } = useSelector((state: RootState) => state.products);
+  // const { loading, error } = useSelector((state: RootState) => state.products);
 
   const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
+
+  console.log(data);
 
   ////LOGIC
 
   // fetch products after render
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (data) {
+      dispatch(addProducts(data));
+    }
+  }, [dispatch, data]);
 
   // add to cart when user is logged in
   const handleAddToCartClick = (event: React.MouseEvent, item: Product) => {
@@ -95,7 +100,7 @@ export const Products = () => {
   }, [entry]);
 
   //UI
-  if (loading) {
+  if (isPending) {
     return (
       <Box sx={{ width: "100%" }}>
         <LinearProgress />
@@ -103,8 +108,8 @@ export const Products = () => {
     );
   }
 
-  if (error !== null) {
-    return <p>{error}</p>;
+  if (isError) {
+    return <p>{error.message}</p>;
   }
 
   return (

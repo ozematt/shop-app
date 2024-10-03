@@ -14,14 +14,11 @@ const userCheck = async (userData: { username: string; password: string }) => {
       const errorData = await response.json();
       throw new Error(errorData?.message || "Login failed");
     }
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error: any) {
     console.error("Error during login:", error.message);
     throw error;
   }
 };
-
-console.log(userCheck);
 
 export default userCheck;
