@@ -1,25 +1,32 @@
-// import {
-//   Button,
-//   DialogActions,
-//   DialogContent,
-//   DialogContentText,
-//   DialogTitle,
-// } from "@mui/material";
-// import { useState } from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
 
-// const Dialog = () => {
-//   const [open, setOpen] = useState(false);
+import DialogTitle from "@mui/material/DialogTitle";
 
-//   const handleClickOpen = () => {
-//     setOpen(true);
-//   };
-
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
-//   return (
-//     <>
-//
-//     </>
-//   );
-// };
+export const AlertDialog = ({
+  open,
+  handleCloseDialogAlert,
+}: {
+  open: boolean;
+  handleCloseDialogAlert: () => void;
+}) => {
+  return (
+    <>
+      <Dialog
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"You have been successfully logged out!"}
+        </DialogTitle>
+        <DialogActions>
+          <Button variant="text" onClick={handleCloseDialogAlert}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};

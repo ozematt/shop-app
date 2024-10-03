@@ -21,8 +21,7 @@ import { removeAllFromCart } from "../../redux/cart/cartSlice";
 import { logOutUser } from "../../redux/user/userSlice";
 
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+import { AlertDialog } from "../DialogMUI";
 
 export const User = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -133,21 +132,10 @@ export const User = () => {
           </Button>
         )}
       </div>
-      <Dialog
+      <AlertDialog
         open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"You have been successfully logged out!"}
-        </DialogTitle>
-        <DialogActions>
-          <Button variant="text" onClick={handleCloseDialogAlert}>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+        handleCloseDialogAlert={handleCloseDialogAlert}
+      />
     </>
   );
 };
