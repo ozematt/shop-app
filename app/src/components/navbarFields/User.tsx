@@ -1,4 +1,12 @@
-import { Button, Divider, Menu, MenuItem, Tooltip } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  Divider,
+  Menu,
+  MenuItem,
+  Tooltip,
+} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
@@ -8,8 +16,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
-import { logout } from "../../redux/user/authSlice";
+
 import { removeAllFromCart } from "../../redux/cart/cartSlice";
+import { logOutUser } from "../../redux/user/userSlice";
+
+import DialogActions from "@mui/material/DialogActions";
+import { AlertDialog } from "../DialogMUI";
 
 export const User = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -29,12 +41,18 @@ export const User = () => {
     },
   }));
 
+  ///DIALOG
+  const [open, setOpen] = useState(false);
+
+  const handleCloseDialogAlert = () => {
+    setOpen(false);
+  };
   ///___________
 
   ////DATA
   const dispatch: AppDispatch = useAppDispatch();
   const navigate = useNavigate();
-  const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
 
   //cart quantity state
   const quantity = useSelector((state: RootState) => state.cart.quantity);
@@ -42,9 +60,10 @@ export const User = () => {
   ////LOGIC
   //handle logout
   const handleLogOut = () => {
-    dispatch(logout());
+    dispatch(logOutUser());
     navigate("/");
     dispatch(removeAllFromCart());
+    setOpen(true);
   };
 
   const handleOrdersHistory = () => {
@@ -113,6 +132,10 @@ export const User = () => {
           </Button>
         )}
       </div>
+      <AlertDialog
+        open={open}
+        handleCloseDialogAlert={handleCloseDialogAlert}
+      />
     </>
   );
 };

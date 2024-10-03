@@ -1,31 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { Product, ProductsState } from "../../lib/types/productTypes";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-//lazy loading with createAsyncThunk
-export const fetchProducts = createAsyncThunk<
-  Product[],
-  void,
-  { state: RootState }
->("products/fetch", async (_, { getState }) => {
-  const { items: productLoaded } = getState().products;
-  //if products are in state, return state
-  if (productLoaded.length > 0) {
-    return productLoaded;
-  }
-  //if not, fetch products
-  const response = await fetch("https://fakestoreapi.com/products");
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  return await response.json();
-});
+import { Product, ProductsState } from "../../lib/types/productTypes";
 
 const initialState: ProductsState = {
   items: [],
   filteredItems: [],
-  loading: false,
-  error: null,
   category: "",
   sortingMethod: "",
 };
@@ -35,31 +14,30 @@ const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    addProducts: (state, action: PayloadAction<Product[]>) => {
+      state.items = action.payload;
+    },
     setSortingMethod: (state, action: PayloadAction<string>) => {
       state.sortingMethod = action.payload;
     },
     filterByCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchProducts.pending, (state) => {
-        state.loading = true;
-      })
-      //products added to state
-      .addCase(
-        fetchProducts.fulfilled,
-        (state, action: PayloadAction<Product[]>) => {
-          state.loading = false;
-          state.items = action.payload;
-        }
-      )
-      .addCase(fetchProducts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to fetch products";
-      });
+    resetCategory: (state) => {
+      state.category = "";
+    },
+    resetSortingMethod: (state) => {
+      state.sortingMethod = "";
+    },
   },
 });
-export const { setSortingMethod, filterByCategory } = productSlice.actions;
+
+export const {
+  setSortingMethod,
+  filterByCategory,
+  resetCategory,
+  resetSortingMethod,
+  addProducts,
+} = productSlice.actions;
+
 export default productSlice.reducer;

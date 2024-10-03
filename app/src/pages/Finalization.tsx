@@ -16,7 +16,7 @@ import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { removeAllFromCart, selectAllCart } from "../redux/cart/cartSlice";
-import { addOrder } from "../redux/user/ordersSlice";
+import { addOrder } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
 export const Finalization = () => {
@@ -101,9 +101,23 @@ export const Finalization = () => {
     const errorsExist = Object.keys(methods.formState.errors).length > 0;
     const addressValues = methods.getValues();
 
-    const hasEmptyFields = Object.values(addressValues).some(
-      (value) => value === "" || value === null
-    );
+    const requiredFields: (keyof Address)[] = [
+      "name",
+      "surname",
+      "email",
+      "phone",
+      "street",
+      "houseNumber",
+      "zipCode",
+      "city",
+    ];
+
+    const allFieldsFilled = requiredFields.every((field) => {
+      const value = addressValues[field];
+      // check if the value is not empty and if it is a string, remove whitespace
+      return value && (typeof value === "string" ? value.trim() !== "" : true);
+    });
+
     //set error when is no payment method selected
     if (!addressValues.payOnDelivery && !addressValues.paymentCard) {
       methods.setError("payOnDelivery", {
@@ -112,14 +126,13 @@ export const Finalization = () => {
       });
       return;
     }
-    if (errorsExist || hasEmptyFields) {
+    if (errorsExist || !allFieldsFilled) {
       setErrorEmptyAddressFields("Address is required");
       return;
     }
+    setErrorEmptyAddressFields(null);
     setSummaryView(true);
   };
-
-  console.log(errorEmptyAddressFields);
 
   const handleSummaryView: () => void = () => {
     setSummaryView(!summaryView);

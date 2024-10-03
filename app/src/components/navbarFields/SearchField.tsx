@@ -3,11 +3,13 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
 
-import { SyntheticEvent, useCallback, useState } from "react";
-import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { SyntheticEvent, useCallback, useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import { selectSortedProducts } from "../../redux/products/productsSelectors";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../redux/store";
+import { resetSortingMethod } from "../../redux/products/productsSlice";
 
 // MUI STYLES
 const Search = styled("div")(({ theme }) => ({
@@ -56,14 +58,19 @@ export const SearchField = () => {
   //DATA
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   //products list from global state
   const products = useSelector(selectSortedProducts);
-
+  const dispatch = useDispatch<AppDispatch>();
   //clear input when focus out
   const handleInputFocusOut = useCallback(() => {
     setSearchValue("");
   }, []);
+
+  useEffect(() => {
+    dispatch(resetSortingMethod()); // Akcja do resetu kategorii
+  }, [location, dispatch]);
 
   // products list titles
   const productsTitle: string[] =
