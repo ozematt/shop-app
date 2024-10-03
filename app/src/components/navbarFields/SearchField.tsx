@@ -1,11 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
-import { SyntheticEvent, useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectSortedProducts } from "../../redux/products/productsSelectors";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AppDispatch } from "../../redux/store";
-import { resetSortingMethod } from "../../redux/products/productsSlice";
 import { Search, SearchIconWrapper, StyledInputBase } from "../mui/styles";
 import { useSearchField } from "../../lib/hooks/navbar/useSearchField";
 

@@ -38,22 +38,22 @@ export const useSearchField = () => {
     dispatch(resetSortingMethod()); // Akcja do resetu kategorii
   }, [location, dispatch]);
 
-  const handleProductSelect = (
-    event: SyntheticEvent<Element, Event>,
-    newValue: string | null
-  ) => {
-    if (!newValue) return;
+  const handleProductSelect = useCallback(
+    (event: SyntheticEvent<Element, Event>, newValue: string | null) => {
+      if (!newValue) return;
 
-    // Find the product that matches the selected title
-    const selectedProduct = products.find(
-      (product) => product.title === newValue
-    );
+      // Find the product that matches the selected title
+      const selectedProduct = products.find(
+        (product) => product.title === newValue
+      );
 
-    // If a product is found, navigate to its detail page
-    if (selectedProduct) {
-      navigate(`/product/${selectedProduct.id}`);
-    }
-  };
+      // If a product is found, navigate to its detail page
+      if (selectedProduct) {
+        navigate(`/product/${selectedProduct.id}`);
+      }
+    },
+    [products, navigate]
+  );
 
   return {
     location,
