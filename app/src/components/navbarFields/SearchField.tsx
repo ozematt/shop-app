@@ -1,97 +1,62 @@
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
-
 import { SyntheticEvent, useCallback, useEffect, useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { selectSortedProducts } from "../../redux/products/productsSelectors";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../redux/store";
 import { resetSortingMethod } from "../../redux/products/productsSlice";
-
-// MUI STYLES
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
+import { Search, SearchIconWrapper, StyledInputBase } from "../mui/styles";
+import { useSearchField } from "../../lib/hooks/navbar/useSearchField";
 
 export const SearchField = () => {
+  const {
+    handleInputFocusOut,
+    productsTitle,
+    handleProductSelect,
+    searchValue,
+    setSearchValue,
+  } = useSearchField();
   //DATA
-  const [searchValue, setSearchValue] = useState("");
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const [searchValue, setSearchValue] = useState("");
+  // const dispatch = useDispatch<AppDispatch>();
 
-  //products list from global state
-  const products = useSelector(selectSortedProducts);
-  const dispatch = useDispatch<AppDispatch>();
+  //sorted products list
+  // const products = useSelector(selectSortedProducts);
+
+  ////LOGIC
+
   //clear input when focus out
-  const handleInputFocusOut = useCallback(() => {
-    setSearchValue("");
-  }, []);
+  // const handleInputFocusOut = useCallback(() => {
+  //   setSearchValue("");
+  // }, []);
 
-  useEffect(() => {
-    dispatch(resetSortingMethod()); // Akcja do resetu kategorii
-  }, [location, dispatch]);
+  // useEffect(() => {
+  //   dispatch(resetSortingMethod()); // Akcja do resetu kategorii
+  // }, [location, dispatch]);
 
   // products list titles
-  const productsTitle: string[] =
-    products?.map((product) => product.title) || [];
+  // const productsTitle: string[] =
+  //   products?.map((product) => product.title) || [];
 
-  const handleProductSelect = (
-    event: SyntheticEvent<Element, Event>,
-    newValue: string | null
-  ) => {
-    if (!newValue) return;
+  // const handleProductSelect = (
+  //   event: SyntheticEvent<Element, Event>,
+  //   newValue: string | null
+  // ) => {
+  //   if (!newValue) return;
 
-    // Find the product that matches the selected title
-    const selectedProduct = products.find(
-      (product) => product.title === newValue
-    );
+  //   // Find the product that matches the selected title
+  //   const selectedProduct = products.find(
+  //     (product) => product.title === newValue
+  //   );
 
-    // If a product is found, navigate to its detail page
-    if (selectedProduct) {
-      navigate(`/product/${selectedProduct.id}`);
-    }
-  };
+  //   // If a product is found, navigate to its detail page
+  //   if (selectedProduct) {
+  //     navigate(`/product/${selectedProduct.id}`);
+  //   }
+  // };
 
   //UI
   return (
