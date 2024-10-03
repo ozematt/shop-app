@@ -84,80 +84,85 @@ export const Authorization = () => {
             width: "100%",
           }}
         >
-          <Box
-            component="form"
-            onSubmit={handleLogin}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "10px",
-            }}
-          >
-            <Typography variant="h4">Login:</Typography>
-            {/* Login field */}
-            <TextField
-              sx={{ width: "400px", marginTop: "20px" }}
-              id="outlined-basic"
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              label="Login"
-              variant="outlined"
-            />
-            {/* Password field */}
-            <FormControl sx={{ width: "400px" }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
-                Password
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={showPassword ? "text" : "password"}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      onMouseUp={handleMouseUpPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
+          {mutation.isPending ? (
+            <CircularProgress />
+          ) : (
+            <Box
+              component="form"
+              onSubmit={handleLogin}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "10px",
+              }}
+            >
+              <Typography variant="h4">Login:</Typography>
+              {/* Login field */}
+              <TextField
+                sx={{ width: "400px", marginTop: "20px" }}
+                id="outlined-basic"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                label="Login"
+                variant="outlined"
               />
-            </FormControl>
-            <Typography sx={{ color: "red" }}>{errorAuth}</Typography>
-            <Box sx={{ marginTop: "20px" }}>
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{
-                  padding: "10px",
-                  marginRight: "20px",
-                  width: "280px",
-                  // width: "100%",
-                }}
-              >
-                Login
-              </Button>
-              <Button
-                variant="text"
-                onClick={() => navigate("/")}
-                sx={{ padding: "10px" }}
-              >
-                main page
-              </Button>
+              {/* Password field */}
+              <FormControl sx={{ width: "400px" }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        onMouseUp={handleMouseUpPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Password"
+                />
+              </FormControl>
+              {mutation.isError && (
+                <Typography variant="h3">
+                  Error: {mutation.error.message}
+                </Typography>
+              )}
+              <Typography sx={{ color: "red" }}>{errorAuth}</Typography>
+              <Box sx={{ marginTop: "20px" }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    padding: "10px",
+                    marginRight: "20px",
+                    width: "280px",
+                    // width: "100%",
+                  }}
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="text"
+                  onClick={() => navigate("/")}
+                  sx={{ padding: "10px" }}
+                >
+                  main page
+                </Button>
+              </Box>
             </Box>
-          </Box>
+          )}
         </Paper>
-        {mutation.isPending && <CircularProgress />}
-        {mutation.isError && (
-          <Typography variant="h3">Error: {mutation.error.message}</Typography>
-        )}
       </Container>
     </>
   );

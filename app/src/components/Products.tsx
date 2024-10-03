@@ -61,8 +61,6 @@ export const Products = () => {
     queryFn: fetchProducts,
   });
 
-  console.log(data);
-
   ////LOGIC
 
   // fetch products after render
