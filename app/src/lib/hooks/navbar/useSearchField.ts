@@ -10,12 +10,11 @@ export const useSearchField = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  //sorted products list
+  // sorted products list
   const products = useSelector(selectSortedProducts);
 
-  //
   ////LOGIC
-  //clear input with searching value, when focus is out
+  // clear input with searching value, when focus is out
   const handleInputFocusOut = useCallback(() => {
     setSearchValue("");
   }, []);
@@ -26,7 +25,7 @@ export const useSearchField = () => {
     [products]
   );
 
-  //product selection action
+  // product selection action
   const handleProductSelect = useCallback(
     (event: SyntheticEvent<Element, Event>, newValue: string | null) => {
       if (!newValue) return;

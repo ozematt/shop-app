@@ -1,6 +1,10 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Autocomplete } from "@mui/material";
-import { Search, SearchIconWrapper, StyledInputBase } from "../mui/styles";
+import {
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+} from "../mui/styledComponents";
 import { useSearchField } from "../../lib/hooks/navbar/useSearchField";
 
 export const SearchField = () => {

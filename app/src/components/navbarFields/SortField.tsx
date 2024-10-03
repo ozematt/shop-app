@@ -4,41 +4,15 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import {
-  resetSortingMethod,
-  setSortingMethod,
-} from "../../redux/products/productsSlice";
-import { useCallback, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useSortField } from "../../lib/hooks/navbar/useSortField";
 
 export const SortField = () => {
-  //DATA
-  const dispatch = useDispatch<AppDispatch>();
-  const location = useLocation();
+  //
+  ////DATA
+  const { sortingMethod, handleSortingMethodChange } = useSortField();
 
-  //sorting method from global state
-  const sortingMethod = useSelector(
-    (state: RootState) => state.products.sortingMethod
-  );
-
-  //LOGIC
-  //select sorting method
-  const handleSortingMethodChange = useCallback(
-    (event: SelectChangeEvent<string>) => {
-      dispatch(setSortingMethod(event.target.value as string));
-    },
-    [dispatch]
-  );
-
-  useEffect(() => {
-    dispatch(resetSortingMethod()); // Akcja do resetu kategorii
-  }, [location, dispatch]);
-
-  //UI
+  ////UI
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">

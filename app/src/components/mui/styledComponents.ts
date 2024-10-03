@@ -2,7 +2,10 @@
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 
-//SEARCH FIELD - STYLED COMPONENTS FROM MUI
+//Cart field imports
+import Badge, { BadgeProps } from "@mui/material/Badge";
+
+//NAVBAR - SEARCH FIELD - STYLED COMPONENTS FROM MUI
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -42,5 +45,15 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
         width: "20ch",
       },
     },
+  },
+}));
+
+//NAVBAR - CART FIELD - STYLED COMPONENTS MUI
+export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
   },
 }));
