@@ -29,16 +29,27 @@ export interface Orders {
   items: OrdersItem[];
 }
 
-const initialState: Orders[] = [];
+interface User {
+  isLoggedIn: boolean;
+  orders: Orders[];
+}
 
-const ordersSlice = createSlice({
-  name: "orders",
+const initialState: User = { isLoggedIn: false, orders: [] };
+
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    addOrder: (state: Orders[], action: PayloadAction<Orders>) => {
-      state.push(action.payload);
+    logUser: (state: User) => {
+      state.isLoggedIn = true;
+    },
+    logOutUser: (state: User) => {
+      state.isLoggedIn = false;
+    },
+    addOrder: (state: User, action: PayloadAction<Orders>) => {
+      state.orders.push(action.payload);
     },
   },
 });
-export const { addOrder } = ordersSlice.actions;
-export default ordersSlice.reducer;
+export const { addOrder, logUser, logOutUser } = userSlice.actions;
+export default userSlice.reducer;

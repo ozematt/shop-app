@@ -8,11 +8,10 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { Orders } from "../redux/user/ordersSlice";
-// import { Container } from "postcss";
+import { Orders } from "../redux/user/userSlice";
 
 export const OrdersHistory = () => {
-  const orders: Orders[] = useSelector((state: RootState) => state.orders);
+  const orders: Orders[] = useSelector((state: RootState) => state.user.orders);
 
   return (
     <>

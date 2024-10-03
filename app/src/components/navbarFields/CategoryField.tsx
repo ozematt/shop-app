@@ -11,11 +11,17 @@ import { useQuery } from "@tanstack/react-query";
 import fetchCategories from "../../api/queries/categories";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { filterByCategory } from "../../redux/products/productsSlice";
+import {
+  filterByCategory,
+  resetCategory,
+} from "../../redux/products/productsSlice";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export const CategoryField = () => {
   //DATA
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
 
   //filter products state
   const { category } = useSelector((state: RootState) => state.products);
@@ -31,6 +37,10 @@ export const CategoryField = () => {
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     dispatch(filterByCategory(event.target.value as string));
   };
+
+  useEffect(() => {
+    dispatch(resetCategory()); // Akcja do resetu kategorii
+  }, [location, dispatch]);
 
   //UI
   return (

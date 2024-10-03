@@ -11,7 +11,7 @@ import { Home } from "./pages/Home";
 
 //tanstack-query
 import { QueryClientProvider } from "@tanstack/react-query";
-import queryClient from "./context/queryClient";
+import queryClient from "./api/queryClient";
 import React from "react";
 
 //redux tool kit

@@ -17,7 +17,7 @@ import { addToCart } from "../redux/cart/cartSlice";
 export const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useAppDispatch();
-  const auth = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
   const navigate = useNavigate();
 
   const product = useSelector((state: RootState) =>
