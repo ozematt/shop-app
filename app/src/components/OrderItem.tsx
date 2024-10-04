@@ -1,8 +1,10 @@
 import { Box, Divider, Paper, Typography } from "@mui/material";
-import { Orders } from "../redux/user/userSlice";
-import { OrderSummary } from "./OrderSummary";
 
-export const OrderItem = ({ order }: { order: Orders }) => {
+import { OrderSummary } from "./OrderSummary";
+import { Orders } from "../lib/types/userTypes";
+import React from "react";
+
+export const OrderItem = React.memo(({ order }: { order: Orders }) => {
   //
   ////UI
   return (
@@ -64,4 +66,4 @@ export const OrderItem = ({ order }: { order: Orders }) => {
       </Paper>
     </>
   );
-};
+});

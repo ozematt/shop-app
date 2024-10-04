@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { Orders } from "../redux/user/userSlice";
+import { Orders } from "../lib/types/userTypes";
 
 export const OrderSummary = ({ order }: { order: Orders }) => {
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AppDispatch, useAppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
@@ -9,19 +9,24 @@ export const useAuthorization = () => {
   //MUI password field logic
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowPassword = useCallback(
+    () => setShowPassword((show) => !show),
+    []
+  );
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+  const handleMouseDownPassword = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    },
+    []
+  );
 
-  const handleMouseUpPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+  const handleMouseUpPassword = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    },
+    []
+  );
 
   ////DATA
   const dispatch: AppDispatch = useAppDispatch();
@@ -46,10 +51,13 @@ export const useAuthorization = () => {
 
   ////LOGIC
   //submit login data
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    mutation.mutate({ username, password });
-  };
+  const handleLogin = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      mutation.mutate({ username, password });
+    },
+    [username, password, mutation]
+  );
 
   return {
     mutation,
