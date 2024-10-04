@@ -1,50 +1,13 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  Rating,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { useSelector } from "react-redux";
-import { addToCart } from "../redux/cart/cartSlice";
+import { Box, Button, Divider, Paper, Rating, Typography } from "@mui/material";
 import { Product } from "../lib/types/productTypes";
+import { useProductItem } from "../lib/hooks/useProductItem";
 
 export const ProductItem = ({ product }: { product: Product }) => {
-  const theme = useTheme();
-  const navigate = useNavigate();
-  const dispatch: AppDispatch = useAppDispatch();
+  //
+  ////DATA
+  const { productStyle, handleAddToCartClick, navigate } = useProductItem();
 
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
-  //product box style
-  const productStyle = {
-    padding: "10px",
-    height: "300px",
-    width: "720px",
-    display: "flex",
-    gap: "10px",
-    margin: "50px 20px 0 0",
-    border: "none",
-    borderRight: "0.5px solid #424242",
-    borderBottom: "0.5px solid #424242",
-    borderRadius: "8px",
-    position: "relative",
-    "&:hover": {
-      backgroundColor:
-        theme.palette.mode === "dark" ? "rgba(255,255,255, 0.05)" : "none",
-      boxShadow: 10,
-    },
-  };
-
-  // add to cart when user is logged in
-  const handleAddToCartClick = (event: React.MouseEvent, item: Product) => {
-    event.stopPropagation();
-    auth ? dispatch(addToCart(item)) : navigate("/login");
-  };
-
+  ////UI
   return (
     <>
       <Paper
@@ -52,8 +15,8 @@ export const ProductItem = ({ product }: { product: Product }) => {
         onClick={() => navigate(`/product/${product.id}`)}
       >
         {/* IMAGE */}
-        <div
-          style={{
+        <Box
+          sx={{
             backgroundImage: `url(${product.image})`,
             backgroundSize: "contain",
             backgroundColor: "white",
@@ -65,20 +28,22 @@ export const ProductItem = ({ product }: { product: Product }) => {
         />
 
         {/* TITLE BOX */}
-        <div style={{ width: "500px" }}>
+        <Box sx={{ width: "500px" }}>
           {" "}
           <Typography variant="h6">{product.title}</Typography>
-          <p style={{ fontSize: "14px", margin: "5px 0 5px 0" }}>
+          <Typography variant="body2" sx={{ margin: "5px 0 5px 0" }}>
             <b>Category:</b> <em> {product.category}</em>
-          </p>
-          <p>{product.description.slice(0, 55)}...</p>
-          <div
-            style={{
+          </Typography>
+          <Typography variant="body1" sx={{ marginTop: "13px" }}>
+            {product.description.slice(0, 55)}...
+          </Typography>
+          <Box
+            sx={{
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
               position: "absolute",
-              bottom: "1px",
+              bottom: "5px",
             }}
           >
             {" "}
@@ -92,33 +57,31 @@ export const ProductItem = ({ product }: { product: Product }) => {
               sx={{ marginRight: "5px" }}
             />
             <p>({product.rating.count})</p>
-          </div>
-        </div>
+          </Box>
+        </Box>
         <Divider orientation="vertical" flexItem />
         {/* PRICE BOX */}
         <Box
           sx={{
-            width: "300px",
+            width: "240px",
             position: "relative",
           }}
         >
           {" "}
-          <div style={{ flexGrow: "1" }}>
-            {" "}
-            <span>Price:</span>
-            <Typography variant="h4">
-              <b>{product.price}</b>
-
-              <span style={{ fontSize: "19px" }}> $</span>
-            </Typography>
-          </div>
+          {/* <div style={{ flexGrow: "1" }}> */}{" "}
+          <Typography variant="body1">Price:</Typography>
+          <Typography variant="h4">
+            <b>{product.price}</b>
+            <span style={{ fontSize: "19px" }}> $</span>
+          </Typography>
+          {/* </div> */}
           <Button
             variant="contained"
             onClick={(event) => handleAddToCartClick(event, product)}
             sx={{
               padding: "20px",
               position: "absolute",
-              bottom: "20px",
+              bottom: "5px",
             }}
           >
             Add to Cart
