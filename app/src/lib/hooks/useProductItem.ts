@@ -13,10 +13,10 @@ export const useProductItem = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useAppDispatch();
 
-  //authorization state
+  // authorization state
   const auth = useSelector((state: RootState) => state.user.isLoggedIn);
 
-  //item box style
+  // item box style
   const productStyle = useMemo(
     () => ({
       padding: "10px",

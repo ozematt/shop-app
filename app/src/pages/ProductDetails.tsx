@@ -8,28 +8,20 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
-import { Product } from "../lib/types/productTypes";
-import { addToCart } from "../redux/cart/cartSlice";
+import { useProductDetails } from "../lib/hooks/useProductDetails";
 
 export const ProductDetails = () => {
-  const { id } = useParams<{ id: string }>();
-  const dispatch: AppDispatch = useAppDispatch();
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
-  const navigate = useNavigate();
+  //
+  ////DATA
+  const { product, handleAddToCartClick, navigate } = useProductDetails();
 
-  const product = useSelector((state: RootState) =>
-    state.products.items.find((item) => item.id === Number(id))
-  );
-
-  const handleAddToCartClick = (item: Product) => {
-    auth ? dispatch(addToCart(item)) : navigate("/login");
-  };
-
+  ////UI
   if (!product) {
-    return <div>Product not found!</div>;
+    return (
+      <Typography variant="h3" sx={{ textAlign: "center" }}>
+        Product not found!
+      </Typography>
+    );
   }
 
   return (
@@ -42,6 +34,7 @@ export const ProductDetails = () => {
             padding: "40px",
           }}
         >
+          {/* TITLE BOX */}
           <Box
             sx={{
               display: "flex",
@@ -53,16 +46,20 @@ export const ProductDetails = () => {
             <Box>
               <Typography variant="h4">{product.title}</Typography>
 
-              <p style={{ fontSize: "16px", margin: "5px 0 5px 0" }}>
+              <Typography
+                variant="body1"
+                style={{ fontSize: "16px", marginTop: "5px" }}
+              >
                 <b>Category:</b> <em> {product.category}</em>
-              </p>
+              </Typography>
             </Box>
           </Box>
 
+          {/* PRODUCT BOX */}
           <Box sx={{ display: "flex", position: "relative" }}>
-            {/* IMG */}
-            <div
-              style={{
+            {/* IMAGE */}
+            <Box
+              sx={{
                 backgroundImage: `url(${product.image})`,
                 backgroundSize: "contain",
                 backgroundColor: "white",
@@ -72,9 +69,11 @@ export const ProductDetails = () => {
                 height: "750px",
               }}
             />
-            {/* Box with price and rating */}
-            <Box sx={{ marginLeft: "50px" }}>
+
+            <Box sx={{ padding: "50px", marginLeft: "50px" }}>
+              {/* BOX WITH PRICE AND RATING */}
               <Box sx={{ marginBottom: "20px" }}>
+                {/* PRICE */}
                 <Box
                   sx={{
                     display: "flex",
@@ -92,12 +91,12 @@ export const ProductDetails = () => {
                   </Typography>
                 </Box>
 
+                {/* RATING */}
                 <Box
                   sx={{
                     display: "flex",
                     justifyContent: "flex-start",
                     alignItems: "center",
-                    // marginLeft: "50px",
                   }}
                 >
                   {" "}
@@ -116,27 +115,30 @@ export const ProductDetails = () => {
                 </Box>
               </Box>
               <Divider flexItem />
+
+              {/* DESCRIPTION */}
               <Box sx={{ width: "500px", marginTop: "50px" }}>
                 {" "}
                 <Typography variant="h6">{product.description}</Typography>
               </Box>
 
+              {/* BUTTONS */}
               <Box
                 sx={{
                   position: "absolute",
                   display: "flex",
                   flexDirection: "column",
-                  bottom: "50px",
+                  bottom: "100px",
                   gap: "10px",
+                  width: "500px",
                 }}
               >
                 <Button
                   variant="contained"
                   onClick={() => handleAddToCartClick(product)}
                   sx={{
-                    // backgroundColor: "#DE7F1F",
                     padding: "20px",
-                    width: "420px",
+                    // width: "100%",
                   }}
                 >
                   Add to Cart
@@ -147,13 +149,6 @@ export const ProductDetails = () => {
               </Box>
             </Box>
           </Box>
-
-          {/* PRICE BOX */}
-          <Box
-            sx={{
-              width: "300px",
-            }}
-          ></Box>
         </Paper>
       </Container>
     </>

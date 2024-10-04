@@ -19,7 +19,11 @@ export const Products = () => {
   }
 
   if (isError) {
-    return <Typography variant="h5">Error: {error?.message}</Typography>;
+    return (
+      <Typography variant="h3" sx={{ textAlign: "center" }}>
+        Error: {error?.message}
+      </Typography>
+    );
   }
 
   return (
