@@ -1,5 +1,5 @@
 // import { Address } from "cluster";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Address } from "../types/addressTypes";
 
@@ -23,29 +23,32 @@ export const usePaymentMethod = () => {
   } = useFormContext<Address>();
 
   ////LOGIC
-  // set pay on delivery method
-  const handlePayOnDelivery = () => {
-    setValue("payOnDelivery", true);
-    clearErrors(["payOnDelivery"]);
-
-    // clear fields
+  // helper function to clear card fields
+  const clearCardFields = useCallback(() => {
     setValue("paymentCard", false);
     setValue("cardCVV", null);
     setValue("cardDate", null);
     setValue("cardNumber", null);
     setCardFields(false);
     setAddClicked(false);
-  };
+  }, [setValue]);
+
+  // set pay on delivery method
+  const handlePayOnDelivery = useCallback(() => {
+    setValue("payOnDelivery", true);
+    clearErrors(["payOnDelivery"]);
+    clearCardFields();
+  }, [setValue, clearErrors, clearCardFields]);
 
   // show card fields
-  const handleShowCardField = () => {
+  const handleShowCardField = useCallback(() => {
     setValue("payOnDelivery", false);
     setCardFields(true);
     setAddClicked(false);
-  };
+  }, [setValue]);
 
   //add credit card
-  const handleAddCardButton = () => {
+  const handleAddCardButton = useCallback(() => {
     // get address value
     const values: Address = getValues() as Address;
 
@@ -60,7 +63,8 @@ export const usePaymentMethod = () => {
     const allFieldsCheck = requiredFields.every((field) => {
       const value = values[field];
       const hasErrors = errors[field];
-      // check if the value is not empty (if it is a string, remove whitespace) and checking if the value has no errors
+      // check if the value is not empty (if it is a string, remove whitespace)
+      //and checking if the value has no errors
       return (
         value &&
         (typeof value === "string" ? value.trim() !== "" : true) &&
@@ -81,7 +85,7 @@ export const usePaymentMethod = () => {
         message: "Please fill in the fields.",
       });
     }
-  };
+  }, [getValues, setValue, clearErrors, setError]);
 
   return {
     addClicked,
