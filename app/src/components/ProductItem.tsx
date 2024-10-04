@@ -1,0 +1,130 @@
+import {
+  Box,
+  Button,
+  Divider,
+  Paper,
+  Rating,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
+import { useSelector } from "react-redux";
+import { addToCart } from "../redux/cart/cartSlice";
+import { Product } from "../lib/types/productTypes";
+
+export const ProductItem = ({ product }: { product: Product }) => {
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useAppDispatch();
+
+  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+  //product box style
+  const productStyle = {
+    padding: "10px",
+    height: "300px",
+    width: "720px",
+    display: "flex",
+    gap: "10px",
+    margin: "50px 20px 0 0",
+    border: "none",
+    borderRight: "0.5px solid #424242",
+    borderBottom: "0.5px solid #424242",
+    borderRadius: "8px",
+    position: "relative",
+    "&:hover": {
+      backgroundColor:
+        theme.palette.mode === "dark" ? "rgba(255,255,255, 0.05)" : "none",
+      boxShadow: 10,
+    },
+  };
+
+  // add to cart when user is logged in
+  const handleAddToCartClick = (event: React.MouseEvent, item: Product) => {
+    event.stopPropagation();
+    auth ? dispatch(addToCart(item)) : navigate("/login");
+  };
+
+  return (
+    <>
+      <Paper
+        sx={productStyle}
+        onClick={() => navigate(`/product/${product.id}`)}
+      >
+        {/* IMAGE */}
+        <div
+          style={{
+            backgroundImage: `url(${product.image})`,
+            backgroundSize: "contain",
+            backgroundColor: "white",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            width: "400px",
+            height: "100%",
+          }}
+        />
+
+        {/* TITLE BOX */}
+        <div style={{ width: "500px" }}>
+          {" "}
+          <Typography variant="h6">{product.title}</Typography>
+          <p style={{ fontSize: "14px", margin: "5px 0 5px 0" }}>
+            <b>Category:</b> <em> {product.category}</em>
+          </p>
+          <p>{product.description.slice(0, 55)}...</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              position: "absolute",
+              bottom: "1px",
+            }}
+          >
+            {" "}
+            <Typography sx={{ fontSize: "17px", padding: "10px 8px 10px 0" }}>
+              {product.rating.rate}
+            </Typography>
+            <Rating
+              name="read-only"
+              value={Math.floor(product.rating.rate)}
+              readOnly
+              sx={{ marginRight: "5px" }}
+            />
+            <p>({product.rating.count})</p>
+          </div>
+        </div>
+        <Divider orientation="vertical" flexItem />
+        {/* PRICE BOX */}
+        <Box
+          sx={{
+            width: "300px",
+            position: "relative",
+          }}
+        >
+          {" "}
+          <div style={{ flexGrow: "1" }}>
+            {" "}
+            <span>Price:</span>
+            <Typography variant="h4">
+              <b>{product.price}</b>
+
+              <span style={{ fontSize: "19px" }}> $</span>
+            </Typography>
+          </div>
+          <Button
+            variant="contained"
+            onClick={(event) => handleAddToCartClick(event, product)}
+            sx={{
+              padding: "20px",
+              position: "absolute",
+              bottom: "20px",
+            }}
+          >
+            Add to Cart
+          </Button>
+        </Box>
+      </Paper>
+    </>
+  );
+};
