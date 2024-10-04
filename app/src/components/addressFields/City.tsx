@@ -14,7 +14,7 @@ export const City = () => {
   return (
     <>
       <TextField
-        sx={{ width: "190px", marginLeft: "20px" }}
+        sx={{ width: "240px", marginLeft: "20px" }}
         label="City"
         variant="outlined"
         margin="dense"
@@ -25,8 +25,8 @@ export const City = () => {
           },
           required: "City is required",
           pattern: {
-            value: /^[a-zA-Z0-9\s]+$/,
-            message: "City cannot contain special characters",
+            value: /^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź\s]+$/,
+            message: "City cannot contain numbers or special characters",
           },
         })}
         error={!!errors.city}

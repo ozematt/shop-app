@@ -15,7 +15,7 @@ export const ApartmentNumber = () => {
     <>
       <TextField
         type="number"
-        sx={{ width: "190px", marginLeft: "20px" }}
+        sx={{ width: "240px", marginLeft: "20px" }}
         label="Apartment number"
         variant="outlined"
         margin="dense"

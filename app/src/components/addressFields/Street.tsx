@@ -14,7 +14,7 @@ export const Street = () => {
   return (
     <>
       <TextField
-        sx={{ width: "400px", marginTop: "30px" }}
+        sx={{ width: "500px", marginTop: "30px" }}
         label="Street"
         variant="outlined"
         margin="dense"
@@ -25,7 +25,7 @@ export const Street = () => {
           },
           required: "Street is required",
           pattern: {
-            value: /^[a-zA-Z0-9\s]+$/,
+            value: /^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9\s]+$/,
             message: "Street cannot contain special characters",
           },
         })}

@@ -14,7 +14,7 @@ export const Surname = () => {
   return (
     <>
       <TextField
-        sx={{ width: "400px" }}
+        sx={{ width: "500px" }}
         label="Surname"
         variant="outlined"
         margin="dense"
@@ -25,7 +25,7 @@ export const Surname = () => {
           },
           required: "Surname is required",
           pattern: {
-            value: /^[A-Za-z\s]+$/,
+            value: /^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź\s]+$/,
             message: "Surname cannot contain numbers or special characters",
           },
         })}

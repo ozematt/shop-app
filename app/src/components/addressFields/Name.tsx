@@ -14,7 +14,7 @@ export const Name = () => {
   return (
     <>
       <TextField
-        sx={{ width: "400px" }}
+        sx={{ width: "500px" }}
         label="Name"
         variant="outlined"
         margin="dense"
@@ -25,7 +25,7 @@ export const Name = () => {
           },
           required: "Name is required",
           pattern: {
-            value: /^[A-Za-z]+$/,
+            value: /^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź\s]+$/,
             message:
               "Name cannot contain numbers, spaces, or special characters",
           },

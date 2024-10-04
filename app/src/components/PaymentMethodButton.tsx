@@ -13,10 +13,17 @@ export const PaymentMethodButton = ({
   handleButtonClick: () => void;
 }) => {
   const { watch } = usePaymentMethod();
+
+  // check button logic
+  const isPayOnDelivery = method === "payOnDelivery";
+  const isSelected =
+    (isPayOnDelivery && watch().payOnDelivery) ||
+    (!isPayOnDelivery && watch().paymentCard);
+
   return (
     <>
       <Button
-        variant={watch().payOnDelivery ? "contained" : "outlined"}
+        variant={isSelected ? "contained" : "outlined"}
         value={method === "payOnDelivery" ? "payOnDelivery" : "paymentCard"}
         startIcon={
           method === "payOnDelivery" ? <AttachMoneyIcon /> : <CreditCardIcon />

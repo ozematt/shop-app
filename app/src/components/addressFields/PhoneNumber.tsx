@@ -15,7 +15,7 @@ export const PhoneNumber = () => {
     <>
       <TextField
         type="tel"
-        sx={{ width: "400px" }}
+        sx={{ width: "500px" }}
         label="Phone number"
         variant="outlined"
         margin="dense"
