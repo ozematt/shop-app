@@ -6,7 +6,6 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import emptyCart from "../assets/Empty_cart_image.png";
 import { useSelector } from "react-redux";
 import {
   removeAllFromCart,
@@ -19,26 +18,7 @@ import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
 import { CartProduct } from "../lib/types/cartTypes";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../components/CartItem";
-
-// empty cart view
-const emptyCartView = (
-  <>
-    <Paper sx={{ margin: "80px 30px 0 0" }}>
-      <Typography variant="h6" sx={{ marginLeft: "15px", padding: "5px" }}>
-        Your cart is empty
-      </Typography>
-    </Paper>
-
-    <img
-      src={emptyCart}
-      style={{
-        margin: "120px 0 0 80px",
-        width: "900px",
-        height: "700px",
-      }}
-    />
-  </>
-);
+import { CartEmpty } from "../components/CartEmpty";
 
 export const Cart = () => {
   ////DATA
@@ -171,7 +151,7 @@ export const Cart = () => {
               </Paper>
             </div>
           ) : (
-            emptyCartView
+            <CartEmpty />
           )}
         </Box>
       </Container>
