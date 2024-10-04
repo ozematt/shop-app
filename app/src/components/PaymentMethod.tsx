@@ -2,6 +2,8 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import { usePaymentMethod } from "../lib/hooks/usePaymentMethod";
+import { FinalizationTitle } from "./FinalizationTitle";
+import { PaymentMethodButton } from "./PaymentMethodButton";
 
 export const PaymentMethod = () => {
   ////DATA
@@ -25,35 +27,25 @@ export const PaymentMethod = () => {
           padding: "20px",
         }}
       >
-        <Typography variant="h5" sx={{ padding: "10px" }}>
-          2. Choose payment method:
-        </Typography>
+        <FinalizationTitle text={"2. Choose payment method:"} />
         <Box
           sx={{
             padding: "20px",
           }}
         >
           {/* PAY PO DELIVERY BUTTON */}
-          <Button
-            variant={watch().payOnDelivery ? "contained" : "outlined"}
-            value="payOnDelivery"
-            startIcon={<AttachMoneyIcon />}
-            sx={{ width: "250px", padding: "15px", marginRight: "10px" }}
-            onClick={handlePayOnDelivery}
-          >
-            pay on delivery
-          </Button>
+          <PaymentMethodButton
+            text={"Pay on delivery"}
+            method={"payOnDelivery"}
+            handleButtonClick={handlePayOnDelivery}
+          />
 
           {/* PAYMENT CARD BUTTON */}
-          <Button
-            variant={watch().paymentCard ? "contained" : "outlined"}
-            value="paymentCard"
-            sx={{ width: "250px", padding: "15px" }}
-            startIcon={<CreditCardIcon />}
-            onClick={handleShowCardField}
-          >
-            payment card
-          </Button>
+          <PaymentMethodButton
+            text={"Payment card"}
+            method={"paymentCard"}
+            handleButtonClick={handleShowCardField}
+          />
 
           {/* ERROR MESSAGE */}
           {errors.payOnDelivery && (

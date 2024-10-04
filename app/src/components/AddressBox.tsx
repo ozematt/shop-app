@@ -1,6 +1,4 @@
-import { Box, Paper, TextField, Typography } from "@mui/material";
-import { useFormContext } from "react-hook-form";
-import { Address } from "../lib/types/addressTypes";
+import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
 import { Name } from "./addressFields/Name";
 import { Surname } from "./addressFields/Surname";
@@ -11,6 +9,7 @@ import { HouseNumber } from "./addressFields/HouseNumber";
 import { ApartmentNumber } from "./addressFields/ApartmentNumber";
 import { ZipCode } from "./addressFields/ZipCode";
 import { City } from "./addressFields/City";
+import { FinalizationTitle } from "./FinalizationTitle";
 
 export const AddressBox = React.memo(
   ({ errorEmptyAddressFields }: { errorEmptyAddressFields: string | null }) => {
@@ -24,10 +23,7 @@ export const AddressBox = React.memo(
             padding: "20px",
           }}
         >
-          <Typography variant="h5" sx={{ padding: "10px" }}>
-            1. Enter your shipping address:
-          </Typography>
-
+          <FinalizationTitle text={"1. Enter your shipping address:"} />
           <Box
             sx={{
               padding: "20px",

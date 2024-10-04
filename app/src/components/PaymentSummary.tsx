@@ -17,13 +17,13 @@ interface PaymentSummaryProps {
 export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
   handleSummaryView,
 }) => {
+  //
+  ////DATA
   const { getValues } = useFormContext<Address>();
 
   const cart = useSelector(selectAllCart);
 
-  ////LOGIC
-  //increment item quantity
-
+  ////UI
   return (
     <>
       <Paper
