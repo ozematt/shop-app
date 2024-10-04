@@ -19,6 +19,7 @@ import { CartProduct } from "../lib/types/cartTypes";
 import { useNavigate } from "react-router-dom";
 import { CartItem } from "../components/CartItem";
 import { CartEmpty } from "../components/CartEmpty";
+import { TotalPrice } from "../components/TotalPrice";
 
 export const Cart = () => {
   ////DATA
@@ -67,10 +68,10 @@ export const Cart = () => {
       <Container maxWidth="xl">
         <Box sx={{ height: "100vh" }}>
           {cart.length > 0 ? (
-            <div style={{ display: "flex" }}>
+            <Box sx={{ display: "flex" }}>
               {/*  buying stage  */}
-              <div>
-                {/* cart title */}
+              <Box>
+                {/* CART TITLE */}
                 <Paper
                   elevation={3}
                   sx={{
@@ -81,25 +82,24 @@ export const Cart = () => {
                     justifyContent: "space-between",
                   }}
                 >
-                  <Typography
-                    variant="h6"
-                    sx={{ marginLeft: "15px", padding: "5px" }}
-                  >
+                  <Typography variant="h5" sx={{ padding: "20px" }}>
                     Your Cart:
                   </Typography>
-                  <Typography
-                    variant="h6"
+
+                  {/* DELETE BUTTON */}
+                  <Button
+                    variant="text"
                     sx={{
-                      marginRight: "15px",
-                      padding: "5px",
+                      padding: "20px",
                       color: "red",
                       cursor: "pointer",
                     }}
                     onClick={() => dispatch(removeAllFromCart())}
                   >
                     Delete Cart
-                  </Typography>
+                  </Button>
                 </Paper>
+
                 {cart.map((item) => (
                   <CartItem
                     key={item.id}
@@ -108,48 +108,15 @@ export const Cart = () => {
                     handleIncrementItemAmount={handleIncrementItemAmount}
                   />
                 ))}
-              </div>
-              {/* price field */}
-              <Paper
-                elevation={3}
-                sx={{
-                  flexGrow: "1",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "353px",
-                  margin: "90px 0 0px 10px",
+              </Box>
 
-                  position: "relative",
-                }}
-              >
-                <Typography variant="h6">Total price:</Typography>
-                <Typography
-                  variant="h3"
-                  sx={{ padding: "10px 0 0 20px", marginBottom: "20px" }}
-                >
-                  <b>{total}$</b>
-                </Typography>
-                <Button
-                  variant="contained"
-                  onClick={handleBuyButton}
-                  sx={{
-                    padding: "20px",
-                    width: "300px",
-                  }}
-                >
-                  Buy
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={() => navigate("/")}
-                  sx={{ width: 300, marginTop: "10px" }}
-                >
-                  back to shopping
-                </Button>
-              </Paper>
-            </div>
+              {/* TOTAL PRICE */}
+              <TotalPrice
+                handleButtonClick={handleBuyButton}
+                title={"Total price:"}
+                buttonText={"Buy"}
+              />
+            </Box>
           ) : (
             <CartEmpty />
           )}

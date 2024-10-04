@@ -11,6 +11,7 @@ import {
 } from "../redux/cart/cartSlice";
 import { CartProduct } from "../lib/types/cartTypes";
 import { useNavigate } from "react-router-dom";
+import { TotalPrice } from "./TotalPrice";
 
 //props type
 interface PaymentSummaryProps {
@@ -168,50 +169,11 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
             ))}
           </Paper>
         </Box>
-        <Paper
-          sx={{
-            flexGrow: "1",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "353px",
-            margin: "10px 0 0px 0px",
-          }}
-        >
-          <Typography variant="h6" sx={{ padding: "20px 0 0 20px" }}>
-            Total amount to be paid:
-          </Typography>
-          <Typography
-            variant="h3"
-            sx={{ padding: "10px 0 0 20px", marginBottom: "20px" }}
-          >
-            <b>{total}$</b>
-          </Typography>
-
-          <Button
-            variant="contained"
-            type="submit"
-            sx={{
-              padding: "20px",
-              // marginTop: "20px",
-              maxWidth: "300px",
-              width: "100%",
-              // height: "50px",
-              // marginLeft: "20px",
-            }}
-          >
-            {" "}
-            PAY
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={() => navigate("/")}
-            sx={{ width: 300, marginTop: "10px" }}
-          >
-            back to shopping
-          </Button>
-        </Paper>
+        <TotalPrice
+          title={"Total amount to be paid:"}
+          buttonText={"Pay"}
+          buttonType={"submit"}
+        />
       </Box>
     </>
   );
