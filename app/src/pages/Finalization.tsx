@@ -2,7 +2,7 @@ import { Box, Container, CssBaseline } from "@mui/material";
 import { FormProvider } from "react-hook-form";
 import { AddressBox } from "../components/AddressBox";
 import { PaymentMethod } from "../components/PaymentMethodBox";
-import { PaymentSummary } from "../components/PaymentSummary";
+import { Summary } from "../components/Summary";
 import { ConfirmInfoBox } from "../components/ConfirmInfoBox";
 import { useFinalization } from "../lib/hooks/useFinalization";
 
@@ -32,7 +32,7 @@ export const Finalization = () => {
                 <ConfirmInfoBox handleConfirmButton={handleConfirmButton} />
               </>
             ) : (
-              <PaymentSummary handleSummaryView={handleSummaryView} />
+              <Summary handleSummaryView={handleSummaryView} />
             )}
           </Box>
         </Container>
