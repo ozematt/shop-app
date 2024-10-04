@@ -1,128 +1,130 @@
 import { Box, Paper, Typography } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { AppDispatch, useAppDispatch } from "../redux/store";
-import { removeFromCart } from "../redux/cart/cartSlice";
 import { CartProduct } from "../lib/types/cartTypes";
+import { useCartItem } from "../lib/hooks/useCartItem";
+import React from "react";
 
-interface CartItem {
-  item: CartProduct;
-  handleDecrementItemAmount: (item: CartProduct) => void;
-  handleIncrementItemAmount: (item: CartProduct) => void;
-}
-
-export const CartItem = ({
-  item,
-  handleDecrementItemAmount,
-  handleIncrementItemAmount,
-}: CartItem) => {
-  const dispatch: AppDispatch = useAppDispatch();
+export const CartItem = React.memo(({ item }: { item: CartProduct }) => {
+  //
+  ////DATA
+  const {
+    handleIncrementItemQuantity,
+    handleDecrementItemQuantity,
+    handleRemoveFromCart,
+  } = useCartItem();
 
   ////UI
   return (
     <Paper
-      // elevation={5}
       sx={{
         height: "300px",
         width: "100%",
-        maxWidth: "914px",
+        maxWidth: "950px",
         marginBottom: "10px",
+        display: "flex",
+        padding: "20px",
       }}
     >
-      {/* Item section */}
-      <Box sx={{ padding: "20px", display: "flex" }}>
-        {/* box with image and amount add */}
-        <div>
+      {/* IMAGE AND QUANTITY + / - */}
+      <Box>
+        <Box
+          sx={{
+            backgroundImage: `url(${item.image})`,
+            backgroundSize: "contain",
+            backgroundColor: "white",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            width: "150px",
+            height: "200px",
+            margin: "0 0 10px 12px",
+          }}
+        />
+        <Box sx={{ display: "flex", fontSize: "18px" }}>
+          <div
+            onClick={() => handleDecrementItemQuantity(item)}
+            style={{
+              cursor: "pointer",
+              width: "40px",
+              height: "40px",
+              border: " 1px solid grey",
+              textAlign: "center",
+              lineHeight: "35px",
+            }}
+          >
+            -
+          </div>
           <div
             style={{
-              backgroundImage: `url(${item.image})`,
-              backgroundSize: "contain",
-              backgroundColor: "white",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              width: "150px",
-              height: "200px",
-              margin: "0 0 10px 12px",
+              width: "90px",
+              height: "40px",
+              border: " 1px solid grey",
+              textAlign: "center",
+              lineHeight: "37px",
             }}
-          />
+          >
+            {item.pieces}
+          </div>
+          <div
+            onClick={() => handleIncrementItemQuantity(item)}
+            style={{
+              cursor: "pointer",
+              width: "40px",
+              height: "40px",
+              border: " 1px solid grey",
+              textAlign: "center",
+              lineHeight: "35px",
+            }}
+          >
+            +
+          </div>
+        </Box>
+      </Box>
 
-          {/* amount + - */}
-          <Box sx={{ display: "flex", fontSize: "18px" }}>
-            <div
-              onClick={() => handleDecrementItemAmount(item)}
-              style={{
-                cursor: "pointer",
-                width: "40px",
-                height: "40px",
-                border: " 1px solid grey",
-                textAlign: "center",
-                lineHeight: "35px",
-              }}
-            >
-              -
-            </div>
-            <div
-              style={{
-                width: "90px",
-                height: "40px",
-                border: " 1px solid grey",
-                textAlign: "center",
-                lineHeight: "37px",
-              }}
-            >
-              {item.pieces}
-            </div>
-            <div
-              onClick={() => handleIncrementItemAmount(item)}
-              style={{
-                cursor: "pointer",
-                width: "40px",
-                height: "40px",
-                border: " 1px solid grey",
-                textAlign: "center",
-                lineHeight: "35px",
-              }}
-            >
-              +
-            </div>
-          </Box>
-        </div>
-
-        {/* section with title and delete */}
-        <div
-          style={{
+      {/* TITLE */}
+      <Box
+        sx={{
+          width: "100%",
+          padding: "20px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+        }}
+      >
+        {/* TITLE, DELETE ICON */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             width: "100%",
-            padding: "30px",
-            position: "relative",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            {" "}
-            <Typography variant="h6" sx={{ width: "500px" }}>
-              {item.title}
-            </Typography>
-            <DeleteOutlineOutlinedIcon
-              onClick={() => dispatch(removeFromCart(item.id))}
-              sx={{ cursor: "pointer", color: " red" }}
-              fontSize="large"
-            />
-          </div>
-          <Typography
-            variant="h5"
-            sx={{
-              position: "absolute",
-              bottom: "40px",
-              right: "40px",
-            }}
-          >
-            Price: <b>{item.price}</b> $
+          {" "}
+          <Typography variant="h6" sx={{ maxWidth: "500px" }}>
+            <b>{item.title}</b>
           </Typography>
-        </div>
+          <DeleteOutlineOutlinedIcon
+            onClick={() => handleRemoveFromCart(item.id)}
+            sx={{
+              cursor: "pointer",
+              color: "red",
+              fontSize: "50px",
+              borderRadius: "50%",
+              padding: "8px",
+              display: "inline-block",
+              "&:hover": {
+                backgroundColor: "rgba(255, 0, 0, 0.05)",
+              },
+            }}
+            fontSize="large"
+          />
+        </Box>
+
+        <Typography variant="h5">
+          Price: <b>{item.price}</b> $
+        </Typography>
       </Box>
     </Paper>
   );
-};
+});

@@ -38,18 +38,14 @@ export const UserField = () => {
         id="menu-appbar"
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: "bottom",
+          horizontal: "left",
         }}
         keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleOrdersHistory}>Orders</MenuItem>
+        <MenuItem onClick={handleOrdersHistory}> Orders</MenuItem>
         <Divider />
         <MenuItem onClick={handleLogOut}>LogOut</MenuItem>
       </Menu>
