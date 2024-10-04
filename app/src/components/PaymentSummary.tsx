@@ -2,15 +2,11 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import { Address } from "../lib/types/addressTypes";
 import { useSelector } from "react-redux";
-import { AppDispatch, RootState, useAppDispatch } from "../redux/store";
+// import { AppDispatch, useAppDispatch } from "../redux/store";
 import { CartItem } from "./CartItem";
-import {
-  removeFromCart,
-  selectAllCart,
-  updateCart,
-} from "../redux/cart/cartSlice";
-import { CartProduct } from "../lib/types/cartTypes";
-import { useNavigate } from "react-router-dom";
+import { selectAllCart } from "../redux/cart/cartSlice";
+
+// import { useNavigate } from "react-router-dom";
 import { TotalPrice } from "./TotalPrice";
 
 //props type
@@ -23,34 +19,10 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
 }) => {
   const { getValues } = useFormContext<Address>();
 
-  const total = useSelector((state: RootState) => state.cart.total);
   const cart = useSelector(selectAllCart);
-  const dispatch: AppDispatch = useAppDispatch();
-  const navigate = useNavigate();
+
   ////LOGIC
   //increment item quantity
-  const handleIncrementItemAmount = (item: CartProduct) => {
-    dispatch(
-      updateCart({
-        id: item.id,
-        changes: { pieces: item.pieces + 1 },
-      })
-    );
-  };
-
-  //decrement item quantity
-  const handleDecrementItemAmount = (item: CartProduct) => {
-    if (item.pieces > 1) {
-      dispatch(
-        updateCart({
-          id: item.id,
-          changes: { pieces: item.pieces - 1 },
-        })
-      );
-    } else {
-      dispatch(removeFromCart(item.id));
-    }
-  };
 
   return (
     <>
@@ -160,12 +132,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
               3. Products to buy:
             </Typography>
             {cart.map((item) => (
-              <CartItem
-                key={item.id}
-                item={item}
-                handleDecrementItemAmount={handleDecrementItemAmount}
-                handleIncrementItemAmount={handleIncrementItemAmount}
-              />
+              <CartItem key={item.id} item={item} />
             ))}
           </Paper>
         </Box>
