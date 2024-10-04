@@ -13,7 +13,10 @@ export const SummaryProductsToBuy = () => {
     <>
       <Paper
         sx={{
-          margin: "10px 10px 0 0",
+          marginTop: "10px",
+          padding: "20px 0 30px 20px",
+          width: "100%",
+          maxWidth: "950px",
         }}
       >
         <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>

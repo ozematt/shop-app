@@ -1,38 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface OrdersAddress {
-  name: string;
-  surname: string;
-  street: string;
-  houseNumber: number | null;
-  apartmentNumber: number | null;
-  zipCode: number | null;
-  city: string;
-  payOnDelivery: boolean | null;
-  paymentCard: boolean | null;
-}
-
-interface OrdersItem {
-  id: number | null;
-  title: string;
-  image: string;
-  price: number;
-  pieces: number;
-}
-
-export interface Orders {
-  id: string | null;
-  date: string | null;
-  totalPrice: number | null;
-  quantity: number | null;
-  address: OrdersAddress;
-  items: OrdersItem[];
-}
-
-interface User {
-  isLoggedIn: boolean;
-  orders: Orders[];
-}
+import { Orders, User } from "../../lib/types/userTypes";
 
 const initialState: User = { isLoggedIn: false, orders: [] };
 

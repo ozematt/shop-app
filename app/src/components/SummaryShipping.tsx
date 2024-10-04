@@ -16,8 +16,8 @@ export const SummaryShipping = ({
     <>
       <Paper
         sx={{
-          margin: "10px 10px 0 0",
-          paddingBottom: "20px",
+          marginTop: "10px",
+          padding: "20px 0 30px 20px",
           width: "100%",
           maxWidth: "950px",
         }}

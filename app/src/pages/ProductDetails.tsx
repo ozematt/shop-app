@@ -128,7 +128,7 @@ export const ProductDetails = () => {
                   position: "absolute",
                   display: "flex",
                   flexDirection: "column",
-                  bottom: "100px",
+                  bottom: "30px",
                   gap: "10px",
                   width: "500px",
                 }}

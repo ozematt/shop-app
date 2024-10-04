@@ -8,8 +8,11 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export const Success = () => {
+  //
+  ////DATA
   const navigate = useNavigate();
 
+  ////UI
   return (
     <>
       <CssBaseline />
