@@ -4,14 +4,15 @@ const userCheck = async (userData: { username: string; password: string }) => {
   try {
     const response = await fetch(AUTHORIZATION, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         username: userData.username,
         password: userData.password,
       }),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData?.message || "Login failed");
