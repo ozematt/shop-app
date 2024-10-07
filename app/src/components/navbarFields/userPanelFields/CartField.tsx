@@ -1,5 +1,4 @@
-import { Tooltip } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
+import { Box, Tooltip } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -15,20 +14,13 @@ export const CartField = () => {
   return (
     <>
       <Link to="/cart" style={{ color: "inherit" }}>
-        <IconButton
-          sx={{ marginLeft: "10px" }}
-          size="large"
-          aria-label="cart of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          color="inherit"
-        >
+        <Box sx={{ padding: "10px", marginLeft: "10px" }}>
           <Tooltip title="View Cart">
             <StyledBadge badgeContent={quantity} color="secondary">
               <ShoppingCartIcon fontSize="large" />
             </StyledBadge>
           </Tooltip>
-        </IconButton>
+        </Box>
       </Link>
     </>
   );

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 
-export const CartAddSuccess = React.memo(
+export const CardAddSuccess = React.memo(
   ({ handleShowCardField }: { handleShowCardField: () => void }) => {
     return (
       <>

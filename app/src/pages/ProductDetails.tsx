@@ -1,19 +1,26 @@
 import {
   Box,
-  Button,
   Container,
   CssBaseline,
   Divider,
   Paper,
-  Rating,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { useProductDetails } from "../lib/hooks/useProductDetails";
+import { TitleBox } from "../components/productDetails/TitleBox";
+import { PriceBox } from "../components/productDetails/PriceBox";
+import { RatingBox } from "../components/productDetails/RatingBox";
+import { DescriptionBox } from "../components/productDetails/DescriptionBox";
+import { ButtonsBox } from "../components/productDetails/ButtonsBox";
+import { ImageBox } from "../components/productDetails/ImageBox";
 
 export const ProductDetails = () => {
   //
   ////DATA
-  const { product, handleAddToCartClick, navigate } = useProductDetails();
+  const { product } = useProductDetails();
+  const isSmallScreen = useMediaQuery("(max-width:1100px)");
+  const isSmallerScreen = useMediaQuery("(max-width:875px)");
 
   ////UI
   if (!product) {
@@ -28,128 +35,64 @@ export const ProductDetails = () => {
     <>
       <CssBaseline />
       <Container maxWidth="xl">
-        <Paper
-          sx={{
-            margin: "90px 7px 0 0",
-            padding: "40px",
-          }}
-        >
-          {/* TITLE BOX */}
-          <Box
+        {!isSmallerScreen ? (
+          <Paper
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "30px",
+              marginTop: "80px",
+              padding: "40px 0 40px 40px",
             }}
           >
-            <Box>
-              <Typography variant="h4">{product.title}</Typography>
+            <TitleBox product={product} />
 
-              <Typography
-                variant="body1"
-                style={{ fontSize: "16px", marginTop: "5px" }}
-              >
-                <b>Category:</b> <em> {product.category}</em>
-              </Typography>
-            </Box>
-          </Box>
-
-          {/* PRODUCT BOX */}
-          <Box sx={{ display: "flex", position: "relative" }}>
-            {/* IMAGE */}
-            <Box
-              sx={{
-                backgroundImage: `url(${product.image})`,
-                backgroundSize: "contain",
-                backgroundColor: "white",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                width: "800px",
-                height: "750px",
-              }}
-            />
-
-            <Box sx={{ padding: "50px", marginLeft: "50px" }}>
-              {/* BOX WITH PRICE AND RATING */}
-              <Box sx={{ marginBottom: "20px" }}>
-                {/* PRICE */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    margin: "50px 50px 0px 0px",
-                  }}
-                >
-                  <Typography variant="h5" sx={{ margin: "0 20px 7px 0" }}>
-                    Price:{" "}
-                  </Typography>
-                  <Typography variant="h2">
-                    <b>{product.price}</b>
-
-                    <span style={{ fontSize: "25px" }}> $</span>
-                  </Typography>
-                </Box>
-
-                {/* RATING */}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                  }}
-                >
-                  {" "}
-                  <Typography
-                    sx={{ fontSize: "17px", padding: "10px 8px 10px 0" }}
-                  >
-                    {product.rating.rate}
-                  </Typography>
-                  <Rating
-                    name="read-only"
-                    value={Math.floor(product.rating.rate)}
-                    readOnly
-                    sx={{ marginRight: "5px" }}
-                  />
-                  <p>({product.rating.count})</p>
-                </Box>
-              </Box>
-              <Divider flexItem />
-
-              {/* DESCRIPTION */}
-              <Box sx={{ width: "500px", marginTop: "50px" }}>
-                {" "}
-                <Typography variant="h6">{product.description}</Typography>
-              </Box>
-
-              {/* BUTTONS */}
+            {/* PRODUCT BOX */}
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <ImageBox product={product} />
               <Box
                 sx={{
-                  position: "absolute",
-                  display: "flex",
-                  flexDirection: "column",
-                  bottom: "30px",
-                  gap: "10px",
-                  width: "500px",
+                  padding: isSmallScreen ? "20px" : "50px",
                 }}
               >
-                <Button
-                  variant="contained"
-                  onClick={() => handleAddToCartClick(product)}
-                  sx={{
-                    padding: "20px",
-                    // width: "100%",
-                  }}
-                >
-                  Add to Cart
-                </Button>
-                <Button variant="outlined" onClick={() => navigate("/")}>
-                  main page
-                </Button>
+                <Box sx={{ marginBottom: "20px" }}>
+                  <PriceBox product={product} />
+                  <RatingBox product={product} />
+                </Box>
+                <Divider flexItem />
+                <DescriptionBox product={product} />
+                <ButtonsBox product={product} />
               </Box>
             </Box>
-          </Box>
-        </Paper>
+          </Paper>
+        ) : (
+          <Paper
+            sx={{
+              margin: "80px 0 70px 0",
+              // padding: "40px",
+              // height: "950px",
+            }}
+          >
+            <ImageBox product={product} />
+            <Box sx={{ padding: "15px" }}>
+              <TitleBox product={product} />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                {" "}
+                <Box sx={{ margin: "-30px 0 30px 0" }}>
+                  <PriceBox product={product} />
+                  <RatingBox product={product} />
+                </Box>
+                <ButtonsBox product={product} />
+              </Box>
+
+              <DescriptionBox product={product} />
+            </Box>
+          </Paper>
+        )}
       </Container>
     </>
   );

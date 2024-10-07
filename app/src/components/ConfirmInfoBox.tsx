@@ -8,7 +8,7 @@ export const ConfirmInfoBox = React.memo(
       <>
         <Paper
           sx={{
-            margin: "10px 7px 0 0",
+            margin: "10px 7px 70px 0",
             padding: "20px",
           }}
         >
@@ -19,9 +19,9 @@ export const ConfirmInfoBox = React.memo(
             onClick={handleConfirmButton}
             sx={{
               maxWidth: "500px",
-              width: "100%",
+              width: "90%",
               padding: "20px",
-              margin: "20px 0 0 20px",
+              margin: "20px",
             }}
           >
             Confirm

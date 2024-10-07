@@ -5,7 +5,7 @@ export const CartEmpty = () => {
   return (
     <>
       <Box sx={{ width: "100%" }}>
-        <Paper sx={{ marginTop: "90px" }}>
+        <Paper sx={{ marginTop: "80px" }}>
           <Typography variant="h5" sx={{ padding: "20px" }}>
             Your cart is empty!
           </Typography>
@@ -14,8 +14,12 @@ export const CartEmpty = () => {
         <img
           src={emptyCart}
           style={{
-            margin: "90px 0 0 80px",
-            height: "600px",
+            width: "100%",
+            maxWidth: "900px",
+            margin: "90px auto",
+            height: "auto",
+            maxHeight: "600px",
+            objectFit: "contain",
           }}
         />
       </Box>

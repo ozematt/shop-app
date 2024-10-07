@@ -9,9 +9,9 @@ export const TitleBar = React.memo(
         <Paper
           elevation={3}
           sx={{
-            margin: "90px 0 10px 0",
+            margin: "80px 0 10px 0",
             width: "100%",
-            maxWidth: "950px",
+            maxWidth: "1200px",
             display: "flex",
             justifyContent: "space-between",
           }}

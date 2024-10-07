@@ -14,7 +14,7 @@ export const Surname = () => {
   return (
     <>
       <TextField
-        sx={{ width: "500px" }}
+        sx={{ width: "100%", maxWidth: "500px" }}
         label="Surname"
         variant="outlined"
         margin="dense"

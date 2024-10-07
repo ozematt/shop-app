@@ -45,8 +45,8 @@ export const Authorization = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "500px",
-            marginTop: "90px",
+            height: "100vh",
+            marginTop: "80px",
             width: "100%",
           }}
         >

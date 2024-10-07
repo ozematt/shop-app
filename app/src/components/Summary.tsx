@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { TotalPrice } from "./TotalPrice";
 import { TitleBar } from "./TitleBar";
 import { SummaryShipping } from "./SummaryShipping";
@@ -8,6 +8,7 @@ import React from "react";
 
 export const Summary = React.memo(
   ({ handleSummaryView }: { handleSummaryView: () => void }) => {
+    const isSmallScreen = useMediaQuery("(max-width:1100px)");
     ////UI
     return (
       <>
@@ -17,12 +18,21 @@ export const Summary = React.memo(
             <SummaryShipping handleSummaryView={handleSummaryView} />
             <SummaryPaymentMethod handleSummaryView={handleSummaryView} />
             <SummaryProductsToBuy />
+            {isSmallScreen ? (
+              <TotalPrice
+                title={"Total amount to be paid:"}
+                buttonText={"Pay"}
+                buttonType={"submit"}
+              />
+            ) : null}
           </Box>
-          <TotalPrice
-            title={"Total amount to be paid:"}
-            buttonText={"Pay"}
-            buttonType={"submit"}
-          />
+          {isSmallScreen ? null : (
+            <TotalPrice
+              title={"Total amount to be paid:"}
+              buttonText={"Pay"}
+              buttonType={"submit"}
+            />
+          )}
         </Box>
       </>
     );

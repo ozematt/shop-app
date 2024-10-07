@@ -15,7 +15,7 @@ export const HouseNumber = () => {
     <>
       <TextField
         type="number"
-        sx={{ width: "240px" }}
+        sx={{ width: "100%", maxWidth: "240px", marginRight: "20px" }}
         label="House number"
         variant="outlined"
         margin="dense"

@@ -1,4 +1,12 @@
-import { Box, Button, Divider, Paper, Rating, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Paper,
+  Rating,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { Product } from "../lib/types/productTypes";
 import { useProductItem } from "../lib/hooks/useProductItem";
 
@@ -6,6 +14,7 @@ export const ProductItem = ({ product }: { product: Product }) => {
   //
   ////DATA
   const { productStyle, handleAddToCartClick, navigate } = useProductItem();
+  const isMobile = useMediaQuery("(max-width:700px)");
 
   ////UI
   return (
@@ -34,9 +43,12 @@ export const ProductItem = ({ product }: { product: Product }) => {
           <Typography variant="body2" sx={{ margin: "5px 0 5px 0" }}>
             <b>Category:</b> <em> {product.category}</em>
           </Typography>
-          <Typography variant="body1" sx={{ marginTop: "13px" }}>
-            {product.description.slice(0, 55)}...
-          </Typography>
+          {isMobile ? null : (
+            <Typography variant="body1" sx={{ marginTop: "13px" }}>
+              {product.description.slice(0, 55)}
+              ...
+            </Typography>
+          )}
           <Box
             sx={{
               display: "flex",
@@ -63,18 +75,17 @@ export const ProductItem = ({ product }: { product: Product }) => {
         {/* PRICE BOX */}
         <Box
           sx={{
-            width: "240px",
+            width: "100%",
+            maxWidth: "140px",
             position: "relative",
           }}
         >
           {" "}
-          {/* <div style={{ flexGrow: "1" }}> */}{" "}
           <Typography variant="body1">Price:</Typography>
           <Typography variant="h4">
             <b>{product.price}</b>
             <span style={{ fontSize: "19px" }}> $</span>
           </Typography>
-          {/* </div> */}
           <Button
             variant="contained"
             onClick={(event) => handleAddToCartClick(event, product)}

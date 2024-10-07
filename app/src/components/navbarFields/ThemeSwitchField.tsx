@@ -19,7 +19,7 @@ export const ThemeSwitchField = () => {
         control={
           <Tooltip title="Switch theme">
             <MaterialUISwitch
-              sx={{ m: 1, margin: "0 -20px 0 20px" }}
+              sx={{ margin: "0 -20px 0 20px" }}
               checked={mode === "dark"}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setMode(
