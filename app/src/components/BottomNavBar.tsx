@@ -8,13 +8,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { LoginButton } from "./navbarFields/userPanelFields/LoginButton";
 import { useState } from "react";
-import { useMediaQuery } from "@mui/material";
+import { Tooltip, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+// import { useTheme } from "@emotion/react";
 
 export const BottomNavBar = () => {
+  const theme = useTheme();
   //
   ////DATA
-  const [value, setValue] = useState(0);
+  // const [value, setValue] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
 
   const isSmallScreen = useMediaQuery("(max-width:990px)");
@@ -37,19 +39,29 @@ export const BottomNavBar = () => {
             position: "fixed",
             bottom: "1px",
             width: "100%",
+            zIndex: "1",
           }}
         >
           <BottomNavigation
-            showLabels
-            sx={{}}
-            value={value}
-            onChange={(_, newValue) => {
-              setValue(newValue);
+            // showLabels/
+            sx={{
+              background:
+                theme.palette.mode === "dark"
+                  ? "black"
+                  : theme.palette.primary.main,
             }}
+            // value={value}
+            // onChange={(_, newValue) => {
+            //   setValue(newValue);
+            // }}
           >
             <BottomNavigationAction
               onClick={handleClick}
-              icon={<SearchIcon fontSize="large" />}
+              icon={
+                <Tooltip title="Search">
+                  <SearchIcon fontSize="large" />
+                </Tooltip>
+              }
             />
             <BottomNavigationAction icon={<CartField />} />
             <BottomNavigationAction

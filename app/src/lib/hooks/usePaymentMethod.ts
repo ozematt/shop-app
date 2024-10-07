@@ -36,7 +36,7 @@ export const usePaymentMethod = () => {
   // set pay on delivery method
   const handlePayOnDelivery = useCallback(() => {
     setValue("payOnDelivery", true);
-    clearErrors(["payOnDelivery"]);
+    clearErrors(["payOnDelivery", "paymentCard"]);
     clearCardFields();
   }, [setValue, clearErrors, clearCardFields]);
 
