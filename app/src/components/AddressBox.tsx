@@ -38,11 +38,11 @@ export const AddressBox = React.memo(
             <Email />
             <PhoneNumber />
             <Street />
-            <Box>
+            <Box sx={{ display: "flex", width: "100%" }}>
               <HouseNumber />
               <ApartmentNumber />
             </Box>
-            <Box>
+            <Box sx={{ display: "flex", width: "100%" }}>
               <ZipCode />
               <City />
             </Box>

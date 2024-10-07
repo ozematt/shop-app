@@ -14,7 +14,7 @@ export const Street = () => {
   return (
     <>
       <TextField
-        sx={{ width: "500px", marginTop: "30px" }}
+        sx={{ width: "100%", maxWidth: "500px", marginTop: "30px" }}
         label="Street"
         variant="outlined"
         margin="dense"

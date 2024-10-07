@@ -14,7 +14,7 @@ export const Email = () => {
   return (
     <>
       <TextField
-        sx={{ width: "500px" }}
+        sx={{ width: "100%", maxWidth: "500px" }}
         type="email"
         label="Email"
         variant="outlined"

@@ -31,7 +31,9 @@ export const Success = () => {
           <Typography variant="h2" sx={{ padding: "20px" }}>
             <b> Congratulations!</b>
           </Typography>
-          <Typography variant="h4">You have made a purchase!</Typography>
+          <Typography variant="h4" sx={{ textAlign: "center" }}>
+            You have made a purchase!
+          </Typography>
           <Button
             onClick={() => navigate("/")}
             variant="outlined"

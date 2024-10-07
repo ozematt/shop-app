@@ -64,7 +64,7 @@ export const PaymentMethod = () => {
                 Enter your Card:
               </Typography>
               <CardNumber />
-              <Box>
+              <Box sx={{ display: "flex", width: "100%" }}>
                 <ValidThru />
                 <CVV />
               </Box>
@@ -77,7 +77,7 @@ export const PaymentMethod = () => {
               {/* ADD CARD BUTTON */}
               <Button
                 variant="contained"
-                sx={{ marginTop: "20px", width: "250px" }}
+                sx={{ marginTop: "20px", width: "100%", maxWidth: "250px" }}
                 onClick={handleAddCardButton}
               >
                 Add Card
