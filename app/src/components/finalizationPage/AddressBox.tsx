@@ -1,14 +1,14 @@
 import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
-import { Name } from "./addressFields/Name";
-import { Surname } from "./addressFields/Surname";
-import { Email } from "./addressFields/Email";
-import { PhoneNumber } from "./addressFields/PhoneNumber";
-import { Street } from "./addressFields/Street";
-import { HouseNumber } from "./addressFields/HouseNumber";
-import { ApartmentNumber } from "./addressFields/ApartmentNumber";
-import { ZipCode } from "./addressFields/ZipCode";
-import { City } from "./addressFields/City";
+import { Name } from "./addressBoxFields/Name";
+import { Surname } from "./addressBoxFields/Surname";
+import { Email } from "./addressBoxFields/Email";
+import { PhoneNumber } from "./addressBoxFields/PhoneNumber";
+import { Street } from "./addressBoxFields/Street";
+import { HouseNumber } from "./addressBoxFields/HouseNumber";
+import { ApartmentNumber } from "./addressBoxFields/ApartmentNumber";
+import { ZipCode } from "./addressBoxFields/ZipCode";
+import { City } from "./addressBoxFields/City";
 import { FinalizationTitle } from "./FinalizationTitle";
 
 export const AddressBox = React.memo(

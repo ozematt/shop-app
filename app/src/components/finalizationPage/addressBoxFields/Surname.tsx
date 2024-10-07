@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../../lib/types/addressTypes";
+import { Address } from "../../../lib/types/addressTypes";
 
-export const Name = () => {
+export const Surname = () => {
   //
   ////DATA
   const {
@@ -15,23 +15,22 @@ export const Name = () => {
     <>
       <TextField
         sx={{ width: "100%", maxWidth: "500px" }}
-        label="Name"
+        label="Surname"
         variant="outlined"
         margin="dense"
-        {...register("name", {
+        {...register("surname", {
           minLength: {
             value: 2,
-            message: "Name must by at last 2 characters long",
+            message: "Surname must by at last 2 characters long",
           },
-          required: "Name is required",
+          required: "Surname is required",
           pattern: {
             value: /^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź\s]+$/,
-            message:
-              "Name cannot contain numbers, spaces, or special characters",
+            message: "Surname cannot contain numbers or special characters",
           },
         })}
-        error={!!errors.name}
-        helperText={errors.name?.message?.toString()}
+        error={!!errors.surname}
+        helperText={errors.surname?.message?.toString()}
       />
     </>
   );

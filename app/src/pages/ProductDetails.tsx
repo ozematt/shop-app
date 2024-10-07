@@ -8,12 +8,12 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useProductDetails } from "../lib/hooks/useProductDetails";
-import { TitleBox } from "../components/productDetails/TitleBox";
-import { PriceBox } from "../components/productDetails/PriceBox";
-import { RatingBox } from "../components/productDetails/RatingBox";
-import { DescriptionBox } from "../components/productDetails/DescriptionBox";
-import { ButtonsBox } from "../components/productDetails/ButtonsBox";
-import { ImageBox } from "../components/productDetails/ImageBox";
+import { TitleBox } from "../components/productDetailsPage/TitleBox";
+import { PriceBox } from "../components/productDetailsPage/PriceBox";
+import { RatingBox } from "../components/productDetailsPage/RatingBox";
+import { DescriptionBox } from "../components/productDetailsPage/DescriptionBox";
+import { ButtonsBox } from "../components/productDetailsPage/ButtonsBox";
+import { ImageBox } from "../components/productDetailsPage/ImageBox";
 
 export const ProductDetails = () => {
   //
@@ -66,8 +66,6 @@ export const ProductDetails = () => {
           <Paper
             sx={{
               margin: "80px 0 70px 0",
-              // padding: "40px",
-              // height: "950px",
             }}
           >
             <ImageBox product={product} />
