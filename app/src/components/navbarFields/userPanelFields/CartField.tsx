@@ -3,7 +3,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
-import { StyledBadge } from "../../mui/styledComponents";
+import { StyledBadge } from "../../../mui/styledComponents";
 
 export const CartField = () => {
   //
