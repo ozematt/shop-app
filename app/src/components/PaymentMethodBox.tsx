@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import { usePaymentMethod } from "../lib/hooks/usePaymentMethod";
 import { FinalizationTitle } from "./FinalizationTitle";
 import { PaymentMethodButton } from "./PaymentMethodButton";
-import { CartAddSuccess } from "./CartAddSuccess";
+import { CardAddSuccess } from "./CardAddSuccess";
 import { CardNumber } from "./creditCardFields/CardNumber";
 import { ValidThru } from "./creditCardFields/ValidThru";
 import { CVV } from "./creditCardFields/CVV";
@@ -54,7 +54,7 @@ export const PaymentMethod = () => {
 
           {/* CREDIT CARD ADDED SUCCESSFULLY  */}
           {addClicked ? (
-            <CartAddSuccess handleShowCardField={handleShowCardField} />
+            <CardAddSuccess handleShowCardField={handleShowCardField} />
           ) : null}
 
           {/* CARD FIELDS SHOW */}
