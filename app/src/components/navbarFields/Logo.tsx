@@ -6,7 +6,6 @@ export const Logo = () => {
     <>
       <Typography
         variant="h4"
-        component="div"
         color="text.secondary"
         sx={{
           flexGrow: 1,

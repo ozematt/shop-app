@@ -36,9 +36,7 @@ export const ProductItem = ({ product }: { product: Product }) => {
             <b>Category:</b> <em> {product.category}</em>
           </Typography>
           <Typography variant="body1" sx={{ marginTop: "13px" }}>
-            {isSmallScreen
-              ? product.description.slice(0, 110)
-              : product.description.slice(0, 55)}
+            {product.description.slice(0, 55)}
             ...
           </Typography>
           <Box
@@ -67,6 +65,7 @@ export const ProductItem = ({ product }: { product: Product }) => {
         {/* PRICE BOX */}
         <Box
           sx={{
+            // padding: "20px",
             width: "240px",
             position: "relative",
           }}
