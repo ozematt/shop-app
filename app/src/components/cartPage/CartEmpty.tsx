@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import emptyCart from "../assets/Empty_cart_image.png";
+import emptyCart from "../../assets/Empty_cart_image.png";
 
 export const CartEmpty = () => {
   return (

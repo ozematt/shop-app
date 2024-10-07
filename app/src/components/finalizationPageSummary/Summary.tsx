@@ -1,6 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { TotalPrice } from "./TotalPrice";
-import { TitleBar } from "./TitleBar";
+import { TotalPrice } from "../TotalPrice";
+import { TitleBar } from "../TitleBar";
 import { SummaryShipping } from "./SummaryShipping";
 import { SummaryPaymentMethod } from "./SummaryPaymentMethod";
 import { SummaryProductsToBuy } from "./SummaryProductsToBuy";

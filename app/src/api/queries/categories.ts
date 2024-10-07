@@ -1,5 +1,7 @@
+import { CATEGORIES } from "../constant";
+
 const fetchCategories = async (): Promise<string[]> => {
-  const response = await fetch("https://fakestoreapi.com/products/categories");
+  const response = await fetch(CATEGORIES);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

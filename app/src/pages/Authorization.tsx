@@ -3,36 +3,39 @@ import {
   Button,
   Container,
   CssBaseline,
-  FormControl,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useAuthorization } from "../lib/hooks/useAuthorization";
+
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useAuthorization } from "../lib/hooks/useAuthorization";
 
 export const Authorization = () => {
   //
   ////DATA
   const {
+    username,
+    setUsername,
     mutation,
+    errorAuth,
+    handleLogin,
+    navigate,
     showPassword,
     handleClickShowPassword,
     handleMouseDownPassword,
     handleMouseUpPassword,
-    username,
-    setUsername,
     password,
     setPassword,
-    errorAuth,
-    handleLogin,
-    navigate,
   } = useAuthorization();
 
   ////UI
@@ -64,7 +67,7 @@ export const Authorization = () => {
               }}
             >
               <Typography variant="h4">Login:</Typography>
-              {/* Login field */}
+
               <TextField
                 sx={{ width: "400px", marginTop: "20px" }}
                 id="outlined-basic"
@@ -73,7 +76,7 @@ export const Authorization = () => {
                 label="Login"
                 variant="outlined"
               />
-              {/* Password field */}
+
               <FormControl sx={{ width: "400px" }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">
                   Password
@@ -99,6 +102,7 @@ export const Authorization = () => {
                   label="Password"
                 />
               </FormControl>
+
               <Typography sx={{ color: "red" }}>{errorAuth}</Typography>
               <Box sx={{ marginTop: "20px" }}>
                 <Button
@@ -108,7 +112,6 @@ export const Authorization = () => {
                     padding: "10px",
                     marginRight: "20px",
                     width: "280px",
-                    // width: "100%",
                   }}
                 >
                   Login

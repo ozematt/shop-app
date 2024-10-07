@@ -1,5 +1,5 @@
 import { Paper, Typography } from "@mui/material";
-import { ButtonDeleteCart } from "./ButtonDeleteCart";
+import { ButtonDeleteCart } from "./cartPage/ButtonDeleteCart";
 import React from "react";
 
 export const TitleBar = React.memo(

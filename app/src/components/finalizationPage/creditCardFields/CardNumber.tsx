@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../../lib/types/addressTypes";
+import { Address } from "../../../lib/types/addressTypes";
 
 export const CardNumber = () => {
   //

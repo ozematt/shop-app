@@ -1,9 +1,9 @@
 import { Box, Container, CssBaseline } from "@mui/material";
 import { FormProvider } from "react-hook-form";
-import { AddressBox } from "../components/AddressBox";
-import { PaymentMethod } from "../components/PaymentMethodBox";
-import { Summary } from "../components/Summary";
-import { ConfirmInfoBox } from "../components/ConfirmInfoBox";
+import { AddressBox } from "../components/finalizationPage/AddressBox";
+import { PaymentMethod } from "../components/finalizationPage/PaymentMethodBox";
+import { Summary } from "../components/finalizationPageSummary/Summary";
+import { ConfirmInfoBox } from "../components/finalizationPage/ConfirmInfoBox";
 import { useFinalization } from "../lib/hooks/useFinalization";
 
 export const Finalization = () => {

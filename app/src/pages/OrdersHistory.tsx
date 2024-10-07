@@ -1,8 +1,8 @@
 import { Container, CssBaseline, Paper, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { OrderItem } from "../components/OrderItem";
-import { OrdersEmpty } from "../components/OrdersEmpty";
+import { OrderItem } from "../components/ordersHistoryPage/OrderItem";
+import { OrdersEmpty } from "../components/ordersHistoryPage/OrdersEmpty";
 import { Orders } from "../lib/types/userTypes";
 
 export const OrdersHistory = () => {
