@@ -1,6 +1,8 @@
+import { AUTHORIZATION } from "../constant";
+
 const userCheck = async (userData: { username: string; password: string }) => {
   try {
-    const response = await fetch("https://fakestoreapi.com/auth/login", {
+    const response = await fetch(AUTHORIZATION, {
       method: "POST",
       body: JSON.stringify({
         username: userData.username,
