@@ -82,7 +82,7 @@ export const ProductDetails = () => {
                 }}
               >
                 {" "}
-                <Box sx={{ marginBottom: "20px" }}>
+                <Box sx={{ margin: "-30px 0 30px 0" }}>
                   <PriceBox product={product} />
                   <RatingBox product={product} />
                 </Box>

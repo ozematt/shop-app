@@ -13,6 +13,9 @@ export const DescriptionBox = ({ product }: { product: Product }) => {
         }}
       >
         {" "}
+        <Typography variant="body1" sx={{ marginBottom: "7px" }}>
+          Description:
+        </Typography>
         <Typography variant="h6">{product.description}</Typography>
       </Box>
     </>
