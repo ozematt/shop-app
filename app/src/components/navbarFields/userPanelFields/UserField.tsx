@@ -1,5 +1,4 @@
-import { Divider, Menu, MenuItem, Tooltip } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
+import { Box, Divider, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { useUserField } from "../../../lib/hooks/navbar/useUserField";
@@ -21,19 +20,14 @@ export const UserField = () => {
   ////UI
   return (
     <>
-      <IconButton
-        sx={{ marginRight: "10px" }}
-        size="large"
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
+      <Box
+        sx={{ padding: "10px 10px 4px 10px", marginRight: "10px" }}
         onClick={handleMenu}
-        color="inherit"
       >
         <Tooltip title="User Options">
           <AccountCircleIcon fontSize="large" />
         </Tooltip>
-      </IconButton>
+      </Box>
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}

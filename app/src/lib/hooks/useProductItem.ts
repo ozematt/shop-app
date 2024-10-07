@@ -12,6 +12,8 @@ export const useProductItem = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useAppDispatch();
+
+  //
   const isSmallScreen = useMediaQuery("(max-width:1533px)");
 
   // authorization state

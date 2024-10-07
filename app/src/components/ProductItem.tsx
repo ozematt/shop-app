@@ -5,8 +5,7 @@ import { useProductItem } from "../lib/hooks/useProductItem";
 export const ProductItem = ({ product }: { product: Product }) => {
   //
   ////DATA
-  const { productStyle, handleAddToCartClick, navigate, isSmallScreen } =
-    useProductItem();
+  const { productStyle, handleAddToCartClick, navigate } = useProductItem();
 
   ////UI
   return (
