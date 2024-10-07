@@ -32,9 +32,10 @@ export const Products = () => {
         maxWidth="xl"
         sx={{
           display: "flex",
-          // justifyContent: "center",
+          justifyContent: "center",
           flexWrap: "wrap",
-          marginTop: "90px",
+          marginTop: "70px",
+          width: "100%",
         }}
       >
         {/* PRODUCTS */}

@@ -5,7 +5,8 @@ import { useProductItem } from "../lib/hooks/useProductItem";
 export const ProductItem = ({ product }: { product: Product }) => {
   //
   ////DATA
-  const { productStyle, handleAddToCartClick, navigate } = useProductItem();
+  const { productStyle, handleAddToCartClick, navigate, isSmallScreen } =
+    useProductItem();
 
   ////UI
   return (
@@ -35,7 +36,10 @@ export const ProductItem = ({ product }: { product: Product }) => {
             <b>Category:</b> <em> {product.category}</em>
           </Typography>
           <Typography variant="body1" sx={{ marginTop: "13px" }}>
-            {product.description.slice(0, 55)}...
+            {isSmallScreen
+              ? product.description.slice(0, 110)
+              : product.description.slice(0, 55)}
+            ...
           </Typography>
           <Box
             sx={{
@@ -68,13 +72,11 @@ export const ProductItem = ({ product }: { product: Product }) => {
           }}
         >
           {" "}
-          {/* <div style={{ flexGrow: "1" }}> */}{" "}
           <Typography variant="body1">Price:</Typography>
           <Typography variant="h4">
             <b>{product.price}</b>
             <span style={{ fontSize: "19px" }}> $</span>
           </Typography>
-          {/* </div> */}
           <Button
             variant="contained"
             onClick={(event) => handleAddToCartClick(event, product)}
