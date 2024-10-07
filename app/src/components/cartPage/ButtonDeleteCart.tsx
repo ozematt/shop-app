@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
-import { AppDispatch, useAppDispatch } from "../redux/store";
-import { removeAllFromCart } from "../redux/cart/cartSlice";
+import { AppDispatch, useAppDispatch } from "../../redux/store";
+import { removeAllFromCart } from "../../redux/cart/cartSlice";
 
 export const ButtonDeleteCart = () => {
   const dispatch: AppDispatch = useAppDispatch();

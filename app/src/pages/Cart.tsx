@@ -2,8 +2,8 @@ import { Box, Container, CssBaseline, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectAllCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { CartItem } from "../components/CartItem";
-import { CartEmpty } from "../components/CartEmpty";
+import { CartItem } from "../components/cartPage/CartItem";
+import { CartEmpty } from "../components/cartPage/CartEmpty";
 import { TotalPrice } from "../components/TotalPrice";
 import { TitleBar } from "../components/TitleBar";
 

@@ -5,7 +5,7 @@ import {
   Tooltip,
   useColorScheme,
 } from "@mui/material";
-import { MaterialUISwitch } from "../mui/styledComponents";
+import { MaterialUISwitch } from "../../mui/styledComponents";
 
 export const ThemeSwitchField = () => {
   //

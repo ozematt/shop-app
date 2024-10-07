@@ -1,7 +1,7 @@
 import { Paper, Typography } from "@mui/material";
-import { CartItem } from "./CartItem";
+import { CartItem } from "../cartPage/CartItem";
 import { useSelector } from "react-redux";
-import { selectAllCart } from "../redux/cart/cartSlice";
+import { selectAllCart } from "../../redux/cart/cartSlice";
 
 export const SummaryProductsToBuy = () => {
   //

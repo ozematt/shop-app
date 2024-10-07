@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { usePaymentMethod } from "../lib/hooks/usePaymentMethod";
+import { usePaymentMethod } from "../../lib/hooks/usePaymentMethod";
 import { FinalizationTitle } from "./FinalizationTitle";
 import { PaymentMethodButton } from "./PaymentMethodButton";
 import { CardAddSuccess } from "./CardAddSuccess";

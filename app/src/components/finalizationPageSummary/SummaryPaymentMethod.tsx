@@ -1,6 +1,6 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../lib/types/addressTypes";
+import { Address } from "../../lib/types/addressTypes";
 import React from "react";
 
 export const SummaryPaymentMethod = React.memo(
