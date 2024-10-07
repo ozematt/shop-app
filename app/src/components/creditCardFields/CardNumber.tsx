@@ -14,7 +14,7 @@ export const CardNumber = () => {
   return (
     <>
       <TextField
-        sx={{ width: "400px" }}
+        sx={{ width: "100%", maxWidth: "400px" }}
         type="number"
         label="Credit card number"
         variant="outlined"

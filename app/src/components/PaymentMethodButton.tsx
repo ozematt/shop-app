@@ -34,7 +34,13 @@ export const PaymentMethodButton = React.memo(
               <CreditCardIcon />
             )
           }
-          sx={{ width: "250px", padding: "15px", marginRight: "10px" }}
+          sx={{
+            width: "100%",
+            maxWidth: "300px",
+            padding: "15px",
+            marginRight: "10px",
+            marginBottom: "10px",
+          }}
           onClick={handleButtonClick}
         >
           {text}

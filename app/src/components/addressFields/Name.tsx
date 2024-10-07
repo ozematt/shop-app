@@ -14,7 +14,7 @@ export const Name = () => {
   return (
     <>
       <TextField
-        sx={{ width: "500px" }}
+        sx={{ width: "100%", maxWidth: "500px" }}
         label="Name"
         variant="outlined"
         margin="dense"

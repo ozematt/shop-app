@@ -14,7 +14,7 @@ export const ZipCode = () => {
   return (
     <>
       <TextField
-        sx={{ width: "240px" }}
+        sx={{ width: "100%", maxWidth: "240px", marginRight: "20px" }}
         label="Zip-Code"
         variant="outlined"
         margin="dense"

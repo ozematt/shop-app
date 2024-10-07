@@ -19,7 +19,7 @@ export const CartItem = React.memo(({ item }: { item: CartProduct }) => {
       sx={{
         height: "300px",
         width: "100%",
-        maxWidth: "950px",
+        maxWidth: "1200px",
         marginBottom: "10px",
         display: "flex",
         padding: "20px",

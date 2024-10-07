@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectAllCart } from "../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ export const Cart = () => {
   const navigate = useNavigate();
   // cart state
   const cart = useSelector(selectAllCart);
+  const isSmallScreen = useMediaQuery("(max-width:1100px)");
 
   ////LOGIC
   // handle finalization view
@@ -32,12 +33,21 @@ export const Cart = () => {
               {cart.map((item) => (
                 <CartItem key={item.id} item={item} />
               ))}
+              {isSmallScreen ? (
+                <TotalPrice
+                  handleButtonClick={handleBuyButton}
+                  title={"Total price:"}
+                  buttonText={"Buy"}
+                />
+              ) : null}
             </Box>
-            <TotalPrice
-              handleButtonClick={handleBuyButton}
-              title={"Total price:"}
-              buttonText={"Buy"}
-            />
+            {isSmallScreen ? null : (
+              <TotalPrice
+                handleButtonClick={handleBuyButton}
+                title={"Total price:"}
+                buttonText={"Buy"}
+              />
+            )}
           </>
         ) : (
           <CartEmpty />
