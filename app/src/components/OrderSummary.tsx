@@ -1,16 +1,33 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
 import { Orders } from "../lib/types/userTypes";
 
 export const OrderSummary = ({ order }: { order: Orders }) => {
+  const isSmallScreen = useMediaQuery("(max-width:790px)");
   return (
     <>
-      <Box sx={{ display: "flex", gap: "100px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: isSmallScreen ? "30px" : "100px",
+          marginBottom: "70px",
+        }}
+      >
         <Box sx={{ marginLeft: "20px" }}>
-          <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>
+          <Typography
+            variant={isSmallScreen ? "h6" : "h5"}
+            sx={{ padding: "20px 0 0 20px" }}
+          >
             Shipping address:
           </Typography>
-          <Box sx={{ padding: "20px", marginLeft: "20px" }}>
-            <Typography variant="h6">
+          <Box
+            sx={{
+              padding: "20px",
+              marginLeft: "20px",
+              width: "100%",
+              minWidth: isSmallScreen ? "170px" : "210px",
+            }}
+          >
+            <Typography variant={isSmallScreen ? "body1" : "h6"}>
               {order.address.name} {order.address.surname}
             </Typography>
             <Typography variant="h6">
@@ -26,8 +43,11 @@ export const OrderSummary = ({ order }: { order: Orders }) => {
         </Box>
 
         <Divider orientation="vertical" variant="middle" flexItem />
-        <Box>
-          <Typography variant="h5" sx={{ padding: "20px 0 0 20px" }}>
+        <Box sx={{ width: "100%", minWidth: "200px" }}>
+          <Typography
+            variant={isSmallScreen ? "h6" : "h5"}
+            sx={{ padding: "20px 0 0 20px" }}
+          >
             Total amount paid:
           </Typography>
           <Typography

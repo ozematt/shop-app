@@ -1,10 +1,11 @@
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Box, Divider, Paper, Typography, useMediaQuery } from "@mui/material";
 
 import { OrderSummary } from "./OrderSummary";
 import { Orders } from "../lib/types/userTypes";
 import React from "react";
 
 export const OrderItem = React.memo(({ order }: { order: Orders }) => {
+  const isSmallScreen = useMediaQuery("(max-width:790px)");
   //
   ////UI
   return (
@@ -15,7 +16,10 @@ export const OrderItem = React.memo(({ order }: { order: Orders }) => {
           padding: "20px",
         }}
       >
-        <Typography variant="h5" sx={{ padding: "20px" }}>
+        <Typography
+          variant={isSmallScreen ? "h6" : "h5"}
+          sx={{ padding: "20px" }}
+        >
           Purchase date: <i>{order.date}</i>
         </Typography>
         <Divider />
@@ -46,7 +50,10 @@ export const OrderItem = React.memo(({ order }: { order: Orders }) => {
               }}
             >
               {" "}
-              <Typography variant="h5" sx={{ width: "500px" }}>
+              <Typography
+                variant={isSmallScreen ? "h6" : "h5"}
+                sx={{ width: "100%", maxWidth: "500px" }}
+              >
                 {item.title}
               </Typography>
               <Typography
