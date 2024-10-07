@@ -13,9 +13,10 @@ export const MobileSearchView = () => {
 
   const navigate = useNavigate();
 
+  ////LOGIC
   useEffect(() => {
     if (isLargeScreen) {
-      navigate("/"); // Przekierowanie do głównej strony
+      navigate("/");
     }
   }, [isLargeScreen, navigate]);
 
@@ -26,7 +27,7 @@ export const MobileSearchView = () => {
         <>
           <Box
             sx={{
-              marginTop: "70px",
+              margin: "70px 8px -70px 20px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

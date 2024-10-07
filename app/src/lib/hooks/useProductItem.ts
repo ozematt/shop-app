@@ -26,7 +26,7 @@ export const useProductItem = () => {
     maxWidth: isSmallScreen ? "990px" : "720px",
     width: "100%",
     display: "flex",
-    gap: isSmallScreen ? "40px" : "10px",
+    gap: "10px",
     marginTop: "15px",
     marginRight: isSmallScreen ? 0 : "15px",
     borderRight: "0.5px solid #424242",

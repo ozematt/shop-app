@@ -11,23 +11,24 @@ import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function SimpleBottomNavigation() {
+export const BottomNavBar = () => {
+  //
+  ////DATA
   const [value, setValue] = useState(0);
-  const [clickSearch, setClickSearch] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
   const isSmallScreen = useMediaQuery("(max-width:990px)");
   const navigate = useNavigate();
 
   const auth = useSelector((state: RootState) => state.user.isLoggedIn);
 
-  const handleSearchClick = () => {
-    setClickSearch(!clickSearch);
-    if (clickSearch) {
-      navigate("/mSearch");
-    } else {
-      navigate("/");
-    }
+  ////LOGIC
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    navigate("/mSearch");
   };
 
+  ////UI
   return (
     <>
       {isSmallScreen ? (
@@ -42,12 +43,12 @@ export default function SimpleBottomNavigation() {
             showLabels
             sx={{}}
             value={value}
-            onChange={(event, newValue) => {
+            onChange={(_, newValue) => {
               setValue(newValue);
             }}
           >
             <BottomNavigationAction
-              onClick={handleSearchClick}
+              onClick={handleClick}
               icon={<SearchIcon fontSize="large" />}
             />
             <BottomNavigationAction icon={<CartField />} />
@@ -59,4 +60,4 @@ export default function SimpleBottomNavigation() {
       ) : null}
     </>
   );
-}
+};

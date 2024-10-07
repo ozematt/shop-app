@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./Navbar";
-import SimpleBottomNavigation from "./BottomNav";
+import { BottomNavBar } from "./BottomNavBar";
 
 export const Dashboard = () => {
   return (
@@ -8,7 +8,7 @@ export const Dashboard = () => {
       <div>
         <Navbar />
         <Outlet />
-        <SimpleBottomNavigation />
+        <BottomNavBar />
       </div>
     </>
   );

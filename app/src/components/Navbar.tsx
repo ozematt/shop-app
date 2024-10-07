@@ -8,7 +8,10 @@ import { CategoryField } from "./navbarFields/CategoryField";
 import { SortField } from "./navbarFields/SortField";
 
 export const Navbar = () => {
+  //
+  ////DATA
   const isSmallScreen = useMediaQuery("(max-width:990px)");
+  ////UI
   return (
     <>
       {!isSmallScreen ? (

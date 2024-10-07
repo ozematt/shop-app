@@ -35,6 +35,7 @@ export const Products = () => {
           justifyContent: "center",
           flexWrap: "wrap",
           marginTop: "70px",
+          marginBottom: "80px",
           width: "100%",
         }}
       >
