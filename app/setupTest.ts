@@ -1,5 +1,15 @@
-// import * as matchers from "@testing-library/jest-dom/matchers";
 import "@testing-library/jest-dom/vitest";
-// import { expect } from "vitest";
+import { beforeAll, afterAll, afterEach } from "vitest";
+import { server } from "../app/src/_mocks_/server";
 
-// expect.extend(matchers);
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: "bypass" });
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});

@@ -11,15 +11,6 @@ const cartAdapter = createEntityAdapter({
   selectId: (product: CartProduct) => product.id, //
 });
 
-const initialState = [
-  {
-    id: null,
-    userId: null,
-    date: null,
-    products: [{ productId: null, quantity: null }],
-  },
-];
-
 const cartSlice = createSlice({
   name: "cart",
   initialState: cartAdapter.getInitialState({
