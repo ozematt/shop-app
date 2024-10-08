@@ -17,7 +17,8 @@ const userCheck = async (userData: { username: string; password: string }) => {
       const errorData = await response.json();
       throw new Error(errorData?.message || "Login failed");
     }
-    return await response.json();
+    const result = response.json();
+    return await result;
   } catch (error: any) {
     console.error("Error during login:", error.message);
     throw error;

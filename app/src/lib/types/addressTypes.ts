@@ -6,7 +6,7 @@ export interface Address {
   street: string;
   houseNumber: number | null;
   apartmentNumber: number | null;
-  zipCode: number | null;
+  zipCode: string | null;
   city: string;
   payOnDelivery: boolean | null;
   paymentCard: boolean | null;

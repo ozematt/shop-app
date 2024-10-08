@@ -54,6 +54,7 @@ export const useFinalization = () => {
   // handle data submit
   const onSubmit = useCallback<SubmitHandler<Address>>(
     (data) => {
+      // data to send
       const modifiedData = {
         id: orderId,
         date: formatDate(),
