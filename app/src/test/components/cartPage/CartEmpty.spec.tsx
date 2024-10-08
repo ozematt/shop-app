@@ -1,17 +1,16 @@
 import { render, screen } from "@testing-library/react";
-
 import { expect } from "vitest";
 import { MemoryRouter } from "react-router-dom";
-import { OrdersEmpty } from "../../components/ordersHistoryPage/OrdersEmpty";
+import { CartEmpty } from "../../../components/cartPage/CartEmpty";
 
 describe("<OrdersEmpty />", () => {
-  test("displaying a empty orders history message", () => {
+  test("displaying a empty cart message", () => {
     render(
       <MemoryRouter>
-        <OrdersEmpty />
+        <CartEmpty />
       </MemoryRouter>
     );
-    const text = screen.getByText("You don't have any previous orders...");
+    const text = screen.getByText("Your cart is empty!");
     expect(text).toBeInTheDocument();
   });
 });
