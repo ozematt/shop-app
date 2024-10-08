@@ -10,13 +10,11 @@ import { LoginButton } from "./navbarFields/userPanelFields/LoginButton";
 import { useState } from "react";
 import { Tooltip, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// import { useTheme } from "@emotion/react";
 
 export const BottomNavBar = () => {
   const theme = useTheme();
   //
   ////DATA
-  // const [value, setValue] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
 
   const isSmallScreen = useMediaQuery("(max-width:990px)");
@@ -43,17 +41,12 @@ export const BottomNavBar = () => {
           }}
         >
           <BottomNavigation
-            // showLabels/
             sx={{
               background:
                 theme.palette.mode === "dark"
                   ? "black"
                   : theme.palette.primary.main,
             }}
-            // value={value}
-            // onChange={(_, newValue) => {
-            //   setValue(newValue);
-            // }}
           >
             <BottomNavigationAction
               onClick={handleClick}

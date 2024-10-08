@@ -8,7 +8,10 @@ import React from "react";
 
 export const Summary = React.memo(
   ({ handleSummaryView }: { handleSummaryView: () => void }) => {
+    //
+    ////DATA
     const isSmallScreen = useMediaQuery("(max-width:1100px)");
+
     ////UI
     return (
       <>

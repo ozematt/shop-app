@@ -6,7 +6,7 @@ import { logUser } from "../../redux/user/userSlice";
 import userCheck from "../../api/queries/authorization";
 
 export const useAuthorization = () => {
-  //MUI password field logic
+  //MUI password field  data logic
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = useCallback(
@@ -37,6 +37,7 @@ export const useAuthorization = () => {
   const [password, setPassword] = useState("");
   const [errorAuth, setErrorAuth] = useState<string | null>(null);
 
+  // log user
   const mutation = useMutation({
     mutationFn: userCheck,
     onSuccess: () => {
