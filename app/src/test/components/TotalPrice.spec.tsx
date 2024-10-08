@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
+import { expect } from "vitest";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import cartSliceReducer from "../../redux/cart/cartSlice";
 import { TotalPrice } from "../../components/TotalPrice";
-import { expect } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 
 // helper function to render a component from Redux Store
