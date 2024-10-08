@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
+import { AppDispatch, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { selectSortedProducts } from "../../redux/products/productsSelectors";
 import { useQuery } from "@tanstack/react-query";
@@ -18,9 +18,6 @@ export const useProducts = () => {
   // memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
 
-  // product state
-  const productsState = useSelector((state: RootState) => state.products.items);
-
   // fetch products
   const {
     isPending,
@@ -34,9 +31,8 @@ export const useProducts = () => {
 
   ////LOGIC
   // save products in state after render
-  // lazy loading
   useEffect(() => {
-    if (products || productsState.length < 0) {
+    if (products) {
       dispatch(addProducts(products));
     }
   }, [dispatch, products]);

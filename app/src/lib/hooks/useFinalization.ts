@@ -9,6 +9,8 @@ import { Address } from "../types/addressTypes";
 import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
 import { removeAllFromCart, selectAllCart } from "../../redux/cart/cartSlice";
 import { addOrder } from "../../redux/user/userSlice";
+import { useQuery } from "@tanstack/react-query";
+import usersFetch from "../../api/queries/users";
 
 export const useFinalization = () => {
   //
@@ -50,10 +52,18 @@ export const useFinalization = () => {
   const { total, quantity } = useSelector((state: RootState) => state.cart);
   const cart = useSelector(selectAllCart);
 
+  const { data } = useQuery({
+    queryKey: ["usersData"],
+    queryFn: usersFetch,
+  });
+
+  console.log(data);
+
   ////LOGIC
   // handle data submit
   const onSubmit = useCallback<SubmitHandler<Address>>(
     (data) => {
+      // data to send
       const modifiedData = {
         id: orderId,
         date: formatDate(),

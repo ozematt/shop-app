@@ -5,8 +5,10 @@ import { Orders } from "../../lib/types/userTypes";
 import React from "react";
 
 export const OrderItem = React.memo(({ order }: { order: Orders }) => {
-  const isSmallScreen = useMediaQuery("(max-width:790px)");
   //
+  ////DATA
+  const isSmallScreen = useMediaQuery("(max-width:790px)");
+
   ////UI
   return (
     <>
@@ -39,7 +41,7 @@ export const OrderItem = React.memo(({ order }: { order: Orders }) => {
               }}
             />
 
-            {/* section with title */}
+            {/* TITLE SECTION */}
             <Box
               sx={{
                 width: "100%",
@@ -56,12 +58,7 @@ export const OrderItem = React.memo(({ order }: { order: Orders }) => {
               >
                 {item.title}
               </Typography>
-              <Typography
-                variant="body1"
-                // sx={{ width: "500px", marginTop: "30px" }}
-              >
-                Pieces: x{item.pieces}
-              </Typography>
+              <Typography variant="body1">Pieces: x{item.pieces}</Typography>
               <Typography variant="h5">
                 Price: <b>{item.price}</b> $
               </Typography>

@@ -44,9 +44,10 @@ export const useProductItem = () => {
   const handleAddToCartClick = useCallback(
     (event: React.MouseEvent, item: Product) => {
       event.stopPropagation(); // for bottom use
+
       auth ? dispatch(addToCart(item)) : navigate("/login");
     },
-    [navigate, auth, dispatch]
+    [navigate, auth]
   );
 
   return { productStyle, handleAddToCartClick, navigate, isSmallScreen };

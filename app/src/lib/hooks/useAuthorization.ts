@@ -1,12 +1,14 @@
 import { useCallback, useState } from "react";
 import { AppDispatch, useAppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { logUser } from "../../redux/user/userSlice";
 import userCheck from "../../api/queries/authorization";
+import usersFetch from "../../api/queries/users";
+import { UserFetchData } from "../types/userTypes";
 
 export const useAuthorization = () => {
-  //MUI password field logic
+  //MUI password field  data logic
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = useCallback(
@@ -37,10 +39,20 @@ export const useAuthorization = () => {
   const [password, setPassword] = useState("");
   const [errorAuth, setErrorAuth] = useState<string | null>(null);
 
+  // get user Id
+  const { data } = useQuery({
+    queryKey: ["usersData"],
+    queryFn: usersFetch,
+  });
+  const userId = data?.find(
+    (user: UserFetchData) => user.username === username
+  )?.id;
+
+  // log user
   const mutation = useMutation({
     mutationFn: userCheck,
     onSuccess: () => {
-      dispatch(logUser());
+      dispatch(logUser(userId));
       navigate("/");
       setErrorAuth(null);
     },
