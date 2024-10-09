@@ -1,14 +1,13 @@
 import { Box, Tooltip } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
 import { StyledBadge } from "../../../mui/styledComponents";
+import { useCartField } from "../../../lib/hooks/navbarFields/userPanelFields/useCartField";
 
 export const CartField = () => {
   //
   ////DATA
-  const quantity = useSelector((state: RootState) => state.cart.quantity);
+  const { quantity } = useCartField();
 
   ////UI
   return (

@@ -1,24 +1,14 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import { CategoryField } from "./navbarFields/CategoryField";
 import { SearchField } from "./navbarFields/SearchField";
 import { SortField } from "./navbarFields/SortField";
 import { Products } from "./Products";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useMobileSearchView } from "../lib/hooks/useMobileSearchView";
 
 export const MobileSearchView = () => {
   //
   ////DATA
-  const isLargeScreen = useMediaQuery("(min-width:990px)");
-
-  const navigate = useNavigate();
-
-  ////LOGIC
-  useEffect(() => {
-    if (isLargeScreen) {
-      navigate("/");
-    }
-  }, [isLargeScreen, navigate]);
+  const { isLargeScreen } = useMobileSearchView();
 
   ////UI
   return (

@@ -2,6 +2,8 @@ import { Box, Typography, Rating } from "@mui/material";
 import { Product } from "../../lib/types/productTypes";
 
 export const RatingBox = ({ product }: { product: Product }) => {
+  //
+  ////UI
   return (
     <>
       <Box

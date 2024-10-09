@@ -1,13 +1,12 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { useFormContext } from "react-hook-form";
-import { Address } from "../../lib/types/addressTypes";
 import React from "react";
+import { useSummaryShipping } from "../../lib/hooks/finalizationPageSummary/useSummaryShipping";
 
 export const SummaryPaymentMethod = React.memo(
   ({ handleSummaryView }: { handleSummaryView: () => void }) => {
     //
     ////DATA
-    const { getValues } = useFormContext<Address>();
+    const { getValues } = useSummaryShipping();
 
     ////UI
     return (

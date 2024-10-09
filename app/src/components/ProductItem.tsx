@@ -1,20 +1,12 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  Rating,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Button, Divider, Paper, Rating, Typography } from "@mui/material";
 import { Product } from "../lib/types/productTypes";
 import { useProductItem } from "../lib/hooks/useProductItem";
 
 export const ProductItem = ({ product }: { product: Product }) => {
   //
   ////DATA
-  const { productStyle, handleAddToCartClick, navigate } = useProductItem();
-  const isMobile = useMediaQuery("(max-width:700px)");
+  const { productStyle, handleAddToCartClick, navigate, isMobile } =
+    useProductItem();
 
   ////UI
   return (

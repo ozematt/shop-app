@@ -1,7 +1,6 @@
 import { Box, Divider, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
-import { useUserField } from "../../../lib/hooks/navbar/useUserField";
+import { useUserField } from "../../../lib/hooks/navbarFields/userPanelFields/useUserField";
 import { AlertDialog } from "../../AlertDialog";
 
 export const UserField = () => {

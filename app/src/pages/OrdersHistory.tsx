@@ -1,14 +1,12 @@
 import { Container, CssBaseline, Paper, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import { OrderItem } from "../components/ordersHistoryPage/OrderItem";
 import { OrdersEmpty } from "../components/ordersHistoryPage/OrdersEmpty";
-import { Orders } from "../lib/types/userTypes";
+import { useOrdersHistory } from "../lib/hooks/pages/useOrdersHistory";
 
 export const OrdersHistory = () => {
   //
   ////DATA
-  const orders: Orders[] = useSelector((state: RootState) => state.user.orders);
+  const { orders } = useOrdersHistory();
 
   ////UI
   return (

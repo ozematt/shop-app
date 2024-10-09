@@ -13,9 +13,10 @@ function renderWithProvider(
 ) {
   return render(<Provider store={store}>{ui}</Provider>);
 }
-
+//
+////TESTS
 describe("<TotalPrice />", () => {
-  test("should display total price with proper button text", () => {
+  it("should display the correct title and button name", () => {
     const store = configureStore({
       reducer: {
         cart: cartSliceReducer,
@@ -35,6 +36,30 @@ describe("<TotalPrice />", () => {
     );
 
     const button = screen.getByRole("button", { name: "PAY" });
+    const title = screen.getByText("Total Price:");
     expect(button).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
+  });
+  it("should not display any title", () => {
+    const store = configureStore({
+      reducer: {
+        cart: cartSliceReducer,
+      },
+    });
+
+    renderWithProvider(
+      <MemoryRouter>
+        <TotalPrice
+          handleButtonClick={vi.fn()}
+          title=""
+          buttonText="PAY"
+          buttonType="button"
+        />
+      </MemoryRouter>,
+      { store }
+    );
+
+    const title = screen.queryByText("Total Price:");
+    expect(title).not.toBeInTheDocument();
   });
 });

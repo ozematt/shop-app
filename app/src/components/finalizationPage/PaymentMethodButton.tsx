@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
-import { usePaymentMethod } from "../../lib/hooks/usePaymentMethod";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import React from "react";
+import { usePaymentMethodButton } from "../../lib/hooks/finalizationPage/usePaymentMethodButton";
 
 export const PaymentMethodButton = React.memo(
   ({
@@ -14,14 +14,11 @@ export const PaymentMethodButton = React.memo(
     method: string;
     handleButtonClick: () => void;
   }) => {
-    const { watch } = usePaymentMethod();
+    //
+    //DATA
+    const { isSelected } = usePaymentMethodButton({ method });
 
-    // check button logic
-    const isPayOnDelivery = method === "payOnDelivery";
-    const isSelected =
-      (isPayOnDelivery && watch().payOnDelivery) ||
-      (!isPayOnDelivery && watch().paymentCard);
-
+    ////UI
     return (
       <>
         <Button

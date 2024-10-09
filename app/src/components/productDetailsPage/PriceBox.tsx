@@ -1,8 +1,13 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Product } from "../../lib/types/productTypes";
+import { useProductDetails } from "../../lib/hooks/pages/useProductDetails";
 
 export const PriceBox = ({ product }: { product: Product }) => {
-  const isSmallScreen = useMediaQuery("(max-width:1100px)");
+  //
+  ////DATA
+  const { isSmallScreen } = useProductDetails();
+
+  //UI
   return (
     <>
       <Box

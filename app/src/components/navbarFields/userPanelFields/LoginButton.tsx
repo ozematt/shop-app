@@ -1,12 +1,10 @@
-// import { useTheme } from "@emotion/react";
-import { Typography, useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
+import { useLoginButton } from "../../../lib/hooks/navbarFields/userPanelFields/useLoginButton";
 
 export const LoginButton = () => {
   //
   ////DATA
-  const navigate = useNavigate();
-  const theme = useTheme();
+  const { navigate, theme } = useLoginButton();
 
   ////UI
   return (

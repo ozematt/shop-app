@@ -5,7 +5,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../../mui/styledComponents";
-import { useSearchField } from "../../lib/hooks/navbar/useSearchField";
+import { useSearchField } from "../../lib/hooks/navbarFields/useSearchField";
 
 export const SearchField = () => {
   //

@@ -2,6 +2,8 @@ import { Box, Typography } from "@mui/material";
 import { Product } from "../../lib/types/productTypes";
 
 export const TitleBox = ({ product }: { product: Product }) => {
+  //
+  ////UI
   return (
     <>
       <Box
