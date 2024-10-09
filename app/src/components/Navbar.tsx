@@ -6,11 +6,13 @@ import { UserPanelFields } from "./navbarFields/UserPanelFields";
 import { ThemeSwitchField } from "./navbarFields/ThemeSwitchField";
 import { CategoryField } from "./navbarFields/CategoryField";
 import { SortField } from "./navbarFields/SortField";
+import { useNavbar } from "../lib/hooks/useNavbar";
 
 export const Navbar = () => {
   //
   ////DATA
-  const isSmallScreen = useMediaQuery("(max-width:990px)");
+  const { isSmallScreen } = useNavbar();
+
   ////UI
   return (
     <>

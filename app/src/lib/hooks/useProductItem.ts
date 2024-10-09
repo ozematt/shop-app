@@ -15,6 +15,7 @@ export const useProductItem = () => {
 
   //
   const isSmallScreen = useMediaQuery("(max-width:1533px)");
+  const isMobile = useMediaQuery("(max-width:700px)");
 
   // authorization state
   const auth = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -50,5 +51,11 @@ export const useProductItem = () => {
     [navigate, auth]
   );
 
-  return { productStyle, handleAddToCartClick, navigate, isSmallScreen };
+  return {
+    productStyle,
+    handleAddToCartClick,
+    navigate,
+    isSmallScreen,
+    isMobile,
+  };
 };
