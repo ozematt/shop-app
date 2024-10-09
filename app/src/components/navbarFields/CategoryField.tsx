@@ -7,7 +7,6 @@ export const CategoryField = () => {
   ////DATA
   const { category, categories, handleCategoryChange } = useCategoryField();
 
-  //
   ////UI
   return (
     <>

@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { useAuthorization } from "../../lib/hooks/useAuthorization";
+import { useAuthorization } from "../../lib/hooks/pages/useAuthorization";
 
 export const LoginField = () => {
   //

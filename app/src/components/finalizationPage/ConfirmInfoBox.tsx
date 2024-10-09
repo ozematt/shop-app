@@ -4,6 +4,7 @@ import React from "react";
 
 export const ConfirmInfoBox = React.memo(
   ({ handleConfirmButton }: { handleConfirmButton: () => void }) => {
+    //
     ////UI
     return (
       <>

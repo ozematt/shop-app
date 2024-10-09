@@ -13,6 +13,7 @@ export const AlertDialog = React.memo(
     open: boolean;
     handleCloseDialogAlert: (confirmed: boolean) => void;
   }) => {
+    //
     ////UI
     return (
       <>

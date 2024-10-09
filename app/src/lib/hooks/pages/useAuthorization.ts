@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
-import { AppDispatch, useAppDispatch } from "../../redux/store";
+import { AppDispatch, useAppDispatch } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { logUser } from "../../redux/user/userSlice";
-import userCheck from "../../api/queries/authorization";
+import { logUser } from "../../../redux/user/userSlice";
+import userCheck from "../../../api/queries/authorization";
 
 export const useAuthorization = () => {
   //MUI password field  data logic

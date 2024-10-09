@@ -4,7 +4,7 @@ import { AddressBox } from "../components/finalizationPage/AddressBox";
 import { PaymentMethod } from "../components/finalizationPage/PaymentMethodBox";
 import { Summary } from "../components/finalizationPageSummary/Summary";
 import { ConfirmInfoBox } from "../components/finalizationPage/ConfirmInfoBox";
-import { useFinalization } from "../lib/hooks/useFinalization";
+import { useFinalization } from "../lib/hooks/pages/useFinalization";
 
 export const Finalization = () => {
   //

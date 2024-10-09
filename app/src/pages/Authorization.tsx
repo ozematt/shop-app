@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAuthorization } from "../lib/hooks/useAuthorization";
+import { useAuthorization } from "../lib/hooks/pages/useAuthorization";
 
 import {
   FormControl,

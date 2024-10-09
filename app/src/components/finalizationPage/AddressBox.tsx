@@ -13,6 +13,7 @@ import { FinalizationTitle } from "./FinalizationTitle";
 
 export const AddressBox = React.memo(
   ({ errorEmptyAddressFields }: { errorEmptyAddressFields: string | null }) => {
+    //
     ////UI
     return (
       <>

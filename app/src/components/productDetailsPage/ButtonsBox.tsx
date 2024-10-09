@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import { useProductDetails } from "../../lib/hooks/useProductDetails";
+import { useProductDetails } from "../../lib/hooks/pages/useProductDetails";
 import { Product } from "../../lib/types/productTypes";
 
 export const ButtonsBox = ({ product }: { product: Product }) => {

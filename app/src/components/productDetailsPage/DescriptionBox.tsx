@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { Product } from "../../lib/types/productTypes";
 
 export const DescriptionBox = ({ product }: { product: Product }) => {
+  //
   ////UI
   return (
     <>

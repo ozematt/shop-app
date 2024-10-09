@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import React from "react";
 
 export const FinalizationTitle = React.memo(({ text }: { text: string }) => {
+  //
   ////UI
   return (
     <>

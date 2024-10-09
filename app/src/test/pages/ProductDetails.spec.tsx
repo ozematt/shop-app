@@ -1,16 +1,17 @@
 import { render, screen } from "@testing-library/react";
-import * as useProductDetailsFile from "../../lib/hooks/useProductDetails";
+import * as useProductDetailsFile from "../../lib/hooks/pages/useProductDetails";
 import { Product } from "../../lib/types/productTypes";
 import { ProductDetails } from "../../pages/ProductDetails";
 import { expect } from "vitest";
+import { configureStore } from "@reduxjs/toolkit";
+import userSliceReducer from "../../redux/user/userSlice";
+import { Provider } from "react-redux";
+import productsSliceReducer from "../../redux/products/productsSlice";
 
 const useProductDetailsSpy = vi.spyOn(
   useProductDetailsFile,
   "useProductDetails"
 );
-
-const handleClick = vi.fn();
-const nav = vi.fn();
 
 const mockUseProductDetails = ({
   product = {
@@ -22,15 +23,29 @@ const mockUseProductDetails = ({
     image: "www.example.com",
     rating: { rate: 5, count: 10 },
   } as Product,
-  handleAddToCartClick = handleClick,
-  navigate = nav,
+  handleAddToCartClick = vi.fn(),
+  isSmallScreen = false,
+  isSmallerScreen = false,
 } = {}) => {
   useProductDetailsSpy.mockReturnValue({
     product,
     handleAddToCartClick,
-    navigate,
+    isSmallScreen,
+    isSmallerScreen,
   });
 };
+
+// helper function to render a component from Redux Store
+function renderWithProvider(
+  ui: React.ReactElement,
+  { store } = {
+    store: configureStore({
+      reducer: { user: userSliceReducer, products: productsSliceReducer },
+    }),
+  }
+) {
+  return render(<Provider store={store}>{ui}</Provider>);
+}
 
 describe("<ProductDetails />", () => {
   afterAll(() => {
@@ -38,7 +53,15 @@ describe("<ProductDetails />", () => {
   });
   test("should display proper product", () => {
     mockUseProductDetails();
-    render(<ProductDetails />);
+
+    const store = configureStore({
+      reducer: {
+        user: userSliceReducer,
+        products: productsSliceReducer,
+      },
+    });
+    renderWithProvider(<ProductDetails />, { store });
+
     expect(screen.getByText("Product1")).toBeInTheDocument();
   });
 });

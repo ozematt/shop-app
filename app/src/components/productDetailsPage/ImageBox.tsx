@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { Product } from "../../lib/types/productTypes";
 
 export const ImageBox = ({ product }: { product: Product }) => {
+  //
   ////UI
   return (
     <>
