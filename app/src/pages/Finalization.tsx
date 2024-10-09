@@ -1,7 +1,7 @@
 import { Box, Container, CssBaseline } from "@mui/material";
 import { FormProvider } from "react-hook-form";
 import { AddressBox } from "../components/finalizationPage/AddressBox";
-import { PaymentMethod } from "../components/finalizationPage/PaymentMethodBox";
+import { PaymentMethodBox } from "../components/finalizationPage/PaymentMethodBox";
 import { Summary } from "../components/finalizationPageSummary/Summary";
 import { ConfirmInfoBox } from "../components/finalizationPage/ConfirmInfoBox";
 import { useFinalization } from "../lib/hooks/pages/useFinalization";
@@ -28,7 +28,7 @@ export const Finalization = () => {
             {!summaryView ? (
               <>
                 <AddressBox errorEmptyAddressFields={errorEmptyAddressFields} />
-                <PaymentMethod />
+                <PaymentMethodBox />
                 <ConfirmInfoBox handleConfirmButton={handleConfirmButton} />
               </>
             ) : (

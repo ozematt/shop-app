@@ -61,7 +61,9 @@ export const useAuthorization = () => {
   );
 
   return {
-    mutation,
+    mutation: {
+      isPending: mutation.isPending,
+    },
     showPassword,
     handleClickShowPassword,
     handleMouseDownPassword,

@@ -7,6 +7,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSliceReducer from "../../redux/user/userSlice";
 import { Provider } from "react-redux";
 import productsSliceReducer from "../../redux/products/productsSlice";
+import { MemoryRouter } from "react-router-dom";
 
 const useProductDetailsSpy = vi.spyOn(
   useProductDetailsFile,
@@ -26,12 +27,14 @@ const mockUseProductDetails = ({
   handleAddToCartClick = vi.fn(),
   isSmallScreen = false,
   isSmallerScreen = false,
+  navigate = vi.fn(),
 } = {}) => {
   useProductDetailsSpy.mockReturnValue({
     product,
     handleAddToCartClick,
     isSmallScreen,
     isSmallerScreen,
+    navigate,
   });
 };
 
@@ -46,7 +49,8 @@ function renderWithProvider(
 ) {
   return render(<Provider store={store}>{ui}</Provider>);
 }
-
+//
+////TEST
 describe("<ProductDetails />", () => {
   afterAll(() => {
     useProductDetailsSpy.mockRestore();
@@ -60,7 +64,14 @@ describe("<ProductDetails />", () => {
         products: productsSliceReducer,
       },
     });
-    renderWithProvider(<ProductDetails />, { store });
+
+    renderWithProvider(
+      <MemoryRouter>
+        <ProductDetails />
+      </MemoryRouter>,
+      { store }
+    );
+    // render(<ProductDetails />);
 
     expect(screen.getByText("Product1")).toBeInTheDocument();
   });

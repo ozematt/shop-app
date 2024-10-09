@@ -1,11 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import { Product } from "../../lib/types/productTypes";
-import { useTotalPrice } from "../../lib/hooks/useTotalPrice";
+import { useProductDetails } from "../../lib/hooks/pages/useProductDetails";
 
 export const PriceBox = ({ product }: { product: Product }) => {
   //
   ////DATA
-  const { isSmallScreen } = useTotalPrice();
+  const { isSmallScreen } = useProductDetails();
 
   //UI
   return (
