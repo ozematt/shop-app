@@ -3,7 +3,11 @@ import { useProductDetails } from "../../lib/hooks/useProductDetails";
 import { Product } from "../../lib/types/productTypes";
 
 export const ButtonsBox = ({ product }: { product: Product }) => {
+  //
+  ////DATA
   const { handleAddToCartClick, navigate } = useProductDetails();
+
+  ////UI
   return (
     <>
       <Box

@@ -1,4 +1,4 @@
-import { AppBar, Box, Divider, Toolbar, useMediaQuery } from "@mui/material";
+import { AppBar, Box, Divider, Toolbar } from "@mui/material";
 import { Logo } from "./navbarFields/Logo";
 import { SearchField } from "./navbarFields/SearchField";
 import Container from "@mui/material/Container";

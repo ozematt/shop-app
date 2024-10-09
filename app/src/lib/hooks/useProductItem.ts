@@ -13,7 +13,6 @@ export const useProductItem = () => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useAppDispatch();
 
-  //
   const isSmallScreen = useMediaQuery("(max-width:1533px)");
   const isMobile = useMediaQuery("(max-width:700px)");
 
@@ -41,6 +40,7 @@ export const useProductItem = () => {
     },
   });
 
+  ////LOGIC
   // add to cart when user is logged in
   const handleAddToCartClick = useCallback(
     (event: React.MouseEvent, item: Product) => {

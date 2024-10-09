@@ -1,16 +1,12 @@
 import * as React from "react";
-import {
-  FormControlLabel,
-  FormGroup,
-  Tooltip,
-  useColorScheme,
-} from "@mui/material";
+import { FormControlLabel, FormGroup, Tooltip } from "@mui/material";
 import { MaterialUISwitch } from "../../mui/styledComponents";
+import { useThemeSwitchField } from "../../lib/hooks/navbarFields/useThemeSwitchField";
 
 export const ThemeSwitchField = () => {
   //
   ////DATA
-  const { mode, setMode } = useColorScheme();
+  const { mode, setMode } = useThemeSwitchField();
 
   ////UI
   return (

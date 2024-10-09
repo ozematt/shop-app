@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const Logo = () => {
+  ////UI
   return (
     <>
       <Typography

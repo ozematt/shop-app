@@ -4,29 +4,14 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import SearchIcon from "@mui/icons-material/Search";
 import { CartField } from "./navbarFields/userPanelFields/CartField";
 import { UserField } from "./navbarFields/userPanelFields/UserField";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
 import { LoginButton } from "./navbarFields/userPanelFields/LoginButton";
-import { useState } from "react";
-import { Tooltip, useMediaQuery, useTheme } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Tooltip } from "@mui/material";
+import { useBottomNavbar } from "../lib/hooks/useBottomNavbar";
 
-export const BottomNavBar = () => {
-  const theme = useTheme();
+export const BottomNavbar = () => {
   //
   ////DATA
-  const [isClicked, setIsClicked] = useState(false);
-
-  const isSmallScreen = useMediaQuery("(max-width:990px)");
-  const navigate = useNavigate();
-
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
-
-  ////LOGIC
-  const handleClick = () => {
-    setIsClicked(!isClicked);
-    navigate("/mSearch");
-  };
+  const { theme, isSmallScreen, auth, handleClick } = useBottomNavbar();
 
   ////UI
   return (

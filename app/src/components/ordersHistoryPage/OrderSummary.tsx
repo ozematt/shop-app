@@ -1,10 +1,11 @@
-import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { Orders } from "../../lib/types/ordersTypes";
+import { useOrderSummary } from "../../lib/hooks/ordersHistoryPage/useOrderSummary";
 
 export const OrderSummary = ({ order }: { order: Orders }) => {
   //
   ////DATA
-  const isSmallScreen = useMediaQuery("(max-width:790px)");
+  const { isSmallScreen } = useOrderSummary();
 
   ////UI
   return (

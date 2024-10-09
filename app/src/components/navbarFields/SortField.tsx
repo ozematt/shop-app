@@ -5,7 +5,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { useSortField } from "../../lib/hooks/navbar/useSortField";
+import { useSortField } from "../../lib/hooks/navbarFields/useSortField";
 
 export const SortField = () => {
   //

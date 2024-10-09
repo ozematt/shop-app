@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./Navbar";
-import { BottomNavBar } from "./BottomNavBar";
+import { BottomNavbar } from "./BottomNavbar";
 
 export const Dashboard = () => {
+  ////Ui
   return (
     <>
       <div>
         <Navbar />
         <Outlet />
-        <BottomNavBar />
+        <BottomNavbar />
       </div>
     </>
   );

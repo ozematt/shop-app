@@ -1,12 +1,13 @@
-import { Box, Divider, Paper, Typography, useMediaQuery } from "@mui/material";
+import { Box, Divider, Paper, Typography } from "@mui/material";
 import { OrderSummary } from "./OrderSummary";
 import React from "react";
 import { Orders } from "../../lib/types/ordersTypes";
+import { useOrderSummary } from "../../lib/hooks/ordersHistoryPage/useOrderSummary";
 
 export const OrderItem = React.memo(({ order }: { order: Orders }) => {
   //
   ////DATA
-  const isSmallScreen = useMediaQuery("(max-width:790px)");
+  const { isSmallScreen } = useOrderSummary();
 
   ////UI
   return (

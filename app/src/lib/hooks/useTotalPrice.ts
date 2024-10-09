@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
 
 export const useTotalPrice = () => {
+  //
+  ////DATA
   const total = useSelector((state: RootState) => state.cart.total);
   const navigate = useNavigate();
 
