@@ -1,5 +1,5 @@
 import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
-import { Orders } from "../../lib/types/userTypes";
+import { Orders } from "../../lib/types/ordersTypes";
 
 export const OrderSummary = ({ order }: { order: Orders }) => {
   //

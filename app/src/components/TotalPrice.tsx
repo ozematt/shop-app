@@ -1,8 +1,6 @@
-import { Button, Paper, Typography, useMediaQuery } from "@mui/material";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { RootState } from "../redux/store";
+import { Button, Paper, Typography } from "@mui/material";
 import React from "react";
+import { useTotalPrice } from "../lib/hooks/useTotalPrice";
 
 export const TotalPrice = React.memo(
   ({
@@ -18,11 +16,7 @@ export const TotalPrice = React.memo(
   }) => {
     //
     ////DATA
-    // total price
-    const total = useSelector((state: RootState) => state.cart.total);
-    const navigate = useNavigate();
-
-    const isSmallScreen = useMediaQuery("(max-width:1100px)");
+    const { total, navigate, isSmallScreen } = useTotalPrice();
 
     ////UI
     return (

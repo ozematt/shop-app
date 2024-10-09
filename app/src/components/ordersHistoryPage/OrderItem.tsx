@@ -1,8 +1,7 @@
 import { Box, Divider, Paper, Typography, useMediaQuery } from "@mui/material";
-
 import { OrderSummary } from "./OrderSummary";
-import { Orders } from "../../lib/types/userTypes";
 import React from "react";
+import { Orders } from "../../lib/types/ordersTypes";
 
 export const OrderItem = React.memo(({ order }: { order: Orders }) => {
   //

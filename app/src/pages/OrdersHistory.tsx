@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { OrderItem } from "../components/ordersHistoryPage/OrderItem";
 import { OrdersEmpty } from "../components/ordersHistoryPage/OrdersEmpty";
-import { Orders } from "../lib/types/userTypes";
+import { Orders } from "../lib/types/ordersTypes";
 
 export const OrdersHistory = () => {
   //
