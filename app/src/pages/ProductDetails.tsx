@@ -5,9 +5,8 @@ import {
   Divider,
   Paper,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
-import { useProductDetails } from "../lib/hooks/useProductDetails";
+import { useProductDetails } from "../lib/hooks/pages/useProductDetails";
 import { TitleBox } from "../components/productDetailsPage/TitleBox";
 import { PriceBox } from "../components/productDetailsPage/PriceBox";
 import { RatingBox } from "../components/productDetailsPage/RatingBox";
@@ -18,9 +17,7 @@ import { ImageBox } from "../components/productDetailsPage/ImageBox";
 export const ProductDetails = () => {
   //
   ////DATA
-  const { product } = useProductDetails();
-  const isSmallScreen = useMediaQuery("(max-width:1100px)");
-  const isSmallerScreen = useMediaQuery("(max-width:875px)");
+  const { product, isSmallScreen, isSmallerScreen } = useProductDetails();
 
   ////UI
   if (!product) {

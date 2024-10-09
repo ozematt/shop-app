@@ -1,13 +1,12 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import { useCategoryField } from "../../lib/hooks/navbar/useCategoryField";
+import { useCategoryField } from "../../lib/hooks/navbarFields/useCategoryField";
 
 export const CategoryField = () => {
   //
   ////DATA
   const { category, categories, handleCategoryChange } = useCategoryField();
 
-  //
   ////UI
   return (
     <>

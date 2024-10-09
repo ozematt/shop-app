@@ -1,14 +1,12 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-
 import { LoginButton } from "./userPanelFields/LoginButton";
 import { CartField } from "./userPanelFields/CartField";
 import { UserField } from "./userPanelFields/UserField";
+import { useUserPanelFields } from "../../lib/hooks/navbarFields/useUserPanelFields";
 
 export const UserPanelFields = () => {
   //
   ////DATA
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+  const { auth } = useUserPanelFields();
 
   ////UI
   return (

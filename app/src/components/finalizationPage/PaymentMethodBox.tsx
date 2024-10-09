@@ -7,7 +7,7 @@ import { CardNumber } from "./creditCardFields/CardNumber";
 import { ValidThru } from "./creditCardFields/ValidThru";
 import { CVV } from "./creditCardFields/CVV";
 
-export const PaymentMethod = () => {
+export const PaymentMethodBox = () => {
   //
   ////DATA
   const {

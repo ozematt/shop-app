@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useAuthorization } from "../../lib/hooks/useAuthorization";
+import { useAuthorization } from "../../lib/hooks/pages/useAuthorization";
 
 export const PasswordField = () => {
   //

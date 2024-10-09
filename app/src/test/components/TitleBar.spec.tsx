@@ -12,9 +12,10 @@ function renderWithProvider(
 ) {
   return render(<Provider store={store}>{ui}</Provider>);
 }
-
+//
+////TESTS
 describe("<TitleBar />", () => {
-  test("should display bar with proper text ane without button", () => {
+  it("should display bar with proper text ane without button", () => {
     render(<TitleBar title="PAYMENT SUMMERY:" />);
 
     const bar = screen.getByText("PAYMENT SUMMERY:");
@@ -23,7 +24,7 @@ describe("<TitleBar />", () => {
     expect(bar).toBeInTheDocument();
     expect(button).not.toBeInTheDocument();
   });
-  test("should display bar with proper text ane with button", () => {
+  it("should display bar with proper text ane with button", () => {
     const store = configureStore({
       reducer: {
         cart: cartSliceReducer,

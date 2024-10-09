@@ -1,14 +1,10 @@
 import { TextField } from "@mui/material";
-import { useFormContext } from "react-hook-form";
-import { Address } from "../../../lib/types/addressTypes";
+import { useFormField } from "../../../lib/hooks/finalizationPage/useFormField";
 
 export const City = () => {
   //
   ////DATA
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<Address>();
+  const { register, errors } = useFormField();
 
   ////UI
   return (

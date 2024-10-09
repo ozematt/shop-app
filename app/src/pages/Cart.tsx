@@ -1,25 +1,14 @@
-import { Box, Container, CssBaseline, useMediaQuery } from "@mui/material";
-import { useSelector } from "react-redux";
-import { selectAllCart } from "../redux/cart/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { CartItem } from "../components/cartPage/CartItem";
 import { CartEmpty } from "../components/cartPage/CartEmpty";
 import { TotalPrice } from "../components/TotalPrice";
 import { TitleBar } from "../components/TitleBar";
+import { useCart } from "../lib/hooks/pages/useCart";
 
 export const Cart = () => {
   //
   ////DATA
-  const navigate = useNavigate();
-  // cart state
-  const cart = useSelector(selectAllCart);
-  const isSmallScreen = useMediaQuery("(max-width:1100px)");
-
-  ////LOGIC
-  // handle finalization view
-  const handleBuyButton = () => {
-    navigate("/finalization");
-  };
+  const { cart, isSmallScreen, handleBuyButton } = useCart();
 
   ////UI
   return (

@@ -4,6 +4,8 @@ import React from "react";
 
 export const TitleBar = React.memo(
   ({ title, buttonShow }: { title: string; buttonShow?: boolean }) => {
+    //
+    ////UI
     return (
       <>
         <Paper
