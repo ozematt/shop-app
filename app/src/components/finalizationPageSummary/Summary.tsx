@@ -1,16 +1,17 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import { TotalPrice } from "../TotalPrice";
 import { TitleBar } from "../TitleBar";
 import { SummaryShipping } from "./SummaryShipping";
 import { SummaryPaymentMethod } from "./SummaryPaymentMethod";
 import { SummaryProductsToBuy } from "./SummaryProductsToBuy";
 import React from "react";
+import { useTotalPrice } from "../../lib/hooks/useTotalPrice";
 
 export const Summary = React.memo(
   ({ handleSummaryView }: { handleSummaryView: () => void }) => {
     //
     ////DATA
-    const isSmallScreen = useMediaQuery("(max-width:1100px)");
+    const { isSmallScreen } = useTotalPrice();
 
     ////UI
     return (

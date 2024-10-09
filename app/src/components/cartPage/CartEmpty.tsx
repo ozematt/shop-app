@@ -2,6 +2,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import emptyCart from "../../assets/Empty_cart_image.png";
 
 export const CartEmpty = () => {
+  ////UI
   return (
     <>
       <Box sx={{ width: "100%" }}>

@@ -16,7 +16,6 @@ export const AddressBox = React.memo(
     ////UI
     return (
       <>
-        {/* ADDRESS */}
         <Paper
           sx={{
             margin: "90px 7px 0 0",
