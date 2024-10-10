@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run --",
-    "e2e": "npx playwright test --ui"
+    "e2e": "npx playwright test"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
