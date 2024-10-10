@@ -1,27 +1,27 @@
 import { test as base, expect } from "@playwright/test";
 import { LoginPage, injectLoginPage } from "./pages/LoginPage.mts";
-import { Main, injectMainPage } from "./pages/Main.mts";
+import { MainPage, injectMainPage } from "./pages/Main.mts";
 import { validUser, invalidUser } from "./fixtures/userFixtures";
 
 interface TestFixtures {
   loginPage: LoginPage;
-  main: Main;
+  mainPage: MainPage;
 }
 
 const test = base.extend<TestFixtures>({
   loginPage: injectLoginPage,
-  main: injectMainPage,
+  mainPage: injectMainPage,
 });
 
 test.describe("Login flow", () => {
   test("Go to login page, submit form with valid data, verify redirection", async ({
     loginPage,
-    main,
+    mainPage,
     page,
   }) => {
-    await main.mainPage();
+    await mainPage.visit();
     await page.getByText("LOGIN").nth(1).click();
-    await main.pageURL("/login");
+    await mainPage.pageURL("/login");
 
     await loginPage.enterUserLogin(validUser.username);
     await loginPage.enterPassword(validUser.password);
@@ -33,9 +33,9 @@ test.describe("Login flow", () => {
   test("Go to login page, submit form with incorrect data, checking for error occurrence", async ({
     page,
     loginPage,
-    main,
+    mainPage,
   }) => {
-    await main.mainPage();
+    await mainPage.visit();
     await page.getByText("LOGIN").nth(1).click();
 
     await loginPage.enterUserLogin(invalidUser.username);
@@ -48,9 +48,9 @@ test.describe("Login flow", () => {
   test("Go to login page, checking redirection to main page button", async ({
     page,
     loginPage,
-    main,
+    mainPage,
   }) => {
-    await main.mainPage();
+    await mainPage.visit();
     await page.getByText("LOGIN").nth(1).click();
     await page.getByRole("button", { name: "main page" }).click();
 

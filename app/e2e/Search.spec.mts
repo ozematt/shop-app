@@ -1,24 +1,24 @@
 import { test as base, expect } from "@playwright/test";
-import { Main, injectMainPage } from "./pages/Main.mts";
+import { MainPage, injectMainPage } from "./pages/Main.mts";
 import { SearchPage, injectSearchPage } from "./pages/Search.mts";
 
 interface TestFixtures {
   searchPage: SearchPage;
-  main: Main;
+  mainPage: MainPage;
 }
 
 const test = base.extend<TestFixtures>({
   searchPage: injectSearchPage,
-  main: injectMainPage,
+  mainPage: injectMainPage,
 });
 
 test.describe("Search flow", () => {
   test("searching for an element using the search engine, selecting the found element, going to the view of the found element", async ({
     page,
-    main,
+    mainPage,
     searchPage,
   }) => {
-    await main.mainPage();
+    await mainPage.visit();
 
     await searchPage.searchEngine("Mens Casual Premium");
 
