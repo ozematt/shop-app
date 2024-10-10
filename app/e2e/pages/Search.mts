@@ -5,7 +5,8 @@ export const injectSearchPage = async (
   { page }: { page: Page },
   use: (page: SearchEngine) => Promise<void>
 ) => await use(new SearchEngine(page));
-
+//
+////CLASS
 export class SearchEngine extends Common {
   constructor(page: Page) {
     super(page);

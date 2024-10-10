@@ -5,7 +5,8 @@ export const injectLoginPage = async (
   { page }: { page: Page },
   use: (page: Login) => Promise<void>
 ) => await use(new Login(page));
-
+//
+////CLASS
 export class Login extends Common {
   constructor(page: Page) {
     super(page);

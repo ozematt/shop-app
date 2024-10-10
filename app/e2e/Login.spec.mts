@@ -12,7 +12,8 @@ const test = base.extend<TestFixtures>({
   loginPage: injectLoginPage,
   mainPage: injectMainPage,
 });
-
+//
+////TESTS
 test.describe("Login flow", () => {
   test("Go to login page, submit form with valid data, verify redirection", async ({
     loginPage,

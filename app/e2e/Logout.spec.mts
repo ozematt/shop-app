@@ -12,7 +12,8 @@ const test = base.extend<TestFixtures>({
   loginPage: injectLoginPage,
   mainPage: injectMainPage,
 });
-
+//
+////TESTS
 test.describe("Logout flow", () => {
   test("Log in user and log out", async ({ loginPage, mainPage, page }) => {
     await mainPage.visit();

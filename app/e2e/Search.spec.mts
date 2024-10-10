@@ -1,17 +1,18 @@
 import { test as base, expect } from "@playwright/test";
-import { MainPage, injectMainPage } from "./pages/Main.mts";
-import { SearchPage, injectSearchPage } from "./pages/Search.mts";
+import { Main, injectMainPage } from "./pages/Main.mts";
+import { SearchEngine, injectSearchPage } from "./pages/Search.mts";
 
 interface TestFixtures {
-  searchPage: SearchPage;
-  mainPage: MainPage;
+  searchPage: SearchEngine;
+  mainPage: Main;
 }
 
 const test = base.extend<TestFixtures>({
   searchPage: injectSearchPage,
   mainPage: injectMainPage,
 });
-
+//
+////TESTS
 test.describe("Search flow", () => {
   test("searching for an element using the search engine, selecting the found element, going to the view of the found element", async ({
     page,

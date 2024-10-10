@@ -6,7 +6,8 @@ export const injectMainPage = async (
   { page }: { page: Page },
   use: (page: Main) => Promise<void>
 ) => await use(new Main(page));
-
+//
+////CLASS
 export class Main extends Common {
   constructor(page: Page) {
     super(page);
