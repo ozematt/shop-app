@@ -1,5 +1,6 @@
 import { Page } from "playwright";
 import { Common } from "./Common.mts";
+import { expect } from "@playwright/test";
 
 export const injectMainPage = async (
   { page }: { page: Page },
@@ -10,7 +11,10 @@ export class Main extends Common {
   constructor(page: Page) {
     super(page);
   }
-  async navigate(): Promise<void> {
+  async mainPage(): Promise<void> {
     await this.page.goto("/");
+  }
+  async pageURL(url: string) {
+    await expect(this.page).toHaveURL(url);
   }
 }

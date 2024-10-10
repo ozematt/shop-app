@@ -22,6 +22,13 @@ test.describe("Cart flow", () => {
     main,
     page,
   }) => {
-    await main.navigate();
+    await main.mainPage();
+    await cartPage.visit();
+    await main.pageURL("/cart");
+
+    expect(
+      page.getByRole("heading", { name: "Your cart is empty!" })
+    ).toBeVisible();
+    expect(page.getByRole("img")).toBeVisible();
   });
 });

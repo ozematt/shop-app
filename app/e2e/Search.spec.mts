@@ -18,7 +18,7 @@ test.describe("Search flow", () => {
     main,
     searchPage,
   }) => {
-    await main.navigate();
+    await main.mainPage();
 
     await searchPage.searchEngine("Mens Casual Premium");
 

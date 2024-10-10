@@ -18,9 +18,9 @@ test.describe("Login flow", () => {
     main,
     page,
   }) => {
-    await main.navigate();
+    await main.mainPage();
     await page.getByText("LOGIN").nth(1).click();
-    await expect(page).toHaveURL("/login");
+    await main.pageURL("/login");
 
     await loginPage.enterUserLogin("mor_2314");
     await loginPage.enterPassword("83r5^_");
@@ -34,7 +34,7 @@ test.describe("Login flow", () => {
     loginPage,
     main,
   }) => {
-    await main.navigate();
+    await main.mainPage();
     await page.getByText("LOGIN").nth(1).click();
 
     await loginPage.enterUserLogin("wrong_user");
@@ -49,7 +49,7 @@ test.describe("Login flow", () => {
     loginPage,
     main,
   }) => {
-    await main.navigate();
+    await main.mainPage();
     await page.getByText("LOGIN").nth(1).click();
     await page.getByRole("button", { name: "main page" }).click();
 
