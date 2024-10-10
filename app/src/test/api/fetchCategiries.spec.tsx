@@ -1,6 +1,6 @@
 import { expect } from "vitest";
 import { describe } from "vitest";
-import { categoriesTest } from "../../_mocks_/data";
+import categoriesTest from "../../_mocks_/fixtures/categoriesTest.json";
 import fetchCategories from "../../api/queries/categories";
 
 describe("fetchCategories function", () => {

@@ -1,6 +1,6 @@
 import { expect } from "vitest";
 import { describe } from "vitest";
-import { loginTokenTest } from "../../_mocks_/data";
+import loginTokenTest from "../../_mocks_/fixtures/loginTokenTest.json";
 import userCheck from "../../api/queries/authorization";
 
 describe("userCheck function", () => {
