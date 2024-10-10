@@ -78,4 +78,43 @@ test.describe("Finalization page", () => {
     });
     expect(addCardSuccessMsg).toBeVisible();
   });
+  test("enter valid form data and choose payment method, click 'confirm'", async ({
+    finalizationPage,
+    page,
+  }) => {
+    await finalizationPage.visit();
+
+    await finalizationPage.enterFormValue("Name", "Matt");
+    await finalizationPage.enterFormValue("Surname", "Doe");
+    await finalizationPage.enterFormValue("Email", "example@gmail.com");
+    await finalizationPage.enterFormValue("Phone number", "321321321");
+    await finalizationPage.enterFormValue("Street", "Sunny");
+    await finalizationPage.enterFormValue("House number", "12");
+    await finalizationPage.enterFormValue("Apartment number", "2");
+    await finalizationPage.enterFormValue("Zip-Code", "20-200");
+    await finalizationPage.enterFormValue("City", "Warsaw");
+
+    await finalizationPage.buttonPaymentCardClick();
+
+    const cardWindow = page.getByRole("heading", { name: "Enter your Card:" });
+    expect(cardWindow).toBeVisible();
+
+    await finalizationPage.enterFormValue(
+      "Credit card number",
+      "142582726356283"
+    );
+    await finalizationPage.enterFormValue("Valid Thru", "01/05");
+    await finalizationPage.enterFormValue("CVV", "987");
+    await finalizationPage.buttonAddCardClick();
+    const addCardSuccessMsg = page.getByRole("heading", {
+      name: "Card Added !",
+    });
+    expect(addCardSuccessMsg).toBeVisible();
+
+    await finalizationPage.buttonConfirmClick();
+    const summaryWindow = page.getByRole("heading", {
+      name: "PAYMENT SUMMERY:",
+    });
+    expect(summaryWindow).toBeVisible();
+  });
 });
