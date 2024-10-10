@@ -1,6 +1,7 @@
 import { test as base, expect } from "@playwright/test";
 import { LoginPage, injectLoginPage } from "./pages/LoginPage.mts";
 import { Main, injectMainPage } from "./pages/Main.mts";
+import { validUser, invalidUser } from "./fixtures/userFixtures";
 
 interface TestFixtures {
   loginPage: LoginPage;
@@ -22,8 +23,8 @@ test.describe("Login flow", () => {
     await page.getByText("LOGIN").nth(1).click();
     await main.pageURL("/login");
 
-    await loginPage.enterUserLogin("mor_2314");
-    await loginPage.enterPassword("83r5^_");
+    await loginPage.enterUserLogin(validUser.username);
+    await loginPage.enterPassword(validUser.password);
     await loginPage.clickLogin();
 
     const avatar = page.getByTestId("AccountCircleIcon").nth(1);
@@ -37,8 +38,8 @@ test.describe("Login flow", () => {
     await main.mainPage();
     await page.getByText("LOGIN").nth(1).click();
 
-    await loginPage.enterUserLogin("wrong_user");
-    await loginPage.enterPassword("wrong_password");
+    await loginPage.enterUserLogin(invalidUser.username);
+    await loginPage.enterPassword(invalidUser.password);
     await loginPage.clickLogin();
 
     const errorMessage = page.getByText("User does not exist");
