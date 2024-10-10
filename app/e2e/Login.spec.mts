@@ -1,21 +1,24 @@
 import { test as base, expect } from "@playwright/test";
 import { LoginPage, injectLoginPage } from "./pages/LoginPage.mts";
+import { Main, injectMainPage } from "./pages/Main.mts";
 
-const test = base.extend<{
+interface TestFixtures {
   loginPage: LoginPage;
-}>({
-  loginPage: async ({ page }, use) => {
-    const pageInstance = new LoginPage(page);
-    await use(pageInstance);
-  },
+  main: Main;
+}
+
+const test = base.extend<TestFixtures>({
+  loginPage: injectLoginPage,
+  main: injectMainPage,
 });
 
 test.describe("Login flow", () => {
   test("Go to login page, submit form with valid data, verify redirection", async ({
     loginPage,
+    main,
     page,
   }) => {
-    await loginPage.navigate();
+    await main.navigate();
     await page.getByText("LOGIN").nth(1).click();
     await expect(page).toHaveURL("/login");
 
@@ -29,8 +32,9 @@ test.describe("Login flow", () => {
   test("Go to login page, submit form with incorrect data, checking for error occurrence", async ({
     page,
     loginPage,
+    main,
   }) => {
-    await loginPage.navigate();
+    await main.navigate();
     await page.getByText("LOGIN").nth(1).click();
 
     await loginPage.enterUserLogin("wrong_user");
@@ -43,8 +47,9 @@ test.describe("Login flow", () => {
   test("Go to login page, checking redirection to main page button", async ({
     page,
     loginPage,
+    main,
   }) => {
-    await loginPage.navigate();
+    await main.navigate();
     await page.getByText("LOGIN").nth(1).click();
     await page.getByRole("button", { name: "main page" }).click();
 

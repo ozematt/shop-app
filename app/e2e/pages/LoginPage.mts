@@ -10,9 +10,6 @@ export class LoginPage extends Common {
   constructor(page: Page) {
     super(page);
   }
-  async navigate(): Promise<void> {
-    await this.page.goto("/");
-  }
   async enterUserLogin(value: string): Promise<void> {
     await this.fillInput("Login", value);
   }
