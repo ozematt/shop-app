@@ -14,12 +14,6 @@ export class Cart extends Common {
   async visit(): Promise<void> {
     await this.page.getByRole("link", { name: "View Cart" }).nth(1).click();
   }
-  async enterAddressValue(name: string, value: string) {
-    const input = this.page.getByLabel(name);
-
-    await input.click();
-    await input.fill(value);
-  }
   async buttonClick(name: string) {
     await this.page.getByRole("button", { name: name }).click();
   }

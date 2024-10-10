@@ -2,20 +2,24 @@ import { test as base, expect } from "@playwright/test";
 import { Login, injectLoginPage } from "./pages/Login.mts";
 import { Main, injectMainPage } from "./pages/Main.mts";
 import { Cart, injectCartPage } from "./pages/Cart.mts";
-import { validUser, invalidUser } from "./fixtures/userFixtures";
+
+import { Finalization, injectFinalizationPage } from "./pages/Finalization.mts";
 
 interface TestFixtures {
   cartPage: Cart;
   loginPage: Login;
   mainPage: Main;
+  finalizationPage: Finalization;
 }
 
 const test = base.extend<TestFixtures>({
   cartPage: injectCartPage,
   loginPage: injectLoginPage,
   mainPage: injectMainPage,
+  finalizationPage: injectFinalizationPage,
 });
-
+//
+////TESTS
 test.describe("Finalization page", () => {
   test("do not enter any data and click on the button 'confirm' ", async ({
     cartPage,
@@ -29,10 +33,13 @@ test.describe("Finalization page", () => {
     expect(errorPaymentMethod).toBeVisible();
   });
   test("do not enter address data, choose 'pay on delivery' payment method and click on the button 'confirm' ", async ({
-    cartPage,
-    mainPage,
+    finalizationPage,
     page,
   }) => {
-    await page.goto("/finalization");
+    await finalizationPage.visit();
+    await finalizationPage.buttonPayOnDeliveryClick();
+    await finalizationPage.buttonConfirmClick();
+    const errorAddressMgs = page.getByText("Address is required");
+    expect(errorAddressMgs).toBeVisible();
   });
 });

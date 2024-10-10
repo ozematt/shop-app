@@ -3,19 +3,23 @@ import { Login, injectLoginPage } from "./pages/Login.mts";
 import { Main, injectMainPage } from "./pages/Main.mts";
 import { Cart, injectCartPage } from "./pages/Cart.mts";
 import { validUser, invalidUser } from "./fixtures/userFixtures";
+import { Finalization, injectFinalizationPage } from "./pages/Finalization.mts";
 
 interface TestFixtures {
   cartPage: Cart;
   loginPage: Login;
   mainPage: Main;
+  finalizationPage: Finalization;
 }
 
 const test = base.extend<TestFixtures>({
   cartPage: injectCartPage,
   loginPage: injectLoginPage,
   mainPage: injectMainPage,
+  finalizationPage: injectFinalizationPage,
 });
-
+//
+////TESTS
 test.describe("Cart flow", () => {
   test("Go to cart page, verify redirection and message empty cart ", async ({
     cartPage,
@@ -40,6 +44,7 @@ test.describe("Cart flow", () => {
     cartPage,
     loginPage,
     mainPage,
+    finalizationPage,
     page,
   }) => {
     await mainPage.visit();
@@ -62,20 +67,19 @@ test.describe("Cart flow", () => {
     await page.getByText("+").click();
 
     await page.getByRole("button", { name: "Buy" }).click();
-    await page.getByLabel("Name", { exact: true }).click();
-    await page.getByLabel("Name", { exact: true }).fill("Matt");
-    await cartPage.enterAddressValue("Surname", "Doe");
-    await cartPage.enterAddressValue("Email", "example@gmail.com");
-    await cartPage.enterAddressValue("Phone number", "321321321");
-    await cartPage.enterAddressValue("Street", "Sunny");
-    await cartPage.enterAddressValue("House number", "12");
-    await cartPage.enterAddressValue("Apartment number", "2");
-    await cartPage.enterAddressValue("Zip-Code", "20-200");
-    await cartPage.enterAddressValue("City", "Warsaw");
+    await finalizationPage.enterFormValue("Name", "Matt");
+    await finalizationPage.enterFormValue("Surname", "Doe");
+    await finalizationPage.enterFormValue("Email", "example@gmail.com");
+    await finalizationPage.enterFormValue("Phone number", "321321321");
+    await finalizationPage.enterFormValue("Street", "Sunny");
+    await finalizationPage.enterFormValue("House number", "12");
+    await finalizationPage.enterFormValue("Apartment number", "2");
+    await finalizationPage.enterFormValue("Zip-Code", "20-200");
+    await finalizationPage.enterFormValue("City", "Warsaw");
 
-    await cartPage.buttonClick("Pay on delivery");
-    await cartPage.buttonClick("Confirm");
-    await cartPage.buttonClick("Pay");
+    await finalizationPage.buttonPayOnDeliveryClick();
+    await finalizationPage.buttonConfirmClick();
+    await finalizationPage.buttonClick("Pay"); //summary
 
     const success = page.getByText("Congratulations!You have made");
     expect(success).toBeVisible();
