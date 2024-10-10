@@ -20,7 +20,7 @@ const test = base.extend<TestFixtures>({
 });
 //
 ////TESTS
-test.describe("Finalization page", () => {
+test.describe("Finalization flow", () => {
   test("do not enter any data and click on the button 'confirm' ", async ({
     cartPage,
     mainPage,
