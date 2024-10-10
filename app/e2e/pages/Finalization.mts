@@ -22,16 +22,22 @@ export class Finalization extends Common {
   }
 
   async buttonPayOnDeliveryClick() {
-    await this.page.getByRole("button", { name: "Pay on delivery" }).click();
+    await this.#getButton("Pay on delivery").click();
+  }
+  async buttonPaymentCardClick() {
+    await this.#getButton("Payment card").click();
   }
   async buttonConfirmClick() {
-    await this.page.getByRole("button", { name: "Confirm" }).click();
+    await this.#getButton("Confirm").click();
+  }
+  async buttonAddCardClick() {
+    await this.#getButton("Add Card").click();
   }
 
   async buttonClick(name: string) {
-    await this.page.getByRole("button", { name: name }).click();
+    await this.#getButton(name).click();
   }
-  // #getInput(name: string) {
-  //   return this.page.getByLabel(name);
-  // }
+  #getButton(name: string) {
+    return this.page.getByRole("button", { name: name });
+  }
 }

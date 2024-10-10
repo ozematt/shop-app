@@ -42,4 +42,15 @@ test.describe("Finalization page", () => {
     const errorAddressMgs = page.getByText("Address is required");
     expect(errorAddressMgs).toBeVisible();
   });
+  test("choose 'Payment card' payment method and click 'Add card' without form fill", async ({
+    finalizationPage,
+    page,
+  }) => {
+    await finalizationPage.visit();
+    await finalizationPage.buttonPaymentCardClick();
+
+    await finalizationPage.buttonConfirmClick();
+    const errorAddressMgs = page.getByText("Address is required");
+    expect(errorAddressMgs).toBeVisible();
+  });
 });
