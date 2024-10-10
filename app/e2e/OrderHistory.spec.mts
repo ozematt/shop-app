@@ -36,7 +36,10 @@ test.describe("Order history flow", () => {
 
     await page.getByTestId("AccountCircleIcon").nth(1).click();
 
-    await page.getByRole("menuitem", { name: "Orders" }).click();
+    const ordersMenuItem = page
+      .getByRole("menuitem", { name: "Orders" })
+      .nth(0);
+    await ordersMenuItem.click({ force: true });
     const emptyOrderHistoryMgs = page.getByRole("heading", {
       name: "You don't have any previous",
     });
@@ -83,7 +86,10 @@ test.describe("Order history flow", () => {
 
     await page.getByTestId("AccountCircleIcon").click();
 
-    await page.getByRole("menuitem", { name: "Orders" }).click();
+    const ordersMenuItem = page
+      .getByRole("menuitem", { name: "Orders" })
+      .nth(0);
+    await ordersMenuItem.click({ force: true });
 
     const orderData = page.getByRole("heading", { name: "Purchase date:" });
     expect(orderData).toBeVisible();

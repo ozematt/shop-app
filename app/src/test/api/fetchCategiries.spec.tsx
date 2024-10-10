@@ -6,6 +6,6 @@ import fetchCategories from "../../api/queries/categories";
 ////TESTS
 describe("fetchCategories function", () => {
   it("should fetch correct data", async () => {
-    expect(await fetchCategories()).toEqual({ categoriesTest });
+    expect(await fetchCategories()).toEqual(categoriesTest);
   });
 });
