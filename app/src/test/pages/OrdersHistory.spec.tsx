@@ -12,7 +12,8 @@ function renderWithProvider(
 ) {
   return render(<Provider store={store}>{ui}</Provider>);
 }
-
+//
+////TESTS
 describe("<OrdersHistory />", () => {
   test("should display title", () => {
     const store = configureStore({

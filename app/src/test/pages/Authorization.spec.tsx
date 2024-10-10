@@ -8,6 +8,7 @@ import cartSliceReducer from "../../redux/cart/cartSlice";
 import productsSliceReducer from "../../redux/products/productsSlice";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
 const useAuthorizationSpy = vi.spyOn(useAuthorizationFile, "useAuthorization");
 
@@ -70,8 +71,47 @@ describe("<Authorization />", () => {
   afterAll(() => {
     useAuthorizationSpy.mockRestore();
   });
-  test("should display proper product", () => {
+  it("should not display the login window", () => {
     mockUseAuthorization({ mutation: { isPending: true } });
+    const store = configureStore({
+      reducer: {
+        user: userSliceReducer,
+        products: productsSliceReducer,
+        cart: cartSliceReducer,
+      },
+    });
+    renderWithProvider(
+      <MemoryRouter>
+        <Authorization />
+      </MemoryRouter>,
+      { store }
+    );
+    expect(screen.queryByText("Login")).not.toBeInTheDocument();
+  });
+  it("should display a login window", () => {
+    mockUseAuthorization({});
+    const store = configureStore({
+      reducer: {
+        user: userSliceReducer,
+        products: productsSliceReducer,
+        cart: cartSliceReducer,
+      },
+    });
+    renderWithProvider(
+      <MemoryRouter>
+        <Authorization />
+      </MemoryRouter>,
+      { store }
+    );
+    expect(screen.getByRole("heading", { name: "Login:" })).toBeInTheDocument();
+  });
+  it("should call handleLogin when the login button is clicked", async () => {
+    const user = userEvent.setup();
+
+    mockUseAuthorization({
+      username: "john",
+      password: "123456",
+    });
 
     const store = configureStore({
       reducer: {
@@ -80,7 +120,6 @@ describe("<Authorization />", () => {
         cart: cartSliceReducer,
       },
     });
-
     renderWithProvider(
       <MemoryRouter>
         <Authorization />
@@ -88,6 +127,18 @@ describe("<Authorization />", () => {
       { store }
     );
 
-    expect(screen.queryByText("Login")).not.toBeInTheDocument();
+    const loginInput = screen.getByLabelText("Login");
+    const passwordInput = screen.getByLabelText("Password");
+
+    expect(loginInput).toHaveValue("john");
+    expect(passwordInput).toHaveValue("123456");
+
+    const loginButton = screen.getByRole("button", { name: "Login" });
+
+    await user.click(loginButton);
+
+    expect(mockHandleLogin).toHaveBeenCalled();
+
+    expect(mockHandleLogin).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { expect } from "vitest";
 import { MemoryRouter } from "react-router-dom";
-import { CartEmpty } from "../../../components/cartPage/CartEmpty";
-
+import { CartEmpty } from "../../components/cartPage/CartEmpty";
+//
+////TESTS
 describe("<OrdersEmpty />", () => {
-  test("displaying a empty cart message", () => {
+  it("should display message of empty cart", () => {
     render(
       <MemoryRouter>
         <CartEmpty />
