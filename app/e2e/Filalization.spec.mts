@@ -49,8 +49,33 @@ test.describe("Finalization page", () => {
     await finalizationPage.visit();
     await finalizationPage.buttonPaymentCardClick();
 
-    await finalizationPage.buttonConfirmClick();
-    const errorAddressMgs = page.getByText("Address is required");
+    const cardWindow = page.getByRole("heading", { name: "Enter your Card:" });
+    expect(cardWindow).toBeVisible();
+
+    await finalizationPage.buttonAddCardClick();
+    const errorAddressMgs = page.getByText("Please fill in the fields.");
     expect(errorAddressMgs).toBeVisible();
+  });
+  test("choose 'Payment card' payment method and click 'Add card' after fill card form", async ({
+    finalizationPage,
+    page,
+  }) => {
+    await finalizationPage.visit();
+    await finalizationPage.buttonPaymentCardClick();
+
+    const cardWindow = page.getByRole("heading", { name: "Enter your Card:" });
+    expect(cardWindow).toBeVisible();
+
+    await finalizationPage.enterFormValue(
+      "Credit card number",
+      "142582726356283"
+    );
+    await finalizationPage.enterFormValue("Valid Thru", "01/05");
+    await finalizationPage.enterFormValue("CVV", "987");
+    await finalizationPage.buttonAddCardClick();
+    const addCardSuccessMsg = page.getByRole("heading", {
+      name: "Card Added !",
+    });
+    expect(addCardSuccessMsg).toBeVisible();
   });
 });

@@ -5,7 +5,8 @@ export const injectCartPage = async (
   { page }: { page: Page },
   use: (page: Cart) => Promise<void>
 ) => await use(new Cart(page));
-
+//
+////CLASS
 export class Cart extends Common {
   constructor(page: Page) {
     super(page);
