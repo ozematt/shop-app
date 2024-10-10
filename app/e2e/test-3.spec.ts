@@ -8,7 +8,15 @@ test("test", async ({ page }) => {
   await page.getByLabel("Password", { exact: true }).click();
   await page.getByLabel("Password", { exact: true }).fill("83r5^_");
   await page.getByRole("button", { name: "Login" }).click();
-  await page.locator("button").first().click();
-  await page.getByRole("link", { name: "View Cart" }).nth(1).click();
-  await page.getByText("-1+ Fjallraven - Foldsack No").click();
+  await page
+    .locator(
+      "div:nth-child(2) > .MuiPaper-root > .MuiContainer-root > .MuiToolbar-root > div:nth-child(7) > .MuiSvgIcon-root > path"
+    )
+    .click();
+  await page
+    .locator("div")
+    .filter({ hasText: "You have been successfully" })
+    .nth(1)
+    .click();
+  await page.getByRole("button", { name: "Close" }).click();
 });

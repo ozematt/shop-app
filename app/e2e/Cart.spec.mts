@@ -36,7 +36,7 @@ test.describe("Cart flow", () => {
     await page.locator("button").first().click();
     expect(mainPage.pageURL("/login"));
   });
-  test("Add item to cart when user is log in", async ({
+  test("Add item to cart when user is log in, increase the quantity of the product added and buy it ", async ({
     cartPage,
     loginPage,
     mainPage,
@@ -54,7 +54,33 @@ test.describe("Cart flow", () => {
 
     await page.locator("button").first().click();
     await cartPage.visit();
+
     const item = page.getByText("-1+ Fjallraven - Foldsack No");
     expect(item).toBeVisible();
+
+    await page.getByText("+").click();
+    await page.getByText("+").click();
+
+    await page.getByRole("button", { name: "Buy" }).click();
+    await page.getByLabel("Name", { exact: true }).click();
+    await page.getByLabel("Name", { exact: true }).fill("Matt");
+    await cartPage.enterAddressValue("Surname", "Doe");
+    await cartPage.enterAddressValue("Email", "example@gmail.com");
+    await cartPage.enterAddressValue("Phone number", "321321321");
+    await cartPage.enterAddressValue("Street", "Sunny");
+    await cartPage.enterAddressValue("House number", "12");
+    await cartPage.enterAddressValue("Apartment number", "2");
+    await cartPage.enterAddressValue("Zip-Code", "20-200");
+    await cartPage.enterAddressValue("City", "Warsaw");
+
+    await cartPage.buttonClick("Pay on delivery");
+    await cartPage.buttonClick("Confirm");
+    await cartPage.buttonClick("Pay");
+
+    const success = page.getByText("Congratulations!You have made");
+    expect(success).toBeVisible();
+
+    await cartPage.buttonClick("back to main page");
+    expect(mainPage.pageURL("/"));
   });
 });

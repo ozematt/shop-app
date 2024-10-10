@@ -47,7 +47,6 @@ test.describe("Login flow", () => {
   });
   test("Go to login page, checking redirection to main page button", async ({
     page,
-    loginPage,
     mainPage,
   }) => {
     await mainPage.visit();
