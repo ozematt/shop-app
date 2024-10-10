@@ -3,10 +3,10 @@ import { Common } from "./Common.mts";
 
 export const injectCartPage = async (
   { page }: { page: Page },
-  use: (page: CartPage) => Promise<void>
-) => await use(new CartPage(page));
+  use: (page: Cart) => Promise<void>
+) => await use(new Cart(page));
 
-export class CartPage extends Common {
+export class Cart extends Common {
   constructor(page: Page) {
     super(page);
   }

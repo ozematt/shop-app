@@ -3,10 +3,10 @@ import { Common } from "./Common.mts";
 
 export const injectSearchPage = async (
   { page }: { page: Page },
-  use: (page: SearchPage) => Promise<void>
-) => await use(new SearchPage(page));
+  use: (page: SearchEngine) => Promise<void>
+) => await use(new SearchEngine(page));
 
-export class SearchPage extends Common {
+export class SearchEngine extends Common {
   constructor(page: Page) {
     super(page);
   }

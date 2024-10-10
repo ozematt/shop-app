@@ -1,13 +1,13 @@
 import { test as base, expect } from "@playwright/test";
-import { LoginPage, injectLoginPage } from "./pages/LoginPage.mts";
-import { MainPage, injectMainPage } from "./pages/Main.mts";
-import { CartPage, injectCartPage } from "./pages/CartPage.mts";
+import { Login, injectLoginPage } from "./pages/Login.mts";
+import { Main, injectMainPage } from "./pages/Main.mts";
+import { Cart, injectCartPage } from "./pages/Cart.mts";
 import { validUser, invalidUser } from "./fixtures/userFixtures";
 
 interface TestFixtures {
-  cartPage: CartPage;
-  loginPage: LoginPage;
-  mainPage: MainPage;
+  cartPage: Cart;
+  loginPage: Login;
+  mainPage: Main;
 }
 
 const test = base.extend<TestFixtures>({
@@ -24,7 +24,7 @@ test.describe("Cart flow", () => {
   }) => {
     await mainPage.visit();
     await cartPage.visit();
-    await mainPage.pageURL("/cart");
+    await mainPage.verifyURL("/cart");
 
     expect(
       page.getByRole("heading", { name: "Your cart is empty!" })
@@ -34,7 +34,7 @@ test.describe("Cart flow", () => {
   test("Add to cart when user is not log in", async ({ mainPage, page }) => {
     await mainPage.visit();
     await page.locator("button").first().click();
-    expect(mainPage.pageURL("/login"));
+    expect(mainPage.verifyURL("/login"));
   });
   test("Add item to cart when user is log in, increase the quantity of the product added and buy it ", async ({
     cartPage,
@@ -81,6 +81,6 @@ test.describe("Cart flow", () => {
     expect(success).toBeVisible();
 
     await cartPage.buttonClick("back to main page");
-    expect(mainPage.pageURL("/"));
+    expect(mainPage.verifyURL("/"));
   });
 });

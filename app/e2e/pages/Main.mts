@@ -4,17 +4,17 @@ import { expect } from "@playwright/test";
 
 export const injectMainPage = async (
   { page }: { page: Page },
-  use: (page: MainPage) => Promise<void>
-) => await use(new MainPage(page));
+  use: (page: Main) => Promise<void>
+) => await use(new Main(page));
 
-export class MainPage extends Common {
+export class Main extends Common {
   constructor(page: Page) {
     super(page);
   }
   async visit(): Promise<void> {
     await this.page.goto("/");
   }
-  async pageURL(url: string) {
+  async verifyURL(url: string) {
     await expect(this.page).toHaveURL(url);
   }
 }

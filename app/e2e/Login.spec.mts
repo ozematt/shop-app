@@ -1,11 +1,11 @@
 import { test as base, expect } from "@playwright/test";
-import { LoginPage, injectLoginPage } from "./pages/LoginPage.mts";
-import { MainPage, injectMainPage } from "./pages/Main.mts";
+import { Login, injectLoginPage } from "./pages/Login.mts";
+import { Main, injectMainPage } from "./pages/Main.mts";
 import { validUser, invalidUser } from "./fixtures/userFixtures";
 
 interface TestFixtures {
-  loginPage: LoginPage;
-  mainPage: MainPage;
+  loginPage: Login;
+  mainPage: Main;
 }
 
 const test = base.extend<TestFixtures>({
@@ -21,7 +21,7 @@ test.describe("Login flow", () => {
   }) => {
     await mainPage.visit();
     await page.getByText("LOGIN").nth(1).click();
-    await mainPage.pageURL("/login");
+    await mainPage.verifyURL("/login");
 
     await loginPage.enterUserLogin(validUser.username);
     await loginPage.enterPassword(validUser.password);
