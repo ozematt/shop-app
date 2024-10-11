@@ -100,7 +100,7 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
 
 ### Opcja 2: Uruchamianie w kontenerze (Docker)
 
-1. **Upewnij się, że masz zainstalowany Docker.:**
+1. **Upewnij się, że masz zainstalowany Docker.**
 2. **Sklonuj repozytorium:**
    ```sh
    git clone https://github.com/ozematt/shop-app.git
@@ -113,8 +113,22 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
    ```sh
    ./startdev.sh
    ```
+4. **Zainstaluj zależności:**
+   ```sh
+   npm install
+   ```
 5. **Uruchom aplikacje:**
    ```sh
    npm run dev
    ```
    Aplikacja będzie dostępna pod adresem: http://localhost:3000/
+   
+
+
+## Użycie
+
+
+- **Zmiana motywu** – Przycisk do przełączania motywów znajduje się w prawym górnym rogu interfejsu.
+- **Logowanie** – Użyj formularza logowania, aby uzyskać dostęp do funkcji zakupowych. Dane do logowania dostępne w dokumentacji Fake Shop API(https://fakestoreapi.com).
+- **Katalog produktów** – Przeglądaj produkty, korzystając z filtrów, sortowania i wyszukiwania.
+- **Koszyk** – Dodawaj produkty do koszyka, zarządzaj nimi i realizuj zakupy.
