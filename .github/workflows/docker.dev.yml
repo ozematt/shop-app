@@ -81,10 +81,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Check for package.json
+        run: ls -la ./app
       - name: Install dependencies
-        run: npm install
-      - name: Debugging
-        run: cat package-lock.json
+        run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
