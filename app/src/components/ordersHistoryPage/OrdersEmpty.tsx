@@ -12,7 +12,7 @@ export const OrdersEmpty = () => {
         }}
       >
         <Typography variant="h3" sx={{ padding: "20px" }}>
-          You don't have any previous orders...
+          You do not have any previous orders...
         </Typography>
       </Paper>
     </>

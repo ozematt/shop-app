@@ -39,11 +39,16 @@ test.describe("Order history flow", () => {
     const ordersMenuItem = page
       .getByRole("menuitem", { name: "Orders" })
       .nth(0);
+
     await ordersMenuItem.click({ force: true });
-    const emptyOrderHistoryMgs = page.getByRole("heading", {
-      name: "You don't have any previous",
-    });
-    expect(emptyOrderHistoryMgs).toBeVisible();
+
+    const emptyOrderHistoryMgs = page
+      .locator("h3:has-text('You do not have any previous orders...')")
+      .nth(0);
+
+    await emptyOrderHistoryMgs.waitFor({ state: "visible" });
+
+    await expect(emptyOrderHistoryMgs).toBeVisible();
   });
   test("buy an item and check order history", async ({
     loginPage,
@@ -91,7 +96,7 @@ test.describe("Order history flow", () => {
       .nth(0);
     await ordersMenuItem.click({ force: true });
 
-    const orderData = page.getByRole("heading", { name: "Purchase date:" });
+    const orderData = page.locator('h5:has-text("Purchase date:")');
     expect(orderData).toBeVisible();
   });
 });
