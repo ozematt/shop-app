@@ -45,6 +45,7 @@ jobs:
         working-directory: ./app
       - name: Install Playwright
         run: npx playwright install
+        working-directory: ./app
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         working-directory: ./app
