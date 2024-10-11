@@ -1,4 +1,5 @@
-import { Navbar } from "../components/Navbar";
+import { Dashboard } from "../components/Dashboard";
+// import { Navbar } from "../components/Navbar";
 import { Products } from "../components/Products";
 
 export const Home = () => {
@@ -6,7 +7,8 @@ export const Home = () => {
   ////UI
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Dashboard />
       <Products />
     </>
   );
