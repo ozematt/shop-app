@@ -1,11 +1,10 @@
-import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import SearchIcon from "@mui/icons-material/Search";
 import { CartField } from "./navbarFields/userPanelFields/CartField";
 import { UserField } from "./navbarFields/userPanelFields/UserField";
 import { LoginButton } from "./navbarFields/userPanelFields/LoginButton";
-import { Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { useBottomNavbar } from "../lib/hooks/useBottomNavbar";
 
 export const BottomNavbar = () => {
