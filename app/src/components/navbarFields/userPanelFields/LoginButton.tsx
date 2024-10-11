@@ -15,7 +15,6 @@ export const LoginButton = () => {
           padding: "10px",
           marginRight: "10px",
           color: "white",
-          // color: theme.palette.mode === "dark" ? "white" : "black",
           cursor: "pointer",
           "&:hover": {
             borderRadius: "5px",

@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store";
 
-export const useBottomNavbar = () => {
+export const useBottomBar = () => {
   //
   ////DATA
   const [isClicked, setIsClicked] = useState(false);
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery("(max-width:990px)");
+  const showBottomNav = useMediaQuery("(max-width:990px)");
   const navigate = useNavigate();
 
   const auth = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -19,5 +19,5 @@ export const useBottomNavbar = () => {
     setIsClicked(!isClicked);
     navigate("/mSearch");
   };
-  return { theme, isSmallScreen, auth, handleClick };
+  return { theme, showBottomNav, auth, handleClick };
 };

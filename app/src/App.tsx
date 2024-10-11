@@ -5,10 +5,6 @@ import theme from "./mui/theme";
 //router
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-//pages
-import { NotFound } from "./pages/NotFound";
-import { Home } from "./pages/Home";
-
 //tanstack-query
 import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "./api/queryClient";
@@ -17,6 +13,10 @@ import React from "react";
 //redux tool kit
 import { Provider } from "react-redux";
 import store from "./redux/store";
+
+//components
+import { NotFound } from "./pages/NotFound";
+import { Home } from "./pages/Home";
 import { Cart } from "./pages/Cart";
 import { Dashboard } from "./components/Dashboard";
 import { Authorization } from "./pages/Authorization";

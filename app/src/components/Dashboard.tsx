@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./Navbar";
-import { BottomNavbar } from "./BottomNavbar";
 
 export const Dashboard = () => {
   //
@@ -10,7 +9,6 @@ export const Dashboard = () => {
       <div>
         <Navbar />
         <Outlet />
-        <BottomNavbar />
       </div>
     </>
   );
