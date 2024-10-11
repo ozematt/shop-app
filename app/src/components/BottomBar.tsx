@@ -5,12 +5,12 @@ import { CartField } from "./navbarFields/userPanelFields/CartField";
 import { UserField } from "./navbarFields/userPanelFields/UserField";
 import { LoginButton } from "./navbarFields/userPanelFields/LoginButton";
 import { Box, Tooltip } from "@mui/material";
-import { useBottomNavbar } from "../lib/hooks/useBottomNavbar";
+import { useBottomBar } from "../lib/hooks/useBottomBar";
 
-export const BottomNavbar = () => {
+export const BottomBar = () => {
   //
   ////DATA
-  const { theme, auth, handleClick } = useBottomNavbar();
+  const { theme, auth, handleClick } = useBottomBar();
 
   ////UI
   return (
