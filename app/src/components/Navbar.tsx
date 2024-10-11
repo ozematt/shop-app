@@ -7,14 +7,14 @@ import { ThemeSwitchField } from "./navbarFields/ThemeSwitchField";
 import { CategoryField } from "./navbarFields/CategoryField";
 import { SortField } from "./navbarFields/SortField";
 import { useNavbar } from "../lib/hooks/useNavbar";
-import { useBottomNavbar } from "../lib/hooks/useBottomNavbar";
-import { BottomNavbar } from "./BottomNavbar";
+import { useBottomBar } from "../lib/hooks/useBottomBar";
+import { BottomBar } from "./BottomBar";
 
 export const Navbar = () => {
   //
   ////DATA
   const { isSmallScreen } = useNavbar();
-  const { showBottomNav } = useBottomNavbar();
+  const { showBottomNav } = useBottomBar();
 
   ////UI
   return (
@@ -37,7 +37,7 @@ export const Navbar = () => {
               </Container>
             </AppBar>
           </Box>
-          {showBottomNav && <BottomNavbar />}
+          {showBottomNav && <BottomBar />}
         </>
       ) : (
         <>
@@ -51,7 +51,7 @@ export const Navbar = () => {
               </Container>
             </AppBar>
           </Box>
-          {showBottomNav && <BottomNavbar />}
+          {showBottomNav && <BottomBar />}
         </>
       )}
     </>

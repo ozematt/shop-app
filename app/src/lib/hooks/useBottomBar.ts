@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/store";
 
-export const useBottomNavbar = () => {
+export const useBottomBar = () => {
   //
   ////DATA
   const [isClicked, setIsClicked] = useState(false);
