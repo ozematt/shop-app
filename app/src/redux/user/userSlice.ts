@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Orders, User } from "../../lib/types/userTypes";
+import { User } from "../../lib/types/userTypes";
+import { Orders } from "../../lib/types/ordersTypes";
 
 const initialState: User = { isLoggedIn: false, orders: [] };
 
@@ -16,7 +17,11 @@ const userSlice = createSlice({
     addOrder: (state: User, action: PayloadAction<Orders>) => {
       state.orders.push(action.payload);
     },
+    removeOrders: (state) => {
+      state.orders = [];
+    },
   },
 });
-export const { addOrder, logUser, logOutUser } = userSlice.actions;
+export const { addOrder, logUser, logOutUser, removeOrders } =
+  userSlice.actions;
 export default userSlice.reducer;

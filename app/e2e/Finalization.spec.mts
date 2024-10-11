@@ -23,15 +23,19 @@ const test = base.extend<TestFixtures>({
 test.describe("Finalization flow", () => {
   test("do not enter any data and click on the button 'confirm' ", async ({
     cartPage,
-    mainPage,
+
     page,
   }) => {
     await page.goto("/finalization");
     await cartPage.buttonClick("Confirm");
-    expect(mainPage.verifyURL("/finalization"));
-    const errorPaymentMethod = page.getByText("Please select a payment");
+
+    const errorPaymentMethod = page
+      .locator('text="Please select a payment method."')
+      .first();
+
     expect(errorPaymentMethod).toBeVisible();
   });
+
   test("do not enter address data, choose 'pay on delivery' payment method and click on the button 'confirm' ", async ({
     finalizationPage,
     page,
@@ -42,6 +46,7 @@ test.describe("Finalization flow", () => {
     const errorAddressMgs = page.getByText("Address is required");
     expect(errorAddressMgs).toBeVisible();
   });
+
   test("choose 'Payment card' payment method and click 'Add card' without form fill", async ({
     finalizationPage,
     page,
@@ -53,9 +58,14 @@ test.describe("Finalization flow", () => {
     expect(cardWindow).toBeVisible();
 
     await finalizationPage.buttonAddCardClick();
-    const errorAddressMgs = page.getByText("Please fill in the fields.");
+
+    // const errorAddressMgs = page.getByText("Please fill in the fields.");
+    const errorAddressMgs = page.locator(
+      'p:has-text("Please fill in the fields.")'
+    );
     expect(errorAddressMgs).toBeVisible();
   });
+
   test("choose 'Payment card' payment method and click 'Add card' after fill card form", async ({
     finalizationPage,
     page,
