@@ -1,12 +1,18 @@
 # shop-app
 
+
+
 ## Opis projektu
+
 
 shop-app jest to aplikacja e-commerce, która oferuje funkcjonalny i nowoczesny sklep internetowy. Główne funkcjonalności aplikacji to obsługa motywów, katalog produktów z wyszukiwarką i filtrowaniem, zarządzanie koszykiem, proces zakupu oraz pulpit użytkownika z historią zamówień. Projekt został zbudowany z wykorzystaniem React, TypeScript oraz komponentów z biblioteki Material-UI (MUI), które zapewniają nowoczesny i intuicyjny interfejs użytkownika.
 
 Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliwia testowanie funkcjonalności bez potrzeby tworzenia własnego backendu.
 
+
+
 ### Funkcjonalności
+
 
 ### 1. Obsługa motywów
 
@@ -47,7 +53,10 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
 
 - Użytkownik ma dostęp do swojego pulpitu z **historią zamówień**.
 
+
+
 ## Technologia
+
 
 - **React** – JavaScriptowy framework do budowy interfejsów użytkownika.
 - **TypeScript** – Superset JavaScriptu, który zapewnia statyczne typowanie, co poprawia niezawodność i stabilność aplikacji.
@@ -62,7 +71,10 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
 - **Fake Store API** – Zewnętrzne API, które dostarcza dane produktów, takie jak opisy, ceny, zdjęcia i kategorie (dokumentacja: [https://fakestoreapi.com/](https://fakestoreapi.com/)).
 - **API REST** – Obsługa danych przez endpointy API, m.in. `/auth/login`, `/products`.
 
+
+
 ## Instalacja
+
 
 ### Opcja 1: Uruchamianie lokalnie
 
@@ -84,6 +96,7 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
    npm run dev
    ```
    Aplikacja będzie dostępna pod adresem: http://localhost:3000/
+
 
 ### Opcja 2: Uruchamianie w kontenerze (Docker)
 
