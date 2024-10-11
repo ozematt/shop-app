@@ -11,7 +11,7 @@ describe("<OrdersEmpty />", () => {
         <OrdersEmpty />
       </MemoryRouter>
     );
-    const text = screen.getByText("You don't have any previous orders...");
+    const text = screen.getByText("You do not have any previous orders...");
     expect(text).toBeInTheDocument();
   });
 });
