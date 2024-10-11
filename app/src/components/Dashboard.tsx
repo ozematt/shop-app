@@ -4,7 +4,6 @@ import { Navbar } from "./Navbar";
 // import { useBottomNavbar } from "../lib/hooks/useBottomNavbar";
 
 export const Dashboard = () => {
-  // const { isSmallScreen } = useBottomNavbar();
   //
   ////Ui
   return (
