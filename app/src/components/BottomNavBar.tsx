@@ -10,43 +10,41 @@ import { useBottomNavbar } from "../lib/hooks/useBottomNavbar";
 export const BottomNavbar = () => {
   //
   ////DATA
-  const { theme, isSmallScreen, auth, handleClick } = useBottomNavbar();
+  const { theme, auth, handleClick } = useBottomNavbar();
 
   ////UI
   return (
     <>
-      {isSmallScreen ? (
-        <Box
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: "1px",
+          width: "100%",
+          zIndex: "1",
+        }}
+      >
+        <BottomNavigation
           sx={{
-            position: "fixed",
-            bottom: "1px",
-            width: "100%",
-            zIndex: "1",
+            background:
+              theme.palette.mode === "dark"
+                ? "black"
+                : theme.palette.primary.main,
           }}
         >
-          <BottomNavigation
-            sx={{
-              background:
-                theme.palette.mode === "dark"
-                  ? "black"
-                  : theme.palette.primary.main,
-            }}
-          >
-            <BottomNavigationAction
-              onClick={handleClick}
-              icon={
-                <Tooltip title="Search">
-                  <SearchIcon fontSize="large" />
-                </Tooltip>
-              }
-            />
-            <BottomNavigationAction icon={<CartField />} />
-            <BottomNavigationAction
-              icon={auth ? <UserField /> : <LoginButton />}
-            />
-          </BottomNavigation>
-        </Box>
-      ) : null}
+          <BottomNavigationAction
+            onClick={handleClick}
+            icon={
+              <Tooltip title="Search">
+                <SearchIcon fontSize="large" />
+              </Tooltip>
+            }
+          />
+          <BottomNavigationAction icon={<CartField />} />
+          <BottomNavigationAction
+            icon={auth ? <UserField /> : <LoginButton />}
+          />
+        </BottomNavigation>
+      </Box>
     </>
   );
 };
