@@ -27,6 +27,7 @@ jobs:
       - name: Run Vitest tests
         run: npm run test
         working-directory: ./app
+
   e2e:
     needs: tests
     timeout-minutes: 60
