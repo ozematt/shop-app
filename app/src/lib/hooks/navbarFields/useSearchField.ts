@@ -27,7 +27,7 @@ export const useSearchField = () => {
 
   // product selection action
   const handleProductSelect = useCallback(
-    (event: SyntheticEvent<Element, Event>, newValue: string | null) => {
+    (_: SyntheticEvent<Element, Event>, newValue: string | null) => {
       if (!newValue) return;
 
       // find the product that matches the selected title
