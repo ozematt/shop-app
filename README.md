@@ -4,10 +4,9 @@
 
 ## Opis projektu
 
+**shop-app** to aplikacja e-commerce zbudowana z użyciem React i TypeScript, oferująca funkcjonalny sklep internetowy z katalogiem produktów, zarządzaniem koszykiem, procesem zakupu oraz pulpitem użytkownika. Aplikacja korzysta z **Fake Store API** do pobierania produktów. Zaimplementowane zostały funkcje takie jak obsługa motywów, filtrowanie i sortowanie produktów, oraz integracja z API do obsługi logowania i zamówień. 
 
-shop-app jest to aplikacja e-commerce, która oferuje funkcjonalny i nowoczesny sklep internetowy. Główne funkcjonalności aplikacji to obsługa motywów, katalog produktów z wyszukiwarką i filtrowaniem, zarządzanie koszykiem, proces zakupu oraz pulpit użytkownika z historią zamówień. Projekt został zbudowany z wykorzystaniem React, TypeScript oraz komponentów z biblioteki Material-UI (MUI), które zapewniają nowoczesny i intuicyjny interfejs użytkownika.
-
-Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliwia testowanie funkcjonalności bez potrzeby tworzenia własnego backendu.
+Technologie użyte w projekcie obejmują **React**, **Material-UI (MUI)** oraz inne nowoczesne narzędzia, takie jak **TanStack Query**, **Redux Toolkit** oraz **Docker**.
 
 
 
@@ -100,6 +99,8 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
 
 ### Opcja 2: Uruchamianie w kontenerze (Docker)
 
+#### Uruchomienie w trybie developerskim
+
 1. **Upewnij się, że masz zainstalowany Docker.**
 2. **Sklonuj repozytorium:**
    ```sh
@@ -122,6 +123,23 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
    npm run dev
    ```
    Aplikacja będzie dostępna pod adresem: http://localhost:3000/
+
+   
+#### Uruchomienie w trybie produkcyjnym
+
+1. **Sklonuj repozytorium:**
+   ```sh
+   git clone https://github.com/ozematt/shop-app.git
+   ```
+2. **Zbuduj obraz Docker::**
+   ```sh
+   docker build -t shop-app .
+   ```
+3. **Uruchom aplikację z zbudowanego obrazu::**
+   ```sh
+   docker run -p 3000:3000 shop-app
+   ```
+   Aplikacja będzie dostępna pod adresem: http://localhost:3000/
    
 
 
@@ -132,3 +150,45 @@ Aplikacja korzysta z Fake Store API do pobierania danych produktów, co umożliw
 - **Logowanie** – Użyj formularza logowania, aby uzyskać dostęp do funkcji zakupowych. Dane do logowania dostępne w dokumentacji Fake Shop API(https://fakestoreapi.com).
 - **Katalog produktów** – Przeglądaj produkty, korzystając z filtrów, sortowania i wyszukiwania.
 - **Koszyk** – Dodawaj produkty do koszyka, zarządzaj nimi i realizuj zakupy.
+
+
+
+## Konteneryzacja
+
+
+Aplikacja shop-app jest konteneryzowana przy użyciu **Docker** i automatycznie budowana oraz publikowana do **GitHub Container Registry** (GHCR) przy użyciu **GitHub Actions** w ramach procesu CI/CD.
+
+
+ 
+### CI/CD i automatyczne tworzenie obrazów
+
+
+Każdy pull request i merge do gałęzi main i develop powoduje automatyczne zbudowanie obrazu aplikacji, który jest publikowany w sekcji **Packages** repozytorium na GitHubie. 
+
+
+
+### Obraz Docker
+
+
+Najnowszy obraz aplikacji jest dostępny w sekcji **Packages** w repozytorium na GitHubie. Możesz go znaleźć tutaj:
+
+[GitHub Packages - shop-app](https://github.com/ozematt/shop-app/packages)
+
+
+
+### Pobieranie i uruchamianie obrazu Docker
+
+
+Obraz aplikacji można pobrać bezpośrednio z GitHub Container Registry (GHCR) za pomocą poniższej komendy:
+
+```sh
+docker pull ghcr.io/ozematt/shop-app:refs-pull-88-merge
+```
+
+Aby uruchomić aplikację w trybie produkcyjnym na porcie 3000, użyj następującej komendy:
+
+```sh
+docker run -p 3000:3000 ghcr.io/ozematt/shop-app:refs-pull-88-merge
+```
+
+Po uruchomieniu, aplikacja będzie dostępna pod adresem http://localhost:3000
