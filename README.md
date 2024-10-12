@@ -4,7 +4,7 @@
 
 ## Opis projektu
 
-**shop-app** to aplikacja e-commerce zbudowana z użyciem React i TypeScript, oferująca funkcjonalny sklep internetowy z katalogiem produktów, zarządzaniem koszykiem, procesem zakupu oraz pulpitem użytkownika. Aplikacja korzysta z **Fake Store API** do pobierania produktów. Zaimplementowane zostały funkcje takie jak obsługa motywów, filtrowanie i sortowanie produktów, oraz integracja z API do obsługi logowania i zamówień. 
+**shop-app** to aplikacja e-commerce zbudowana z użyciem React i TypeScript, oferująca funkcjonalny sklep internetowy z katalogiem produktów, zarządzaniem koszykiem, procesem zakupu oraz pulpitem użytkownika. Aplikacja korzysta z **Fake Store API** do pobierania produktów. Zaimplementowane zostały funkcje takie jak obsługa motywów, filtrowanie i sortowanie produktów, oraz integracja z API do obsługi logowania.
 
 Technologie użyte w projekcie obejmują **React**, **Material-UI (MUI)** oraz inne nowoczesne narzędzia, takie jak **TanStack Query**, **Redux Toolkit** oraz **Docker**.
 
