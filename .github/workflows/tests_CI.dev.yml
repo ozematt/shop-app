@@ -53,6 +53,7 @@ jobs:
           tags: ghcr.io/${{ env.GH_REPO_LC }}:${{ env.TAG_NAME }}
 
   tests:
+    needs: build_docker
     runs-on: ubuntu-latest
 
     steps:
