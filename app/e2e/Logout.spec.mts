@@ -1,7 +1,7 @@
 import { test as base, expect } from "@playwright/test";
 import { Login, injectLoginPage } from "./pages/Login.mts";
 import { Main, injectMainPage } from "./pages/Main.mts";
-import { validUser, invalidUser } from "./fixtures/userFixtures";
+import { validUser } from "./fixtures/userFixtures";
 
 interface TestFixtures {
   loginPage: Login;

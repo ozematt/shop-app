@@ -1,4 +1,4 @@
-FROM node:21 AS builder
+FROM node:21 AS build
 WORKDIR /app
 COPY ./app/package*.json .
 RUN npm install
@@ -7,13 +7,9 @@ RUN npm run build
 
 FROM node:21-alpine
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-RUN npm install --production
-
-RUN npm i -g serve
-USER node
-
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package*.json ./
+RUN npm ci --only=production
+ENV PORT=3000
 EXPOSE 3000
-CMD [ "serve", "-s", "dist"]
+CMD ["npx", "serve", "-s", "dist", "-l", "3000"]
