@@ -3,6 +3,11 @@ import { Product } from "../lib/types/productTypes";
 import { useProductItem } from "../lib/hooks/useProductItem";
 
 export const ProductItem = ({ product }: { product: Product }) => {
+  //
+  ////DATA
+  const { productStyle, handleAddToCartClick, navigate, isMobile } =
+    useProductItem();
+
   ////UI
   return (
     <>
