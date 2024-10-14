@@ -71,7 +71,6 @@ describe("<ProductDetails />", () => {
       </MemoryRouter>,
       { store }
     );
-    // render(<ProductDetails />);
 
     expect(screen.getByText("Product1")).toBeInTheDocument();
   });
