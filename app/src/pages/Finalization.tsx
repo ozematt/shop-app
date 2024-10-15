@@ -7,17 +7,6 @@ import { ConfirmInfoBox } from "../components/finalizationPage/ConfirmInfoBox";
 import { useFinalization } from "../lib/hooks/pages/useFinalization";
 
 export const Finalization = () => {
-  //
-  ////DATA
-  const {
-    methods,
-    summaryView,
-    onSubmit,
-    errorEmptyAddressFields,
-    handleConfirmButton,
-    handleSummaryView,
-  } = useFinalization();
-
   ////UI
   return (
     <>
