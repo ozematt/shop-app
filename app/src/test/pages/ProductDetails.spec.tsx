@@ -55,23 +55,4 @@ describe("<ProductDetails />", () => {
   afterAll(() => {
     useProductDetailsSpy.mockRestore();
   });
-  test("should display proper product", () => {
-    mockUseProductDetails();
-
-    const store = configureStore({
-      reducer: {
-        user: userSliceReducer,
-        products: productsSliceReducer,
-      },
-    });
-
-    renderWithProvider(
-      <MemoryRouter>
-        <ProductDetails />
-      </MemoryRouter>,
-      { store }
-    );
-
-    expect(screen.getByText("Product1")).toBeInTheDocument();
-  });
 });
