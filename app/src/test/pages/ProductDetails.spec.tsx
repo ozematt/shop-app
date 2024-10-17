@@ -9,6 +9,35 @@ import { Provider } from "react-redux";
 import productsSliceReducer from "../../redux/products/productsSlice";
 import { MemoryRouter } from "react-router-dom";
 
+const useProductDetailsSpy = vi.spyOn(
+  useProductDetailsFile,
+  "useProductDetails"
+);
+
+const mockUseProductDetails = ({
+  product = {
+    id: 1,
+    title: "Product1",
+    price: 20,
+    category: "electronic",
+    description: "Description...",
+    image: "www.example.com",
+    rating: { rate: 5, count: 10 },
+  } as Product,
+  handleAddToCartClick = vi.fn(),
+  isSmallScreen = false,
+  isSmallerScreen = false,
+  navigate = vi.fn(),
+} = {}) => {
+  useProductDetailsSpy.mockReturnValue({
+    product,
+    handleAddToCartClick,
+    isSmallScreen,
+    isSmallerScreen,
+    navigate,
+  });
+};
+
 // helper function to render a component from Redux Store
 function renderWithProvider(
   ui: React.ReactElement,
