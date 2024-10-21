@@ -41,7 +41,7 @@ export const useAuthorization = () => {
   const mutation = useMutation({
     mutationFn: userCheck,
     onSuccess: () => {
-      dispatch(logUser());
+      dispatch(logUser(username));
       navigate("/");
       setErrorAuth(null);
     },
