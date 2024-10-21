@@ -1,13 +1,16 @@
-const fetchUsers = async () => {
-  try {
-    const response = await fetch("https://fakestoreapi.com/users");
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData?.message || "Failed to fetch users");
-    }
-  } catch (error: any) {
-    console.error("Error during fetch users:", error.message);
-  }
-};
+// import supabase from "../../services/supabase";
 
-export default fetchUsers;
+// const sendData = async (dataToSend) => {
+//   const { data, error } = await supabase
+//     .from("Orders")
+//     .insert([dataToSend])
+//     .select();
+//   if (data) {
+//     console.log(data);
+//   }
+//   if (error) {
+//     console.log(error);
+//   }
+// };
+
+// export default sendData;
