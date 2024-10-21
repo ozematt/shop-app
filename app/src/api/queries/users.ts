@@ -1,4 +1,4 @@
-const festchUsers = async () => {
+const fetchUsers = async () => {
   try {
     const response = await fetch("https://fakestoreapi.com/users");
     if (!response.ok) {
@@ -9,3 +9,5 @@ const festchUsers = async () => {
     console.error("Error during fetch users:", error.message);
   }
 };
+
+export default fetchUsers;
