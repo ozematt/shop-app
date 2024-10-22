@@ -69,16 +69,14 @@ export const useFinalization = () => {
     if (fetchError) {
       // when user not exist
       console.error("Error fetching existing orders:", fetchError);
-      // return;
     }
-    console.log(existingData);
 
     // add new order
     const currentOrders = existingData?.orders || []; // optional chaining
     const updatedOrders = [...currentOrders, ...newOrders];
 
-    // user exist update orders
     if (existingData) {
+      // user exist - update orders
       const { data: updatedData, error: updateError } = await supabase
         .from("usersOrders")
         .update({ orders: updatedOrders })
@@ -134,7 +132,7 @@ export const useFinalization = () => {
         })),
       };
 
-      dispatch(addOrder(modifiedData));
+      // dispatch(addOrder(modifiedData));
       dispatch(removeAllFromCart());
 
       addOrders([modifiedData]); // send to supabase

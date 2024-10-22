@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
 import { Orders } from "../../types/ordersTypes";
 import { RootState } from "../../../redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../../../services/supabase";
 
 export const useOrdersHistory = () => {
   //
   ////DATA
-  const orders: Orders[] = useSelector((state: RootState) => state.user.orders);
+  // const orders: Orders[] = useSelector((state: RootState) => state.user.orders);
+  const [orders, setOrders] = useState([]);
 
   const username = useSelector((state: RootState) => state.user.username);
 
@@ -16,10 +17,10 @@ export const useOrdersHistory = () => {
       const { data, error } = await supabase
         .from("usersOrders")
         .select()
-        .eq("user", username);
-      // .single();
+        .eq("user", username)
+        .single();
       if (data) {
-        console.log(data);
+        setOrders(data.orders);
       }
       if (error) {
         console.log(error);
