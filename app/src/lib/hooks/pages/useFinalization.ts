@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useCallback, useEffect, useId, useState } from "react";
+import { useCallback, useId, useState } from "react";
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,8 @@ import {
   selectAllCart,
 } from "../../../redux/cart/cartSlice";
 import { addOrder } from "../../../redux/user/userSlice";
-import supabase from "../../../services/supabase";
-import { log } from "console";
 import { Orders } from "../../types/ordersTypes";
-// import sendData from "../../../api/queries/users";
+import supabase from "../../../services/supabase";
 
 export const useFinalization = () => {
   //
@@ -55,11 +53,12 @@ export const useFinalization = () => {
   const { total, quantity } = useSelector((state: RootState) => state.cart);
   const cart = useSelector(selectAllCart);
 
+  //user state
+  const { username, orders } = useSelector((state: RootState) => state.user);
+
   ////LOGIC
 
-  const { username, orders } = useSelector((state: RootState) => state.user);
-  console.log(orders);
-
+  //data send to supabase function
   const sendData = async (username: string | null, orders: Orders[]) => {
     const { data, error } = await supabase
       .from("usersOrders")
@@ -104,7 +103,7 @@ export const useFinalization = () => {
       };
       dispatch(addOrder(modifiedData));
       dispatch(removeAllFromCart());
-      sendData(username, orders);
+      sendData(username, orders); // send to supabase
       navigate("/success");
     },
     [dispatch, navigate, total, quantity, cart]
