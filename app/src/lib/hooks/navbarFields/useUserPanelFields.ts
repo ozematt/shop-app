@@ -5,7 +5,7 @@ export const useUserPanelFields = () => {
   //
   ////DATA
   const username = useSelector((state: RootState) => state.user.username);
-  const auth = !!username;
+  const auth = !!username; // type boolean
 
   return { auth };
 };
