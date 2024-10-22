@@ -5,6 +5,7 @@ import { Product } from "../../types/productTypes";
 import { addToCart } from "../../../redux/cart/cartSlice";
 import { useCallback } from "react";
 import { useMediaQuery } from "@mui/material";
+import { useAuthorization } from "./useAuthorization";
 
 export const useProductDetails = () => {
   //
@@ -16,7 +17,7 @@ export const useProductDetails = () => {
   const isSmallerScreen = useMediaQuery("(max-width:875px)");
 
   // authorization state
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+  const auth = useAuthorization();
 
   // selected product
   const product = useSelector((state: RootState) =>

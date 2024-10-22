@@ -4,7 +4,8 @@ import { RootState } from "../../../redux/store";
 export const useUserPanelFields = () => {
   //
   ////DATA
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+  const username = useSelector((state: RootState) => state.user.username);
+  const auth = !!username; // type boolean
 
   return { auth };
 };

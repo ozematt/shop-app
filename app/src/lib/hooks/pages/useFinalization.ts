@@ -10,7 +10,7 @@ import {
   selectAllCart,
 } from "../../../redux/cart/cartSlice";
 import { addOrder } from "../../../redux/user/userSlice";
-// import sendData from "../../../api/queries/users";
+import addOrders from "../../../api/queries/addOrders";
 
 export const useFinalization = () => {
   //
@@ -50,8 +50,10 @@ export const useFinalization = () => {
 
   // cart state
   const { total, quantity } = useSelector((state: RootState) => state.cart);
-  const { username, orders } = useSelector((state: RootState) => state.user);
   const cart = useSelector(selectAllCart);
+
+  //user
+  const username = useSelector((state: RootState) => state.user.username);
 
   ////LOGIC
   // handle data submit
@@ -83,9 +85,10 @@ export const useFinalization = () => {
           pieces: item.pieces,
         })),
       };
-      dispatch(addOrder(modifiedData));
+
+      addOrders([modifiedData], username); // send to supabase
+      dispatch(addOrder([modifiedData])); // added to state
       dispatch(removeAllFromCart());
-      // sendData({ username, orders });
       navigate("/success");
     },
     [dispatch, navigate, total, quantity, cart]

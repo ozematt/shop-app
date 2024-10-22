@@ -2,8 +2,9 @@ import { useCallback, useState } from "react";
 import { AppDispatch, useAppDispatch } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { logUser } from "../../../redux/user/userSlice";
+import { addOrder, logUser } from "../../../redux/user/userSlice";
 import userCheck from "../../../api/queries/authorization";
+import supabase from "../../../services/supabase";
 
 export const useAuthorization = () => {
   //MUI password field  data logic
@@ -37,11 +38,27 @@ export const useAuthorization = () => {
   const [password, setPassword] = useState("");
   const [errorAuth, setErrorAuth] = useState<string | null>(null);
 
+  const fetchUserData = async () => {
+    const { data, error } = await supabase
+      .from("usersOrders")
+      .select("orders")
+      .eq("user", username)
+      .single();
+    if (data) {
+      dispatch(addOrder(data.orders));
+      console.log(data.orders);
+    }
+    if (error) {
+      console.log(error);
+    }
+  };
+
   // log user
   const mutation = useMutation({
     mutationFn: userCheck,
     onSuccess: () => {
       dispatch(logUser(username));
+      fetchUserData();
       navigate("/");
       setErrorAuth(null);
     },
