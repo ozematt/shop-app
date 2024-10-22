@@ -13,16 +13,13 @@ const userSlice = createSlice({
     },
     logOutUser: (state: User) => {
       state.username = null;
+      state.orders = [];
     },
     addOrder: (state: User, action: PayloadAction<Orders[]>) => {
       state.orders = [...state.orders, ...action.payload];
     },
-    removeOrders: (state) => {
-      state.orders = [];
-    },
   },
 });
-export const { addOrder, logUser, logOutUser, removeOrders } =
-  userSlice.actions;
+export const { addOrder, logUser, logOutUser } = userSlice.actions;
 
 export default userSlice.reducer;

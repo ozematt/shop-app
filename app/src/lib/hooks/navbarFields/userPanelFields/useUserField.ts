@@ -40,7 +40,6 @@ export const useUserField = () => {
       setOpen(false);
       if (confirm) {
         dispatch(logOutUser());
-        dispatch(removeOrders());
         dispatch(removeAllFromCart());
         navigate("/");
       }
