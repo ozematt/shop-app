@@ -69,6 +69,7 @@ Technologie użyte w projekcie obejmują **React**, **Material-UI (MUI)** oraz i
 - **Docker** – Narzędzie do konteneryzacji aplikacji.
 - **Fake Store API** – Zewnętrzne API, które dostarcza dane produktów, takie jak opisy, ceny, zdjęcia i kategorie (dokumentacja: [https://fakestoreapi.com/](https://fakestoreapi.com/)).
 - **API REST** – Obsługa danych przez endpointy API, m.in. `/auth/login`, `/products`.
+- **Supabase** –Baza danych. `/auth/login`, `/products`.
 
 
 
