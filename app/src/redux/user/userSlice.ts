@@ -14,8 +14,8 @@ const userSlice = createSlice({
     logOutUser: (state: User) => {
       state.username = null;
     },
-    addOrder: (state: User, action: PayloadAction<Orders>) => {
-      state.orders.push(action.payload);
+    addOrder: (state: User, action: PayloadAction<Orders[]>) => {
+      state.orders = [...state.orders, ...action.payload];
     },
     removeOrders: (state) => {
       state.orders = [];
