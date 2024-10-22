@@ -10,7 +10,6 @@ const fetchProducts = async () => {
     return await response.json();
   } catch (error: any) {
     console.error("Error during fetch products:", error.message);
-    throw error;
   }
 };
 

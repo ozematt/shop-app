@@ -1,10 +1,10 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { AppDispatch, useAppDispatch } from "../../redux/store";
 import { Product } from "../types/productTypes";
 import { addToCart } from "../../redux/cart/cartSlice";
 import { useCallback } from "react";
+import { useAuthorization } from "./pages/useAuthorization";
 
 export const useProductItem = () => {
   //
@@ -17,7 +17,7 @@ export const useProductItem = () => {
   const isMobile = useMediaQuery("(max-width:700px)");
 
   // authorization state
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+  const auth = useAuthorization();
 
   // item box style
   const productStyle = () => ({

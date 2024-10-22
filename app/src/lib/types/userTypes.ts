@@ -1,6 +1,6 @@
 import { Orders } from "./ordersTypes";
 
 export interface User {
-  isLoggedIn: boolean;
+  username: string | null;
   orders: Orders[];
 }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { AppDispatch, useAppDispatch } from "../../redux/store";
+import { AppDispatch, RootState, useAppDispatch } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { selectSortedProducts } from "../../redux/products/productsSelectors";
 import { useQuery } from "@tanstack/react-query";
@@ -18,6 +18,9 @@ export const useProducts = () => {
   // memoized sorting selector
   const sortedProducts = useSelector(selectSortedProducts);
 
+  //products in state
+  const itemsFetched = useSelector((state: RootState) => state.products.items);
+
   // fetch products
   const {
     isPending,
@@ -30,12 +33,15 @@ export const useProducts = () => {
   });
 
   ////LOGIC
-  // save products in state after render
+  // save products in state after render if there are not saved items
   useEffect(() => {
+    if (itemsFetched.length > 0) {
+      return;
+    }
     if (products) {
       dispatch(addProducts(products));
     }
-  }, [dispatch, products]);
+  }, [dispatch, products, itemsFetched]);
 
   // increase the number of visible products by 4
   const loadMoreProducts = useCallback(() => {
