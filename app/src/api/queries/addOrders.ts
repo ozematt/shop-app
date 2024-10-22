@@ -2,7 +2,12 @@ import { Orders } from "../../lib/types/ordersTypes";
 import supabase from "../../services/supabase";
 
 const addOrders = async (newOrders: Orders[], username: string | null) => {
-  // check if user exist
+  if (!username) {
+    console.error("Username cannot be null or undefined.");
+    return;
+  }
+
+  // fetching data if user exist in database
   const { data: existingData, error: fetchError } = await supabase
     .from("usersOrders")
     .select("orders")
@@ -10,38 +15,23 @@ const addOrders = async (newOrders: Orders[], username: string | null) => {
     .single();
 
   if (fetchError) {
-    // when user not exist
     console.error("Error fetching existing orders:", fetchError);
   }
 
-  // add new order
+  // update user data if exist, if not add new data
   const currentOrders = existingData?.orders || []; // optional chaining
   const updatedOrders = [...currentOrders, ...newOrders];
 
-  if (existingData) {
-    // user exist - update orders
-    const { data: updatedData, error: updateError } = await supabase
-      .from("usersOrders")
-      .update({ orders: updatedOrders })
-      .eq("user", username);
-
-    if (updateError) {
-      console.error("Error updating orders:", updateError);
-    } else {
-      console.log("Orders updated successfully:", updatedData);
-    }
-  } else {
-    // user not exist - send new data
-    const { data: newUserData, error: insertError } = await supabase
-      .from("usersOrders")
-      .insert([{ user: username, orders: updatedOrders }])
-      .select();
-
-    if (insertError) {
-      console.error("Error inserting new user:", insertError);
-    } else {
-      console.log("New user added successfully:", newUserData);
-    }
+  //use upsert, combine of update and insert
+  const { data, error } = await supabase
+    .from("usersOrders")
+    .upsert({ user: username, orders: updatedOrders }, { onConflict: "user" })
+    .select();
+  if (data) {
+    console.log("User orders successfully added or updated:", data);
+  }
+  if (error) {
+    console.error("Error adding/updating user orders:", error);
   }
 };
 
