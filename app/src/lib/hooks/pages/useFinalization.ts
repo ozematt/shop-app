@@ -54,21 +54,53 @@ export const useFinalization = () => {
   const cart = useSelector(selectAllCart);
 
   //user state
-  const { username, orders } = useSelector((state: RootState) => state.user);
+  const username = useSelector((state: RootState) => state.user.username);
 
   ////LOGIC
 
-  //data send to supabase function
-  const sendData = async (username: string | null, orders: Orders[]) => {
-    const { data, error } = await supabase
+  const addOrders = async (newOrders: Orders[]) => {
+    // check if user exist
+    const { data: existingData, error: fetchError } = await supabase
       .from("usersOrders")
-      .insert([{ user: username, orders: orders }])
-      .select();
-    if (data) {
-      console.log(data);
+      .select("orders")
+      .eq("user", username)
+      .single();
+
+    if (fetchError) {
+      // when user not exist
+      console.error("Error fetching existing orders:", fetchError);
+      // return;
     }
-    if (error) {
-      console.log(error);
+    console.log(existingData);
+
+    // add new order
+    const currentOrders = existingData?.orders || []; // optional chaining
+    const updatedOrders = [...currentOrders, ...newOrders];
+
+    // user exist update orders
+    if (existingData) {
+      const { data: updatedData, error: updateError } = await supabase
+        .from("usersOrders")
+        .update({ orders: updatedOrders })
+        .eq("user", username);
+
+      if (updateError) {
+        console.error("Error updating orders:", updateError);
+      } else {
+        console.log("Orders updated successfully:", updatedData);
+      }
+    } else {
+      // user not exist - send new data
+      const { data: newUserData, error: insertError } = await supabase
+        .from("usersOrders")
+        .insert([{ user: username, orders: updatedOrders }])
+        .select();
+
+      if (insertError) {
+        console.error("Error inserting new user:", insertError);
+      } else {
+        console.log("New user added successfully:", newUserData);
+      }
     }
   };
 
@@ -101,9 +133,11 @@ export const useFinalization = () => {
           pieces: item.pieces,
         })),
       };
+
       dispatch(addOrder(modifiedData));
       dispatch(removeAllFromCart());
-      sendData(username, orders); // send to supabase
+
+      addOrders([modifiedData]); // send to supabase
       navigate("/success");
     },
     [dispatch, navigate, total, quantity, cart]

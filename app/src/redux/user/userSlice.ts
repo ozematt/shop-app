@@ -14,6 +14,7 @@ const userSlice = createSlice({
     },
     logOutUser: (state: User) => {
       state.isLoggedIn = false;
+      state.username = null;
     },
     addOrder: (state: User, action: PayloadAction<Orders>) => {
       state.orders.push(action.payload);
