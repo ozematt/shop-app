@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { Orders } from "../../types/ordersTypes";
 import { RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
 import supabase from "../../../services/supabase";
@@ -7,7 +6,6 @@ import supabase from "../../../services/supabase";
 export const useOrdersHistory = () => {
   //
   ////DATA
-  // const orders: Orders[] = useSelector((state: RootState) => state.user.orders);
   const [orders, setOrders] = useState([]);
 
   const username = useSelector((state: RootState) => state.user.username);

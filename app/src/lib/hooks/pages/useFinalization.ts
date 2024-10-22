@@ -9,7 +9,6 @@ import {
   removeAllFromCart,
   selectAllCart,
 } from "../../../redux/cart/cartSlice";
-import { addOrder } from "../../../redux/user/userSlice";
 import { Orders } from "../../types/ordersTypes";
 import supabase from "../../../services/supabase";
 
@@ -131,11 +130,9 @@ export const useFinalization = () => {
           pieces: item.pieces,
         })),
       };
-
-      // dispatch(addOrder(modifiedData));
-      dispatch(removeAllFromCart());
-
       addOrders([modifiedData]); // send to supabase
+
+      dispatch(removeAllFromCart());
       navigate("/success");
     },
     [dispatch, navigate, total, quantity, cart]
