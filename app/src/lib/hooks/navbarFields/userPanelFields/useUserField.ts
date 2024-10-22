@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch, useAppDispatch } from "../../../../redux/store";
-import { logOutUser, removeOrders } from "../../../../redux/user/userSlice";
+import { logOutUser } from "../../../../redux/user/userSlice";
 import { removeAllFromCart } from "../../../../redux/cart/cartSlice";
 
 export const useUserField = () => {
