@@ -19,7 +19,7 @@ const addOrders = async (newOrders: Orders[], username: string | null) => {
   }
 
   // update user data if exist, if not add new data
-  const currentOrders = existingData?.orders || []; // optional chaining
+  const currentOrders = existingData?.orders || [];
   const updatedOrders = [...currentOrders, ...newOrders];
 
   //use upsert, combine of update and insert
