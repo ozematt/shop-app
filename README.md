@@ -161,7 +161,7 @@ Aplikacja shop-app jest konteneryzowana przy użyciu **Docker** i automatycznie 
 
 
  
-### CI/CD i automatyczne tworzenie obrazów
+### CI/CD i automatyczne tworzenie obrazu produkcyjnego
 
 
 Każdy pull request i merge do gałęzi main i develop powoduje automatyczne zbudowanie obrazu aplikacji, który jest publikowany w sekcji **Packages** repozytorium na GitHubie. 
