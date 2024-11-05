@@ -2,10 +2,10 @@ import { test as base, expect } from "@playwright/test";
 import { Main, injectMainPage } from "./pages/Main.mts";
 import { SearchEngine, injectSearchPage } from "./pages/Search.mts";
 
-interface TestFixtures {
+type TestFixtures = {
   searchPage: SearchEngine;
   mainPage: Main;
-}
+};
 
 const test = base.extend<TestFixtures>({
   searchPage: injectSearchPage,

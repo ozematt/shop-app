@@ -3,10 +3,10 @@ import { Login, injectLoginPage } from "./pages/Login.mts";
 import { Main, injectMainPage } from "./pages/Main.mts";
 import { validUser } from "./fixtures/userFixtures";
 
-interface TestFixtures {
+type TestFixtures = {
   loginPage: Login;
   mainPage: Main;
-}
+};
 
 const test = base.extend<TestFixtures>({
   loginPage: injectLoginPage,

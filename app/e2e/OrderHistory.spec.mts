@@ -5,12 +5,12 @@ import { Cart, injectCartPage } from "./pages/Cart.mts";
 import { validUser } from "./fixtures/userFixtures";
 import { Finalization, injectFinalizationPage } from "./pages/Finalization.mts";
 
-interface TestFixtures {
+type TestFixtures = {
   cartPage: Cart;
   loginPage: Login;
   mainPage: Main;
   finalizationPage: Finalization;
-}
+};
 
 const test = base.extend<TestFixtures>({
   cartPage: injectCartPage,
