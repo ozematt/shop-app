@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { expect } from "vitest";
 import { OrderItem } from "../../components/ordersHistoryPage/OrderItem";
-import { Orders } from "../../lib/types/ordersTypes";
+import { type Orders } from "../../lib/types";
 //
 ////TESTS
 describe("<OrderItem />", () => {
