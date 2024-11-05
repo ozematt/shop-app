@@ -7,7 +7,7 @@ import cartSliceReducer from "../../redux/cart/cartSlice";
 import { Provider } from "react-redux";
 import productsSliceReducer from "../../redux/products/productsSlice";
 import { MemoryRouter } from "react-router-dom";
-import { CartProduct } from "../../lib/types/cartTypes";
+import { type CartProduct } from "../../lib/types";
 import { Cart } from "../../pages/Cart";
 
 const useCartSpy = vi.spyOn(useCartFile, "useCart");

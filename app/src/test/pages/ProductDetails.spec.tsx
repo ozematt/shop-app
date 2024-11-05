@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import * as useProductDetailsFile from "../../lib/hooks/pages/useProductDetails";
-import { Product } from "../../lib/types/productTypes";
+import { type Product } from "../../lib/types";
 import { ProductDetails } from "../../pages/ProductDetails";
 import { expect } from "vitest";
 import { configureStore } from "@reduxjs/toolkit";
