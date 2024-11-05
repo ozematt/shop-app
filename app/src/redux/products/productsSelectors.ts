@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Product } from "../../lib/types/productTypes";
+import { Product } from "../../lib/types";
 
 ////MEMOIZING FILTER SELECTORS
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../lib/types/userTypes";
-import { Orders } from "../../lib/types/ordersTypes";
+import { User } from "../../lib/types";
+import { Orders } from "../../lib/types";
 
 const initialState: User = { username: null, orders: [] };
 

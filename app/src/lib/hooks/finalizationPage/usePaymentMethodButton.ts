@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form";
-import { Address } from "../../types/addressTypes";
+import { Address } from "../../types";
 
 export const usePaymentMethodButton = ({ method }: { method: string }) => {
   //

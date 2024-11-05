@@ -1,6 +1,6 @@
 // import { Address } from "cluster";
 import { useFormContext } from "react-hook-form";
-import { Address } from "../../types/addressTypes";
+import { Address } from "../../types";
 
 export const useFormField = () => {
   //
