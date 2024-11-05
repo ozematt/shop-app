@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { useProductDetails } from "../../lib/hooks/pages/useProductDetails";
-import { Product } from "../../lib/types/productTypes";
+import { Product } from "../../lib/types";
 
 export const ButtonsBox = ({ product }: { product: Product }) => {
   //

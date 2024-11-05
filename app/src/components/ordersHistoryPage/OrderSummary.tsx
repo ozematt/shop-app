@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { Orders } from "../../lib/types/ordersTypes";
+import { Orders } from "../../lib/types";
 import { useOrderSummary } from "../../lib/hooks/ordersHistoryPage/useOrderSummary";
 
 export const OrderSummary = ({ order }: { order: Orders }) => {
