@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { CartProduct } from "../../lib/types";
+import { type CartProduct } from "../../lib/types";
 import { useCartItem } from "../../lib/hooks/useCartItem";
 import React from "react";
 
