@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { AppDispatch, RootState, useAppDispatch } from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { Product } from "../../types";
+import { type Product } from "../../types";
 import { addToCart } from "../../../redux/cart/cartSlice";
 import { useCallback } from "react";
 import { useMediaQuery } from "@mui/material";

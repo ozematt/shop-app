@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { Product } from "../../lib/types";
+import { type Product } from "../../lib/types";
 import { useProductDetails } from "../../lib/hooks/pages/useProductDetails";
 
 export const PriceBox = ({ product }: { product: Product }) => {

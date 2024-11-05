@@ -12,7 +12,7 @@ export const useBottomBar = () => {
   const showBottomNav = useMediaQuery("(max-width:990px)");
   const navigate = useNavigate();
 
-  const auth = useSelector((state: RootState) => state.user.isLoggedIn);
+  const auth = useSelector((state: RootState) => state.user.username);
 
   ////LOGIC
   const handleClick = () => {

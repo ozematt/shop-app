@@ -1,7 +1,7 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch, useAppDispatch } from "../../redux/store";
-import { Product } from "../types";
+import { type Product } from "../types";
 import { addToCart } from "../../redux/cart/cartSlice";
 import { useCallback } from "react";
 import { useAuthorization } from "./pages/useAuthorization";

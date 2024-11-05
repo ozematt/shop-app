@@ -1,5 +1,5 @@
 import { Box, Typography, Rating } from "@mui/material";
-import { Product } from "../../lib/types";
+import { type Product } from "../../lib/types";
 
 export const RatingBox = ({ product }: { product: Product }) => {
   //

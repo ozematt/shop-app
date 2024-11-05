@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { removeFromCart, updateCart } from "../../redux/cart/cartSlice";
 import { AppDispatch, useAppDispatch } from "../../redux/store";
-import { CartProduct } from "../types";
+import { type CartProduct } from "../types";
 
 export const useCartItem = () => {
   //

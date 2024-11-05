@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { Product } from "../../lib/types";
+import { type Product } from "../../lib/types";
 
 export const ImageBox = ({ product }: { product: Product }) => {
   //
