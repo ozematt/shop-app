@@ -1,8 +1,8 @@
 import { Box, Button, Divider, Paper, Rating, Typography } from "@mui/material";
-import { type Product } from "../lib/types";
+import { type ProductProp } from "../lib/types";
 import { useProductItem } from "../lib/hooks/useProductItem";
 
-export const ProductItem = ({ product }: { product: Product }) => {
+export const ProductItem = ({ product }: ProductProp) => {
   //
   ////DATA
   const { productStyle, handleAddToCartClick, navigate, isMobile } =

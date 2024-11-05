@@ -78,3 +78,9 @@ export type User = {
   username: string | null;
   orders: Orders[];
 };
+
+export type ProductProp = {
+  product: Product;
+};
+
+export type OrdersProp = { order: Orders };

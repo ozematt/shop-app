@@ -4,7 +4,9 @@ import { type CartProduct } from "../../lib/types";
 import { useCartItem } from "../../lib/hooks/useCartItem";
 import React from "react";
 
-export const CartItem = React.memo(({ item }: { item: CartProduct }) => {
+type CartItemProps = { item: CartProduct };
+
+export const CartItem = React.memo(({ item }: CartItemProps) => {
   //
   ////DATA
   const {

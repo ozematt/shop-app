@@ -1,8 +1,8 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { type Orders } from "../../lib/types";
+import { type OrdersProp } from "../../lib/types";
 import { useOrderSummary } from "../../lib/hooks/ordersHistoryPage/useOrderSummary";
 
-export const OrderSummary = ({ order }: { order: Orders }) => {
+export const OrderSummary = ({ order }: OrdersProp) => {
   //
   ////DATA
   const { isSmallScreen } = useOrderSummary();

@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
 import { useProductDetails } from "../../lib/hooks/pages/useProductDetails";
-import { type Product } from "../../lib/types";
+import { type ProductProp } from "../../lib/types";
 
-export const ButtonsBox = ({ product }: { product: Product }) => {
+export const ButtonsBox = ({ product }: ProductProp) => {
   //
   ////DATA
   const { handleAddToCartClick, navigate } = useProductDetails();

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { type Product } from "../../lib/types";
+import { type ProductProp } from "../../lib/types";
 
-export const ImageBox = ({ product }: { product: Product }) => {
+export const ImageBox = ({ product }: ProductProp) => {
   //
   ////UI
   return (

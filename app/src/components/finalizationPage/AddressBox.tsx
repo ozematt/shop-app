@@ -11,8 +11,10 @@ import { ZipCode } from "./addressBoxFields/ZipCode";
 import { City } from "./addressBoxFields/City";
 import { FinalizationTitle } from "./FinalizationTitle";
 
+type AddressBoxProps = { errorEmptyAddressFields: string | null };
+
 export const AddressBox = React.memo(
-  ({ errorEmptyAddressFields }: { errorEmptyAddressFields: string | null }) => {
+  ({ errorEmptyAddressFields }: AddressBoxProps) => {
     //
     ////UI
     return (

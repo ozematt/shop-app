@@ -2,18 +2,20 @@ import { Button, Paper, Typography } from "@mui/material";
 import React from "react";
 import { useTotalPrice } from "../lib/hooks/useTotalPrice";
 
+type TotalPriceProps = {
+  handleButtonClick?: () => void;
+  title: string;
+  buttonText: string;
+  buttonType?: "button" | "submit";
+};
+
 export const TotalPrice = React.memo(
   ({
     handleButtonClick,
     title,
     buttonText,
     buttonType = "button",
-  }: {
-    handleButtonClick?: () => void;
-    title: string;
-    buttonText: string;
-    buttonType?: "button" | "submit";
-  }) => {
+  }: TotalPriceProps) => {
     //
     ////DATA
     const { total, navigate, isSmallScreen } = useTotalPrice();

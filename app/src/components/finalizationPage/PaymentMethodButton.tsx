@@ -4,16 +4,14 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import React from "react";
 import { usePaymentMethodButton } from "../../lib/hooks/finalizationPage/usePaymentMethodButton";
 
+type PaymentMethodButtonProps = {
+  text: string;
+  method: string;
+  handleButtonClick: () => void;
+};
+
 export const PaymentMethodButton = React.memo(
-  ({
-    text,
-    method,
-    handleButtonClick,
-  }: {
-    text: string;
-    method: string;
-    handleButtonClick: () => void;
-  }) => {
+  ({ text, method, handleButtonClick }: PaymentMethodButtonProps) => {
     //
     //DATA
     const { isSelected } = usePaymentMethodButton({ method });

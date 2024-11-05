@@ -1,18 +1,16 @@
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-
 import DialogTitle from "@mui/material/DialogTitle";
 import React from "react";
 
+type AlertDialogProps = {
+  open: boolean;
+  handleCloseDialogAlert: (confirmed: boolean) => void;
+};
+
 export const AlertDialog = React.memo(
-  ({
-    open,
-    handleCloseDialogAlert,
-  }: {
-    open: boolean;
-    handleCloseDialogAlert: (confirmed: boolean) => void;
-  }) => {
+  ({ open, handleCloseDialogAlert }: AlertDialogProps) => {
     //
     ////UI
     return (

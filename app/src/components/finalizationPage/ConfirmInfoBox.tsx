@@ -2,8 +2,10 @@ import { Button, Paper } from "@mui/material";
 import { FinalizationTitle } from "./FinalizationTitle";
 import React from "react";
 
+type ConfirmInfoBoxProps = { handleConfirmButton: () => void };
+
 export const ConfirmInfoBox = React.memo(
-  ({ handleConfirmButton }: { handleConfirmButton: () => void }) => {
+  ({ handleConfirmButton }: ConfirmInfoBoxProps) => {
     //
     ////UI
     return (

@@ -1,10 +1,10 @@
 import { Box, Divider, Paper, Typography } from "@mui/material";
 import { OrderSummary } from "./OrderSummary";
 import React from "react";
-import { type Orders } from "../../lib/types";
+import { type OrdersProp } from "../../lib/types";
 import { useOrderSummary } from "../../lib/hooks/ordersHistoryPage/useOrderSummary";
 
-export const OrderItem = React.memo(({ order }: { order: Orders }) => {
+export const OrderItem = React.memo(({ order }: OrdersProp) => {
   //
   ////DATA
   const { isSmallScreen } = useOrderSummary();

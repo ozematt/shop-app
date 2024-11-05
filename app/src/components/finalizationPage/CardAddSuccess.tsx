@@ -1,8 +1,10 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 
+type CardAddSuccessProps = { handleShowCardField: () => void };
+
 export const CardAddSuccess = React.memo(
-  ({ handleShowCardField }: { handleShowCardField: () => void }) => {
+  ({ handleShowCardField }: CardAddSuccessProps) => {
     //
     ////UI
     return (

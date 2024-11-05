@@ -2,8 +2,10 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import React from "react";
 import { useSummaryShipping } from "../../lib/hooks/finalizationPageSummary/useSummaryShipping";
 
+type SummaryPaymentMethodProps = { handleSummaryView: () => void };
+
 export const SummaryPaymentMethod = React.memo(
-  ({ handleSummaryView }: { handleSummaryView: () => void }) => {
+  ({ handleSummaryView }: SummaryPaymentMethodProps) => {
     //
     ////DATA
     const { getValues } = useSummaryShipping();
