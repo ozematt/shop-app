@@ -9,6 +9,11 @@ type CartItemProps = { item: CartProduct };
 export const CartItem = React.memo(({ item }: CartItemProps) => {
   //
   ////DATA
+  const {
+    handleIncrementItemQuantity,
+    handleDecrementItemQuantity,
+    handleRemoveFromCart,
+  } = useCartItem();
 
   ////UI
   return (
