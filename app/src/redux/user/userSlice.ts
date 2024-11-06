@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { type User } from "../../lib/types";
+import { type UserState } from "../../lib/types";
 import { type Orders } from "../../lib/types";
 
-const initialState: User = { username: null, orders: [] };
+const initialState: UserState = { username: null, orders: [] };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logUser: (state: User, action: PayloadAction<string>) => {
+    logUser: (state, action: PayloadAction<string>) => {
       state.username = action.payload;
     },
-    logOutUser: (state: User) => {
+    logOutUser: (state) => {
       state.username = null;
       state.orders = [];
     },
-    addOrder: (state: User, action: PayloadAction<Orders[]>) => {
+    addOrder: (state, action: PayloadAction<Orders[]>) => {
       state.orders = [...state.orders, ...action.payload];
     },
   },

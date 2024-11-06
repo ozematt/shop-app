@@ -74,7 +74,7 @@ export type ProductsState = {
   sortingMethod: string;
 };
 
-export type User = {
+export type UserState = {
   username: string | null;
   orders: Orders[];
 };
