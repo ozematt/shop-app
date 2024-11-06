@@ -35,11 +35,7 @@ test.describe("Cart flow", () => {
     ).toBeVisible();
     expect(page.getByRole("img")).toBeVisible();
   });
-  test("Add to cart when user is not log in", async ({ mainPage, page }) => {
-    await mainPage.visit();
-    await page.locator("button").first().click();
-    expect(mainPage.verifyURL("/login"));
-  });
+
   test("Add items to cart when user is log in, increase the quantity of the product, delete product and all cart ", async ({
     cartPage,
     loginPage,

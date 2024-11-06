@@ -88,6 +88,6 @@ export const { addToCart, updateCart, removeFromCart, removeAllFromCart } =
   cartSlice.actions;
 export default cartSlice.reducer;
 
-export const { selectAll: selectAllCart } = cartAdapter.getSelectors<RootState>(
-  (state) => state.cart
+export const { selectAll: selectAllCart } = cartAdapter.getSelectors(
+  (state: RootState) => state.cart
 );

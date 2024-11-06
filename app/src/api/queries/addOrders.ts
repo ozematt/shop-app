@@ -1,4 +1,4 @@
-import { Orders } from "../../lib/types/ordersTypes";
+import { Orders } from "../../lib/types";
 import supabase from "../../services/supabase";
 
 const addOrders = async (newOrders: Orders[], username: string | null) => {
