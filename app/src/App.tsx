@@ -1,17 +1,5 @@
-//mui
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import theme from "./mui/theme";
-
 //router
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-//tanstack-query
-import { QueryClientProvider } from "@tanstack/react-query";
-import queryClient from "./api/queryClient";
-
-//redux tool kit
-import { Provider } from "react-redux";
-import store from "./redux/store";
 
 //components
 import { NotFound } from "./pages/NotFound";
@@ -27,25 +15,20 @@ import { MobileSearchView } from "./components/MobileSearchView";
 
 export const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Dashboard />}>
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/mSearch" element={<MobileSearchView />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/login" element={<Authorization />} />
-              <Route path="/finalization" element={<Finalization />} />
-              <Route path="/orders" element={<OrdersHistory />} />
-              <Route path="/success" element={<Success />} />
-              <Route path="/product/:id" element={<ProductDetails />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />}>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/mSearch" element={<MobileSearchView />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Authorization />} />
+          <Route path="/finalization" element={<Finalization />} />
+          <Route path="/orders" element={<OrdersHistory />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
