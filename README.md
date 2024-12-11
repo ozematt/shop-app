@@ -71,6 +71,23 @@ Technologie użyte w projekcie obejmują **React**, **Material-UI (MUI)** oraz i
 - **API REST** – Obsługa danych przez endpointy API, m.in. `/auth/login`, `/products`.
 - **Supabase** – Baza danych histori zamówien użytkowników.
 
+## Zrzuty ekranu
+
+### Widok główny
+![Widok główny - motyw jasny](./app/screenshots/MainPage_light.png)
+![Widok główny - motyw ciemny](./app/screenshots/MainPage_dark.png)
+
+### Widok koszyka zakupowego
+![Koszyk zakupowy](./app/screenshots/CartView.png)
+
+### Widok procesu zakupowego
+![Proces zakupowy](./app/screenshots/Buy.png)
+
+
+### Widok historii zakupów użytkownika 
+![Historia zakupów](./app/screenshots/History.png)
+
+
 
 
 ## Instalacja
